@@ -1,0 +1,6 @@
+rootProject.name = 'inko'
+include 'common'
+include 'model'
+include 'service'
+include 'web'
+
