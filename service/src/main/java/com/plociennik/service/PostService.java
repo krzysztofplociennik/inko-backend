@@ -4,6 +4,7 @@ import com.plociennik.model.Post;
 import com.plociennik.model.repository.PostRepository;
 import com.plociennik.service.dto.PostCreate;
 import com.plociennik.service.dto.PostRead;
+import com.plociennik.service.mapper.PostMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,25 +14,19 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private PostRepository postRepository;
+    private PostMapper postMapper;
 
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
+        this.postMapper = new PostMapper();
     }
 
     public List<PostRead> getPosts() {
         List<PostRead> collect = postRepository.findAll()
                 .stream()
-                .map(this::mapToDto)
+                .map(post -> postMapper.mapToRead(post))
                 .collect(Collectors.toList());
         return collect;
-    }
-
-    private PostRead mapToDto(Post post) {
-        return new PostRead(
-                post.getId(),
-                post.getTitle(),
-                post.getContent()
-        );
     }
 
     public Long save(PostCreate postCreateDto) {
