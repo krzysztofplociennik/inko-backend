@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-post-table
+      author: your-name
+      changes:
+        - createTable:
+            tableName: post
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: title
+                  type: varchar(255)
+              - column:
+                  name: content
+                  type: text
