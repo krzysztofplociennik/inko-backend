@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
-      id: create-post-table
-      author: your-name
+      id: 4-20-1
+      author: kplociennik
       changes:
         - createTable:
             tableName: post
