@@ -16,9 +16,9 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping(value = "/getPosts")
-    public ResponseEntity<List<PostRead>> getPosts() {
-        List<PostRead> posts = postService.getPosts();
+    @GetMapping(value = "/getPosts" )
+    public ResponseEntity<List<PostRead>> getPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        List<PostRead> posts = postService.getPosts(page, size);
         return ResponseEntity.ok(posts);
     }
 

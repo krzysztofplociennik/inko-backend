@@ -5,6 +5,8 @@ import com.plociennik.model.repository.PostRepository;
 import com.plociennik.service.dto.PostCreate;
 import com.plociennik.service.dto.PostRead;
 import com.plociennik.service.mapper.PostMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,9 @@ public class PostService {
         this.postMapper = new PostMapper();
     }
 
-    public List<PostRead> getPosts() {
-        List<PostRead> collect = postRepository.findAll()
+    public List<PostRead> getPosts(int pageNumber, int pageSize) {
+        Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
+        List<PostRead> collect = postRepository.findAll(pageRequest)
                 .stream()
                 .map(post -> postMapper.mapToRead(post))
                 .collect(Collectors.toList());
