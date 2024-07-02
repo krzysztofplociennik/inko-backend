@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 02-1
+      author: kplociennik
+      changes:
+        - createTable:
+            tableName: ARTICLE
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: text
+                  constraints:
+                    nullable: true
+              - column:
+                  name: tags
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: creationDate
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modificationDate
+                  type: timestamp
+                  constraints:
+                    nullable: false
