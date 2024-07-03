@@ -35,6 +35,6 @@ public class ArticleService {
     public String save(ArticleCreate articleCreate) {
         ArticleEntity articleEntity = articleMapper.mapToEntity(articleCreate);
         ArticleEntity save = articleRepository.save(articleEntity);
-        return save.getId();
+        return save.getId().toString();
     }
 }

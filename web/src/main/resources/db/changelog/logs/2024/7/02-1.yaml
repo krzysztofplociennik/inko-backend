@@ -33,12 +33,12 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: creationDate
+                  name: creation_date
                   type: timestamp
                   constraints:
                     nullable: false
               - column:
-                  name: modificationDate
+                  name: modification_date
                   type: timestamp
                   constraints:
-                    nullable: false
+                    nullable: true

@@ -11,7 +11,7 @@ public class ArticleMapper {
 
     public ArticleRead mapToRead(ArticleEntity articleEntity) {
         return new ArticleRead(
-                articleEntity.getId(),
+                articleEntity.getId().toString(),
                 articleEntity.getTitle(),
                 articleEntity.getContent(),
                 articleEntity.getType(),
