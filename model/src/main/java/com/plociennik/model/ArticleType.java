@@ -10,13 +10,10 @@ public enum ArticleType {
     public static ArticleType getType(String s) {
 
         switch (s) {
-            case null -> {
-                return null;
-            }
-            case "PROGRAMMING" -> {
+            case "Programming" -> {
                 return PROGRAMMING;
             }
-            case "TOOLS" -> {
+            case "Tools" -> {
                 return TOOLS;
             }
             case "OS" -> {
