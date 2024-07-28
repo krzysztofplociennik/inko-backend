@@ -1,0 +1,23 @@
+package com.plociennik.service.search.dto;
+
+import com.plociennik.model.ArticleType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.UUID;
+
+@AllArgsConstructor
+@Getter
+@Setter
+public class SearchArticlesItem implements Serializable {
+
+    private UUID id;
+    private String title;
+    private ArticleType type;
+    private Set<String> tags;
+    private LocalDateTime creationDate;
+}
