@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "ARTICLE")
@@ -19,12 +18,23 @@ import java.util.UUID;
 public class ArticleEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
     private String title;
+
     private String content;
+
+    @Enumerated
     private ArticleType type;
-    private Set<String> tags;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "article_tag", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<TagEntity> tags = new ArrayList<>();
+
+    @Column(name = "creation_date")
     private LocalDateTime creationDate;
+
+    @Column(name = "modification_date")
     private LocalDateTime modificationDate;
 }

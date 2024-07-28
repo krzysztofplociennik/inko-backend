@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 02-1
+      id: 2024-07-02-1
       author: kplociennik
       changes:
         - createTable:
@@ -8,37 +8,28 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: uuid
+                  type: UUID
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
                   name: title
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: type
-                  type: varchar(50)
+                  type: VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
                   name: content
-                  type: text
-                  constraints:
-                    nullable: true
+                  type: TEXT
               - column:
-                  name: tags
-                  type: varchar(255)
+                  name: type
+                  type: VARCHAR(255)
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: creation_date
-                  type: timestamp
+                  type: TIMESTAMP
                   constraints:
                     nullable: false
               - column:
                   name: modification_date
-                  type: timestamp
-                  constraints:
-                    nullable: true
+                  type: TIMESTAMP

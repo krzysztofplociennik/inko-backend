@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-25-1
+      author: kplociennik
+      changes:
+        - createTable:
+            tableName: article_tag
+            columns:
+              - column:
+                  name: article_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tag_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: article_tag
+            baseColumnNames: article_id
+            constraintName: fk_article_tag_article
+            referencedTableName: ARTICLE
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: article_tag
+            baseColumnNames: tag_id
+            constraintName: fk_article_tag_tag
+            referencedTableName: TAG
+            referencedColumnNames: id
