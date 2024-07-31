@@ -4,7 +4,7 @@ import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.ArticleType;
 import com.plociennik.model.TagEntity;
 import com.plociennik.service.dto.ArticleCreate;
-import com.plociennik.service.dto.ArticleRead;
+import com.plociennik.service.dto.ArticleDetails;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 public class ArticleMapper {
 
-    public ArticleRead mapToRead(ArticleEntity articleEntity) {
-        return new ArticleRead(
+    public ArticleDetails mapToRead(ArticleEntity articleEntity) {
+        return new ArticleDetails(
                 articleEntity.getId().toString(),
                 articleEntity.getTitle(),
                 articleEntity.getContent(),
-                articleEntity.getType(),
+                articleEntity.getType().toString(),
                 mapTags(articleEntity),
                 articleEntity.getCreationDate(),
                 articleEntity.getModificationDate()

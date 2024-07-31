@@ -12,12 +12,12 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ArticleRead implements Serializable {
+public class ArticleDetails implements Serializable {
 
     private String id;
     private String title;
     private String content;
-    private ArticleType type;
+    private String type;
     private Set<String> tags;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
