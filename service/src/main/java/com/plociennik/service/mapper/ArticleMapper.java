@@ -3,8 +3,10 @@ package com.plociennik.service.mapper;
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.ArticleType;
 import com.plociennik.model.TagEntity;
+import com.plociennik.service.dto.AllArticlesItem;
 import com.plociennik.service.dto.ArticleCreate;
 import com.plociennik.service.dto.ArticleDetails;
+import com.plociennik.service.search.dto.SearchArticlesItem;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class ArticleMapper {
 
-    public ArticleDetails mapToRead(ArticleEntity articleEntity) {
+    public ArticleDetails mapToDetails(ArticleEntity articleEntity) {
         return new ArticleDetails(
                 articleEntity.getId().toString(),
                 articleEntity.getTitle(),
@@ -23,6 +25,19 @@ public class ArticleMapper {
                 articleEntity.getCreationDate(),
                 articleEntity.getModificationDate()
         );
+    }
+
+    public AllArticlesItem mapToAllItem(ArticleEntity articleEntity) {
+
+        AllArticlesItem allArticlesItem = new AllArticlesItem(
+                articleEntity.getId(),
+                articleEntity.getTitle(),
+                articleEntity.getType(),
+                mapTags(articleEntity),
+                articleEntity.getCreationDate()
+        );
+
+        return allArticlesItem;
     }
 
     public ArticleEntity mapToEntity(ArticleCreate articleCreate, List<TagEntity> tagsValues) {

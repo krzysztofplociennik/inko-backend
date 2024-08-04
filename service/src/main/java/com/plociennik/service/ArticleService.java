@@ -4,11 +4,10 @@ import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.ArticleRepository;
 import com.plociennik.model.repository.TagCustomRepositoryImpl;
+import com.plociennik.service.dto.AllArticlesItem;
 import com.plociennik.service.dto.ArticleCreate;
 import com.plociennik.service.dto.ArticleDetails;
 import com.plociennik.service.mapper.ArticleMapper;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,11 +29,10 @@ public class ArticleService {
         this.articleMapper = new ArticleMapper();
     }
 
-    public List<ArticleDetails> getAll(int pageNumber, int pageSize) {
-        Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
-        List<ArticleDetails> collect = articleRepository.findAll(pageRequest)
+    public List<AllArticlesItem> getAll() {
+        List<AllArticlesItem> collect = articleRepository.findAll()
                 .stream()
-                .map(articleMapper::mapToRead)
+                .map(articleMapper::mapToAllItem)
                 .collect(Collectors.toList());
         return collect;
     }
@@ -52,7 +50,7 @@ public class ArticleService {
         Optional<ArticleEntity> searchedArticle = articleRepository.findById(uuid);
         if (searchedArticle.isPresent()) {
             ArticleEntity articleEntity = searchedArticle.get();
-            ArticleDetails articleDetails = articleMapper.mapToRead(articleEntity);
+            ArticleDetails articleDetails = articleMapper.mapToDetails(articleEntity);
             return articleDetails;
         } else {
             throw new Exception("There is no article with this ID: '" + id + "' in the database! (eid: 310720240701");
