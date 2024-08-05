@@ -18,7 +18,7 @@ public class TagCustomRepositoryImpl {
 
         List<TagEntity> byValueIn = tagRepository.findByValueIn(values);
 
-        List<TagEntity> collect = new ArrayList<>();
+        List<TagEntity> collect;
         if (byValueIn.isEmpty()) {
             collect = values.stream()
                     .map(value -> new TagEntity(null, new ArrayList<>(), value))

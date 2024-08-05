@@ -6,7 +6,6 @@ import com.plociennik.model.TagEntity;
 import com.plociennik.service.dto.AllArticlesItem;
 import com.plociennik.service.dto.ArticleCreate;
 import com.plociennik.service.dto.ArticleDetails;
-import com.plociennik.service.search.dto.SearchArticlesItem;
 
 import java.time.LocalDateTime;
 import java.util.List;

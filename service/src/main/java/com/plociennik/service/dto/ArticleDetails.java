@@ -1,6 +1,5 @@
 package com.plociennik.service.dto;
 
-import com.plociennik.model.ArticleType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
