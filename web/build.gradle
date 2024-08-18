@@ -18,6 +18,9 @@ dependencies {
     implementation project(':service')
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    // https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations
+    implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.2.22'
+
 }
 
 test {

@@ -4,6 +4,7 @@ import com.plociennik.service.ArticleService;
 import com.plociennik.service.dto.AllArticlesItem;
 import com.plociennik.service.dto.ArticleCreate;
 import com.plociennik.service.dto.ArticleDetails;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class ArticleController {
         return ResponseEntity.ok(id);
     }
 
+    @Operation(
+            summary = "Fetch article details by ID",
+            description = "Fetches article's content with it's metadata by ID. It will throw an exception if there " +
+                    "is no article in the database with that ID."
+    )
     @GetMapping
     public ResponseEntity<ArticleDetails> getDetails(@RequestParam String id) throws Exception {
         ArticleDetails articleDetails = articleService.getArticleDetails(id);
