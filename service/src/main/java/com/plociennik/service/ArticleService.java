@@ -56,4 +56,9 @@ public class ArticleService {
             throw new Exception("There is no article with this ID: '" + id + "' in the database! (eid: 310720240701");
         }
     }
+
+    public void delete(String id) {
+        UUID uuid = UUID.fromString(id);
+        articleRepository.deleteById(uuid);
+    }
 }

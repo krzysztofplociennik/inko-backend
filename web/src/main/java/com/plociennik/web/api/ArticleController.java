@@ -34,4 +34,10 @@ public class ArticleController {
         List<AllArticlesItem> all = articleService.getAll();
         return ResponseEntity.ok(all);
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestParam String id) {
+        articleService.delete(id);
+        return ResponseEntity.ok("Article got deleted.");
+    }
 }
