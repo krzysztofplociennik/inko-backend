@@ -12,9 +12,15 @@ import java.util.Set;
 @AllArgsConstructor
 public class TagCustomRepositoryImpl {
 
+    // todo: to rewrite - no idea what is happening here
+
     private final TagRepository tagRepository;
 
     public List<TagEntity> getTagValues(Set<String> values) {
+
+        if (values == null || values.isEmpty()) {
+            return new ArrayList<>();
+        }
 
         List<TagEntity> byValueIn = tagRepository.findByValueIn(values);
 
