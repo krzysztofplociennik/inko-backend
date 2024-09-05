@@ -25,7 +25,7 @@ public class ArticleEntity {
 
     private String content;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ArticleType type;
 
     @ManyToMany(cascade = CascadeType.ALL)
