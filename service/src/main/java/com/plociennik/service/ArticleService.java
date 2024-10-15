@@ -1,6 +1,7 @@
 package com.plociennik.service;
 
 import com.plociennik.model.ArticleEntity;
+import com.plociennik.model.ArticleType;
 import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.ArticleRepository;
 import com.plociennik.model.repository.TagCustomRepositoryImpl;
@@ -10,10 +11,7 @@ import com.plociennik.service.dto.ArticleDetails;
 import com.plociennik.service.mapper.ArticleMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,5 +58,13 @@ public class ArticleService {
     public void delete(String id) {
         UUID uuid = UUID.fromString(id);
         articleRepository.deleteById(uuid);
+    }
+
+    public List<String> getAllTypes() {
+        ArticleType[] values = ArticleType.values();
+        List<String> articleTypes = Arrays.stream(values)
+                .map(Enum::toString)
+                .toList();
+        return articleTypes;
     }
 }
