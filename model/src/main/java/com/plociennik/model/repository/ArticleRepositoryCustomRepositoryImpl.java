@@ -2,6 +2,7 @@ package com.plociennik.model.repository;
 
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.QArticleEntity;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
@@ -22,10 +23,13 @@ public class ArticleRepositoryCustomRepositoryImpl implements ArticleRepositoryC
 
         QArticleEntity qArticleEntity = QArticleEntity.articleEntity;
 
-        List<ArticleEntity> fetch = query.from(qArticleEntity)
-                .where(qArticleEntity.content.contains(phrase))
+        BooleanExpression contentContainsPhrase = qArticleEntity.content.contains(phrase);
+        BooleanExpression titleContainsPhrase = qArticleEntity.title.contains(phrase);
+
+        List<ArticleEntity> foundArticles = query.from(qArticleEntity)
+                .where(contentContainsPhrase.or(titleContainsPhrase))
                 .fetch();
 
-        return fetch;
+        return foundArticles;
     }
 }

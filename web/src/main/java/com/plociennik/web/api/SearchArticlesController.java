@@ -17,8 +17,8 @@ public class SearchArticlesController {
     private SearchArticlesService service;
 
     @GetMapping()
-    public ResponseEntity<List<SearchArticlesItem>> search() {
-        List<SearchArticlesItem> articles = service.search("Idea");
+    public ResponseEntity<List<SearchArticlesItem>> search(@RequestParam String searchPhrase) {
+            List<SearchArticlesItem> articles = service.search(searchPhrase);
         return ResponseEntity.ok(articles);
     }
 }
