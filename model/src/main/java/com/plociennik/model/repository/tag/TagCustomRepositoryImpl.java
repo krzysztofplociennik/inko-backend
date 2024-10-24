@@ -1,4 +1,4 @@
-package com.plociennik.model.repository;
+package com.plociennik.model.repository.tag;
 
 import com.plociennik.model.TagEntity;
 import lombok.AllArgsConstructor;

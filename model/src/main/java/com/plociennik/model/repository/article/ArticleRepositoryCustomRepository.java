@@ -1,4 +1,4 @@
-package com.plociennik.model.repository;
+package com.plociennik.model.repository.article;
 
 import com.plociennik.model.ArticleEntity;
 

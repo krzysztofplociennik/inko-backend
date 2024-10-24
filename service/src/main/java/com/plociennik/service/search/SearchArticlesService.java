@@ -1,7 +1,7 @@
 package com.plociennik.service.search;
 
 import com.plociennik.model.ArticleEntity;
-import com.plociennik.model.repository.ArticleRepositoryCustomRepositoryImpl;
+import com.plociennik.model.repository.article.ArticleRepositoryCustomRepositoryImpl;
 import com.plociennik.service.search.dto.SearchArticlesItem;
 import com.plociennik.service.search.mapper.SearchArticlesMapper;
 import org.springframework.stereotype.Service;
