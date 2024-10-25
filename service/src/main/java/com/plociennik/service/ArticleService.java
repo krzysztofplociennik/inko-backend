@@ -37,8 +37,8 @@ public class ArticleService {
 
     public String save(ArticleCreate articleCreate) {
         Set<String> dtoTags = articleCreate.getTags();
-        List<TagEntity> tagsValues = tagRepository.getTagValues(dtoTags);
-        ArticleEntity articleEntity = articleMapper.mapToEntity(articleCreate, tagsValues);
+        List<TagEntity> tags = tagRepository.getTags(dtoTags);
+        ArticleEntity articleEntity = articleMapper.mapToEntity(articleCreate, tags);
         ArticleEntity save = articleRepository.save(articleEntity);
         return save.getId().toString();
     }

@@ -16,21 +16,21 @@ public class TagCustomRepositoryImpl {
 
     private final TagRepository tagRepository;
 
-    public List<TagEntity> getTagValues(Set<String> values) {
+    public List<TagEntity> getTags(Set<String> tags) {
 
-        if (values == null || values.isEmpty()) {
+        if (tags == null || tags.isEmpty()) {
             return new ArrayList<>();
         }
 
-        List<TagEntity> byValueIn = tagRepository.findByValueIn(values);
+        List<TagEntity> existingTags = tagRepository.findByValueIn(tags);
 
         List<TagEntity> collect;
-        if (byValueIn.isEmpty()) {
-            collect = values.stream()
+        if (existingTags.isEmpty()) {
+            collect = tags.stream()
                     .map(value -> new TagEntity(null, new ArrayList<>(), value))
                     .toList();
         } else {
-            return byValueIn;
+            return existingTags;
         }
 
         return collect;
