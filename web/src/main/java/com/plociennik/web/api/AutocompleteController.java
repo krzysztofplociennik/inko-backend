@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/autocomplete")
-@CrossOrigin(value = "http://localhost:4200")
 @AllArgsConstructor
 public class AutocompleteController {
 

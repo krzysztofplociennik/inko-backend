@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/article")
-@CrossOrigin(value = "http://localhost:4200")
 @AllArgsConstructor
 public class ArticleController {
     private final ArticleService articleService;

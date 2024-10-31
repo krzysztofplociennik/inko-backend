@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/search-articles")
-@CrossOrigin(value = "http://localhost:4200")
 @AllArgsConstructor
 public class SearchArticlesController {
 
