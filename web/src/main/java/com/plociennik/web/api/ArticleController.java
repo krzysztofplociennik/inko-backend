@@ -4,6 +4,7 @@ import com.plociennik.service.ArticleService;
 import com.plociennik.service.dto.AllArticlesItem;
 import com.plociennik.service.dto.ArticleCreate;
 import com.plociennik.service.dto.ArticleDetails;
+import com.plociennik.service.dto.ArticleUpdate;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +51,11 @@ public class ArticleController {
     public ResponseEntity<List<String>> getTypes() {
         List<String> allTypes = articleService.getAllTypes();
         return ResponseEntity.ok(allTypes);
+    }
+
+    @PutMapping
+    public ResponseEntity<ArticleDetails> update(@RequestBody ArticleUpdate articleUpdate) {
+        ArticleDetails response = articleService.update(articleUpdate);
+        return ResponseEntity.ok(response);
     }
 }
