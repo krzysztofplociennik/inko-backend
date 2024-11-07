@@ -20,16 +20,13 @@ public class AutocompleteCustomRepositoryImpl implements AutocompleteCustomRepos
 
     @Override
     public List<AutocompleteEntity> findAllBySearchPhrase(String phrase) {
-
-        // todo: repeat code, to be fixed
-
         JPAQuery<AutocompleteEntity> query = new JPAQuery<>(this.entityManager);
-
         QAutocompleteEntity qAutocompleteEntity = QAutocompleteEntity.autocompleteEntity;
 
         BooleanExpression valueContainsPhrase = qAutocompleteEntity.value.contains(phrase);
 
-        List<AutocompleteEntity> allMatchedAutocompletes = query.from(qAutocompleteEntity)
+        List<AutocompleteEntity> allMatchedAutocompletes = query
+                .from(qAutocompleteEntity)
                 .where(valueContainsPhrase)
                 .fetch();
 
@@ -44,14 +41,13 @@ public class AutocompleteCustomRepositoryImpl implements AutocompleteCustomRepos
 
     @Override
     public Optional<AutocompleteEntity> findExactAutocomplete(String phrase) {
-
         JPAQuery<AutocompleteEntity> query = new JPAQuery<>(this.entityManager);
-
         QAutocompleteEntity qAutocompleteEntity = QAutocompleteEntity.autocompleteEntity;
 
         BooleanExpression valueEqualsPhrase = qAutocompleteEntity.value.eq(phrase);
 
-        AutocompleteEntity autocompleteEntity = query.from(qAutocompleteEntity)
+        AutocompleteEntity autocompleteEntity = query
+                .from(qAutocompleteEntity)
                 .where(valueEqualsPhrase)
                 .fetchOne();
 
