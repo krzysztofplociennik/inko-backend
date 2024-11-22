@@ -33,7 +33,8 @@ public class ArticleMapper {
                 articleEntity.getTitle(),
                 articleEntity.getType(),
                 mapTags(articleEntity),
-                articleEntity.getCreationDate()
+                articleEntity.getCreationDate(),
+                articleEntity.getModificationDate()
         );
 
         return allArticlesItem;

@@ -20,4 +20,5 @@ public class SearchArticlesItem implements Serializable {
     private ArticleType type;
     private Set<String> tags;
     private LocalDateTime creationDate;
+    private LocalDateTime modificationDate;
 }

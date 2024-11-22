@@ -17,7 +17,8 @@ public class SearchArticlesMapper {
                 articleEntity.getTitle(),
                 articleEntity.getType(),
                 mapTags(articleEntity),
-                articleEntity.getCreationDate()
+                articleEntity.getCreationDate(),
+                articleEntity.getModificationDate()
         );
 
         return searchArticlesItem;
