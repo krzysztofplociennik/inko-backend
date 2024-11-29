@@ -5,7 +5,7 @@ import com.plociennik.model.ArticleType;
 import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.article.ArticleRepository;
 import com.plociennik.model.repository.article.ArticleRepositoryCustomRepository;
-import com.plociennik.model.repository.tag.TagCustomRepositoryImpl;
+import com.plociennik.model.repository.tag.TagRepository;
 import com.plociennik.service.dto.AllArticlesItem;
 import com.plociennik.service.dto.ArticleCreate;
 import com.plociennik.service.dto.ArticleDetails;
@@ -23,9 +23,9 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleRepositoryCustomRepository articleRepositoryCustomRepository;
     private final ArticleMapper articleMapper;
-    private final TagCustomRepositoryImpl tagRepository;
+    private final TagRepository tagRepository;
 
-    public ArticleService(ArticleRepository articleRepository, ArticleRepositoryCustomRepository articleRepositoryCustomRepository, TagCustomRepositoryImpl tagRepository) {
+    public ArticleService(ArticleRepository articleRepository, ArticleRepositoryCustomRepository articleRepositoryCustomRepository, TagRepository tagRepository) {
         this.articleRepository = articleRepository;
         this.articleRepositoryCustomRepository = articleRepositoryCustomRepository;
         this.tagRepository = tagRepository;
@@ -41,11 +41,30 @@ public class ArticleService {
     }
 
     public String save(ArticleCreate articleCreate) {
-        Set<String> dtoTags = articleCreate.getTags();
-        List<TagEntity> tags = tagRepository.getTags(dtoTags);
+        List<TagEntity> tags = handleTags(articleCreate);
         ArticleEntity articleEntity = articleMapper.mapToEntity(articleCreate, tags);
         ArticleEntity save = articleRepository.save(articleEntity);
         return save.getId().toString();
+    }
+
+    private List<TagEntity> handleTags(ArticleCreate articleCreate) {
+        Set<String> dtoTags = articleCreate.getTags();
+
+        if (dtoTags == null || dtoTags.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<TagEntity> existingTags = tagRepository.findByValueIn(dtoTags);
+        List<TagEntity> resultTags = new ArrayList<>(existingTags);
+
+        List<TagEntity> newTags = dtoTags.stream()
+                .filter(dtoTag -> existingTags.stream().anyMatch(tagEntity -> !tagEntity.getValue().equals(dtoTag)))
+                .map(s -> new TagEntity(null, new ArrayList<>(), s))
+                .toList();
+
+        resultTags.addAll(newTags);
+
+        return resultTags;
     }
 
     public ArticleDetails getArticleDetails(String id) throws Exception {
