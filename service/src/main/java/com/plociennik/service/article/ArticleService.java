@@ -4,7 +4,7 @@ import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.ArticleType;
 import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.article.ArticleRepository;
-import com.plociennik.model.repository.article.ArticleRepositoryCustomRepository;
+import com.plociennik.model.repository.article.ArticleCustomRepository;
 import com.plociennik.model.repository.tag.TagRepository;
 import com.plociennik.service.article.dto.AllArticlesItem;
 import com.plociennik.service.article.dto.ArticleCreate;
@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
-    private final ArticleRepositoryCustomRepository articleRepositoryCustomRepository;
+    private final ArticleCustomRepository articleCustomRepository;
     private final ArticleMapper articleMapper;
     private final TagRepository tagRepository;
 
-    public ArticleService(ArticleRepository articleRepository, ArticleRepositoryCustomRepository articleRepositoryCustomRepository, TagRepository tagRepository) {
+    public ArticleService(ArticleRepository articleRepository, ArticleCustomRepository articleCustomRepository, TagRepository tagRepository) {
         this.articleRepository = articleRepository;
-        this.articleRepositoryCustomRepository = articleRepositoryCustomRepository;
+        this.articleCustomRepository = articleCustomRepository;
         this.tagRepository = tagRepository;
         this.articleMapper = new ArticleMapper();
     }
@@ -96,7 +96,7 @@ public class ArticleService {
         LocalDateTime modificationDate = LocalDateTime.now();
 
         UUID uuid = UUID.fromString(articleUpdate.getId());
-        ArticleEntity entity = articleRepositoryCustomRepository.findByUUID(uuid);
+        ArticleEntity entity = articleCustomRepository.findByUUID(uuid);
 
         entity.setTitle(articleUpdate.getTitle());
         entity.setContent(articleUpdate.getContent());

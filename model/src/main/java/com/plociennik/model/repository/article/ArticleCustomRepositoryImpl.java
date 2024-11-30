@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Repository
 @AllArgsConstructor
-public class ArticleRepositoryCustomRepositoryImpl implements ArticleRepositoryCustomRepository {
+public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
 
     private final EntityManager entityManager;
 
@@ -40,17 +40,15 @@ public class ArticleRepositoryCustomRepositoryImpl implements ArticleRepositoryC
     @Override
     @SneakyThrows
     public ArticleEntity findByUUID(UUID uuid) {
-
         JPAQuery<ArticleEntity> query = new JPAQuery<>(this.entityManager);
-
         QArticleEntity qArticleEntity = QArticleEntity.articleEntity;
-
         BooleanExpression entityWithUUID = qArticleEntity.id.eq(uuid);
 
         ArticleEntity articleEntity = query.from(qArticleEntity)
                 .where(entityWithUUID)
                 .fetchOne();
 
+        // todo: create a custom exception
         if (articleEntity == null) {
             System.out.println("error - 110320241818");
             throw new Exception("asdas");

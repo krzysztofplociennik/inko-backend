@@ -22,7 +22,7 @@ public class AutocompleteService {
         List<AutocompleteEntity> allBySearchPhrase = customRepository.findAllBySearchPhrase(phrase);
 
         List<String> autocompletes = allBySearchPhrase.stream()
-                .map(entity -> entity.getValue())
+                .map(AutocompleteEntity::getValue)
                 .toList();
 
         return autocompletes;
@@ -40,8 +40,8 @@ public class AutocompleteService {
 
         if (exactAutocomplete.isPresent()) {
             AutocompleteEntity entity = exactAutocomplete.get();
-            int oldNumberOfUsage = entity.getNumberOfUses();
-            entity.setNumberOfUses(++oldNumberOfUsage);
+            int currentNumberOfUsage = entity.getNumberOfUses();
+            entity.setNumberOfUses(++currentNumberOfUsage);
             repository.save(entity);
         } else {
             AutocompleteEntity entity = new AutocompleteEntity(null, searchPhrase, 1);

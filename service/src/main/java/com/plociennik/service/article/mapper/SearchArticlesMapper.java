@@ -28,7 +28,7 @@ public class SearchArticlesMapper {
 
         List<TagEntity> tags = articleEntity.getTags();
         Set<String> collectedValues = tags.stream()
-                .map(tag -> tag.getValue())
+                .map(TagEntity::getValue)
                 .collect(Collectors.toSet());
 
         return collectedValues;
