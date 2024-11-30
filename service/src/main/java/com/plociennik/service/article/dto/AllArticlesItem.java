@@ -1,4 +1,4 @@
-package com.plociennik.service.dto;
+package com.plociennik.service.article.dto;
 
 import com.plociennik.model.ArticleType;
 import lombok.AllArgsConstructor;

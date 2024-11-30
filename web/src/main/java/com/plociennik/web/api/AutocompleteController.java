@@ -1,6 +1,6 @@
 package com.plociennik.web.api;
 
-import com.plociennik.service.search.autocomplete.AutocompleteService;
+import com.plociennik.service.autocomplete.AutocompleteService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

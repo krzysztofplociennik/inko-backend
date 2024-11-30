@@ -1,7 +1,7 @@
 package com.plociennik.web.api;
 
-import com.plociennik.service.search.SearchArticlesService;
-import com.plociennik.service.search.dto.SearchArticlesItem;
+import com.plociennik.service.article.SearchArticlesService;
+import com.plociennik.service.article.dto.SearchArticlesItem;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

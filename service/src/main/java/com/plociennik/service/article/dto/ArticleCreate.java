@@ -1,4 +1,4 @@
-package com.plociennik.service.dto;
+package com.plociennik.service.article.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,10 +10,10 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ArticleUpdate implements Serializable {
+public class ArticleCreate implements Serializable {
 
-    private String id;
     private String title;
     private String content;
+    private String type;
     private Set<String> tags;
 }

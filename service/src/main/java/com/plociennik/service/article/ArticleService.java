@@ -1,4 +1,4 @@
-package com.plociennik.service;
+package com.plociennik.service.article;
 
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.ArticleType;
@@ -6,11 +6,11 @@ import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.article.ArticleRepository;
 import com.plociennik.model.repository.article.ArticleRepositoryCustomRepository;
 import com.plociennik.model.repository.tag.TagRepository;
-import com.plociennik.service.dto.AllArticlesItem;
-import com.plociennik.service.dto.ArticleCreate;
-import com.plociennik.service.dto.ArticleDetails;
-import com.plociennik.service.dto.ArticleUpdate;
-import com.plociennik.service.mapper.ArticleMapper;
+import com.plociennik.service.article.dto.AllArticlesItem;
+import com.plociennik.service.article.dto.ArticleCreate;
+import com.plociennik.service.article.dto.ArticleDetails;
+import com.plociennik.service.article.dto.ArticleUpdate;
+import com.plociennik.service.article.mapper.ArticleMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

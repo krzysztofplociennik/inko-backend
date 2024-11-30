@@ -1,10 +1,10 @@
 package com.plociennik.web.api;
 
-import com.plociennik.service.ArticleService;
-import com.plociennik.service.dto.AllArticlesItem;
-import com.plociennik.service.dto.ArticleCreate;
-import com.plociennik.service.dto.ArticleDetails;
-import com.plociennik.service.dto.ArticleUpdate;
+import com.plociennik.service.article.ArticleService;
+import com.plociennik.service.article.dto.AllArticlesItem;
+import com.plociennik.service.article.dto.ArticleCreate;
+import com.plociennik.service.article.dto.ArticleDetails;
+import com.plociennik.service.article.dto.ArticleUpdate;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

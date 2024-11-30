@@ -1,8 +1,8 @@
-package com.plociennik.service.search.mapper;
+package com.plociennik.service.article.mapper;
 
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.TagEntity;
-import com.plociennik.service.search.dto.SearchArticlesItem;
+import com.plociennik.service.article.dto.SearchArticlesItem;
 
 import java.util.List;
 import java.util.Set;

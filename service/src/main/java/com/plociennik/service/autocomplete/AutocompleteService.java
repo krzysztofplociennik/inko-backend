@@ -1,4 +1,4 @@
-package com.plociennik.service.search.autocomplete;
+package com.plociennik.service.autocomplete;
 
 import com.plociennik.model.AutocompleteEntity;
 import com.plociennik.model.repository.autocomplete.AutocompleteCustomRepository;
