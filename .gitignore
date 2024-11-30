@@ -6,6 +6,7 @@ build/
 gradlew
 gradlew.bat
 gradle
+lib
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
