@@ -1,6 +1,6 @@
 package com.plociennik.web.api;
 
-import com.plociennik.service.article.SearchArticlesService;
+import com.plociennik.service.article.ArticleSearchService;
 import com.plociennik.service.article.dto.SearchArticlesItem;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SearchArticlesController {
 
-    private SearchArticlesService service;
+    private ArticleSearchService service;
 
     @GetMapping()
     public ResponseEntity<List<SearchArticlesItem>> search(@RequestParam String searchPhrase) {

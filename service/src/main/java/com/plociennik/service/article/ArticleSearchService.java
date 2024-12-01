@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SearchArticlesService {
+public class ArticleSearchService {
 
     private final ArticleCustomRepositoryImpl articleRepositoryCustomRepositoryImpl;
     private final SearchArticlesMapper searchArticlesMapper;
     private final AutocompleteService autocompleteService;
 
-    public SearchArticlesService(
+    public ArticleSearchService(
             ArticleCustomRepositoryImpl articleRepositoryCustomRepositoryImpl,
             AutocompleteService autocompleteService
     ) {
