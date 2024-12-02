@@ -12,12 +12,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class ArticleFetchService {
+public class ArticleReadService {
 
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
 
-    public ArticleFetchService(ArticleRepository articleRepository ) {
+    public ArticleReadService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
         this.articleMapper = new ArticleMapper();
     }

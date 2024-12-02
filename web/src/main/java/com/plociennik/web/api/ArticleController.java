@@ -2,7 +2,7 @@ package com.plociennik.web.api;
 
 import com.plociennik.service.article.ArticleCreateService;
 import com.plociennik.service.article.ArticleDeleteService;
-import com.plociennik.service.article.ArticleFetchService;
+import com.plociennik.service.article.ArticleReadService;
 import com.plociennik.service.article.ArticleUpdateService;
 import com.plociennik.service.article.dto.AllArticlesItem;
 import com.plociennik.service.article.dto.ArticleCreate;
@@ -20,14 +20,14 @@ import java.util.List;
 @AllArgsConstructor
 public class ArticleController {
 
-    private final ArticleFetchService articleFetchService;
+    private final ArticleReadService articleReadService;
     private final ArticleCreateService articleCreateService;
     private final ArticleUpdateService articleUpdateService;
     private final ArticleDeleteService articleDeleteService;
 
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<AllArticlesItem>> getAll() {
-        List<AllArticlesItem> all = articleFetchService.getAll();
+        List<AllArticlesItem> all = articleReadService.getAll();
         return ResponseEntity.ok(all);
     }
 
@@ -38,13 +38,13 @@ public class ArticleController {
     )
     @GetMapping
     public ResponseEntity<ArticleDetails> getDetails(@RequestParam String id) throws Exception {
-        ArticleDetails articleDetails = articleFetchService.getArticleDetails(id);
+        ArticleDetails articleDetails = articleReadService.getArticleDetails(id);
         return ResponseEntity.ok(articleDetails);
     }
 
     @GetMapping(value = "/getTypes")
     public ResponseEntity<List<String>> getTypes() {
-        List<String> allTypes = articleFetchService.getAllTypes();
+        List<String> allTypes = articleReadService.getAllTypes();
         return ResponseEntity.ok(allTypes);
     }
 

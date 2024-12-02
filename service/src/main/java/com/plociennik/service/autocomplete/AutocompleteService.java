@@ -29,17 +29,14 @@ public class AutocompleteService {
     }
 
     public void incrementUsageIfExists(String searchPhrase) {
-
-        // todo: method does more than its name indicates
-
         if (StringUtils.isBlank(searchPhrase)) {
             return;
         }
 
-        Optional<AutocompleteEntity> exactAutocomplete = customRepository.findExactAutocomplete(searchPhrase);
+        Optional<AutocompleteEntity> optionalExactAutocomplete = customRepository.findExactAutocomplete(searchPhrase);
 
-        if (exactAutocomplete.isPresent()) {
-            AutocompleteEntity entity = exactAutocomplete.get();
+        if (optionalExactAutocomplete.isPresent()) {
+            AutocompleteEntity entity = optionalExactAutocomplete.get();
             int currentNumberOfUsage = entity.getNumberOfUses();
             entity.setNumberOfUses(++currentNumberOfUsage);
             repository.save(entity);
