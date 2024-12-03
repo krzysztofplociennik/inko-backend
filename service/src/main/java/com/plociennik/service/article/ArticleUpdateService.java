@@ -5,7 +5,7 @@ import com.plociennik.model.repository.article.ArticleCustomRepository;
 import com.plociennik.model.repository.article.ArticleRepository;
 import com.plociennik.service.article.dto.ArticleDetails;
 import com.plociennik.service.article.dto.ArticleUpdate;
-import com.plociennik.service.article.mapper.ArticleMapper;
+import com.plociennik.service.article.mapper.ArticleReadMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,12 +16,12 @@ public class ArticleUpdateService {
 
     private final ArticleRepository articleRepository;
     private final ArticleCustomRepository articleCustomRepository;
-    private final ArticleMapper articleMapper;
+    private final ArticleReadMapper articleReadMapper;
 
     public ArticleUpdateService(ArticleRepository articleRepository, ArticleCustomRepository articleCustomRepository) {
         this.articleRepository = articleRepository;
         this.articleCustomRepository = articleCustomRepository;
-        this.articleMapper = new ArticleMapper();
+        this.articleReadMapper = new ArticleReadMapper();
     }
 
     public ArticleDetails update(ArticleUpdate articleUpdate) {
@@ -36,7 +36,7 @@ public class ArticleUpdateService {
 
         ArticleEntity updatedArticle = articleRepository.save(entity);
 
-        ArticleDetails response = articleMapper.mapToDetails(updatedArticle);
+        ArticleDetails response = articleReadMapper.mapToDetails(updatedArticle);
 
         return response;
     }

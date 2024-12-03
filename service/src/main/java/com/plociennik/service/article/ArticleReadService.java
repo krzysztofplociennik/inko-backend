@@ -5,7 +5,7 @@ import com.plociennik.model.ArticleType;
 import com.plociennik.model.repository.article.ArticleRepository;
 import com.plociennik.service.article.dto.AllArticlesItem;
 import com.plociennik.service.article.dto.ArticleDetails;
-import com.plociennik.service.article.mapper.ArticleMapper;
+import com.plociennik.service.article.mapper.ArticleReadMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,17 +15,17 @@ import java.util.stream.Collectors;
 public class ArticleReadService {
 
     private final ArticleRepository articleRepository;
-    private final ArticleMapper articleMapper;
+    private final ArticleReadMapper articleReadMapper;
 
     public ArticleReadService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
-        this.articleMapper = new ArticleMapper();
+        this.articleReadMapper = new ArticleReadMapper();
     }
 
     public List<AllArticlesItem> getAll() {
         List<AllArticlesItem> collect = articleRepository.findAll()
                 .stream()
-                .map(articleMapper::mapToAllItem)
+                .map(articleReadMapper::mapToAllItem)
                 .collect(Collectors.toList());
         return collect;
     }
@@ -35,7 +35,7 @@ public class ArticleReadService {
         Optional<ArticleEntity> searchedArticle = articleRepository.findById(uuid);
         if (searchedArticle.isPresent()) {
             ArticleEntity articleEntity = searchedArticle.get();
-            ArticleDetails articleDetails = articleMapper.mapToDetails(articleEntity);
+            ArticleDetails articleDetails = articleReadMapper.mapToDetails(articleEntity);
             return articleDetails;
         } else {
             throw new Exception("There is no article with this ID: '" + id + "' in the database! (eid: 310720240701");

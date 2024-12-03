@@ -5,7 +5,7 @@ import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.article.ArticleRepository;
 import com.plociennik.model.repository.tag.TagRepository;
 import com.plociennik.service.article.dto.ArticleCreate;
-import com.plociennik.service.article.mapper.ArticleMapper;
+import com.plociennik.service.article.mapper.ArticleCreateMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,20 +16,20 @@ import java.util.Set;
 public class ArticleCreateService {
 
     private final ArticleRepository articleRepository;
-    private final ArticleMapper articleMapper;
+    private final ArticleCreateMapper articleCreateMapper;
     private final TagRepository tagRepository;
 
     public ArticleCreateService(
             ArticleRepository articleRepository,
             TagRepository tagRepository) {
         this.articleRepository = articleRepository;
-        this.articleMapper = new ArticleMapper();
+        this.articleCreateMapper = new ArticleCreateMapper();
         this.tagRepository = tagRepository;
     }
 
     public String create(ArticleCreate articleCreate) {
         List<TagEntity> tags = handleTags(articleCreate);
-        ArticleEntity articleEntity = articleMapper.mapToEntity(articleCreate, tags);
+        ArticleEntity articleEntity = articleCreateMapper.mapToEntity(articleCreate, tags);
         ArticleEntity save = articleRepository.save(articleEntity);
         return save.getId().toString();
     }
