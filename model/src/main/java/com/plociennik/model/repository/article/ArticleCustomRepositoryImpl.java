@@ -1,5 +1,6 @@
 package com.plociennik.model.repository.article;
 
+import com.plociennik.common.ArticleNotFoundException;
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.QArticleEntity;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -35,8 +36,6 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
         return foundArticles;
     }
 
-//    todo: refactor
-
     @Override
     @SneakyThrows
     public ArticleEntity findByUUID(UUID uuid) {
@@ -48,10 +47,8 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
                 .where(entityWithUUID)
                 .fetchOne();
 
-        // todo: create a custom exception
         if (articleEntity == null) {
-            System.out.println("error - 110320241818");
-            throw new Exception("asdas");
+            throw new ArticleNotFoundException(uuid.toString());
         }
 
         return articleEntity;
