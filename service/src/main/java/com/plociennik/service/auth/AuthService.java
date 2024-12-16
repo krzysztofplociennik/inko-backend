@@ -37,14 +37,11 @@ public class AuthService {
     }
 
     private void logSuccess(String username) {
-        String message = String.format("User successfully logged in, username: {}, (EID: {})", username, "081115122024");
-        log.info(message);
+        log.info("User successfully logged in, username: {}, (EID: {})", username, "081115122024");
     }
 
     private void logFailure(String username) {
-        String message = String.format("User failed to log in, username: {}, (EID: {})", username, "081415122024");
-        log.info(message);
-
+        log.info("User failed to log in, username: {}, (EID: {})", username, "081415122024");
     }
 }
 
