@@ -16,24 +16,28 @@ public class AuthService {
 
     private final JwtTokenUtil jwtTokenUtil;
     private final UserRepository userRepository;
+    private final PasswordEncoderConfig passwordEncoderConfig;
 
     private static final String LOGIN_SUCCESS_MESSAGE = "Logged in";
-    private static final String LOGIN_FAILURE_MESSAGE = "Wrong credentials";
+    private static final String LOGIN_FAILURE_MESSAGE = "Invalid credentials";
 
     public ResponseEntity<AuthResponse> auth(LoginRequest loginRequest) {
-        try {
-            UserEntity user = userRepository.findByUsername(loginRequest.username())
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-            String token = jwtTokenUtil.generateToken(user);
+        UserEntity user = userRepository.findByUsername(loginRequest.username())
+                .orElseThrow(() -> {
+                    logFailure(loginRequest.username());
+                    return new UsernameNotFoundException(LOGIN_FAILURE_MESSAGE);
+                });
 
-            logSuccess(loginRequest.username());
-            AuthResponse authResponse = new AuthResponse(token, LOGIN_SUCCESS_MESSAGE);
-            return ResponseEntity.ok(authResponse);
-        } catch (UsernameNotFoundException e) {
+        if (!passwordEncoderConfig.passwordEncoder().matches(loginRequest.password(), user.getPassword())) {
             logFailure(loginRequest.username());
             AuthResponse authResponse = new AuthResponse(null, LOGIN_FAILURE_MESSAGE);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authResponse);
         }
+
+        String token = jwtTokenUtil.generateToken(user);
+        logSuccess(loginRequest.username());
+        AuthResponse authResponse = new AuthResponse(token, LOGIN_SUCCESS_MESSAGE);
+        return ResponseEntity.ok(authResponse);
     }
 
     private void logSuccess(String username) {
