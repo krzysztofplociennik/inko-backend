@@ -45,7 +45,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/**",
-                                "/article/**"
+                                "/article/**",
+                                "/autocomplete/**",
+                                "/search-articles/**"
                                 ).permitAll()
                         .anyRequest().authenticated()
                 );
