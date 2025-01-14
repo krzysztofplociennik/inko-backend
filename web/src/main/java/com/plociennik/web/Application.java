@@ -7,8 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(
         basePackages = {
-                "com.plociennik.service",
+                "com.plociennik.common",
                 "com.plociennik.model",
+                "com.plociennik.service",
                 "com.plociennik.web",
         }
 )

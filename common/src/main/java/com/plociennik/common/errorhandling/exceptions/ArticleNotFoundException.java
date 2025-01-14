@@ -1,4 +1,4 @@
-package com.plociennik.common;
+package com.plociennik.common.errorhandling.exceptions;
 
 public class ArticleNotFoundException extends Exception {
 
