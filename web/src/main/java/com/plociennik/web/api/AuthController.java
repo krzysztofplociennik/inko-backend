@@ -1,5 +1,6 @@
 package com.plociennik.web.api;
 
+import com.plociennik.common.errorhandling.exceptions.LoginCredentialsInvalidException;
 import lombok.AllArgsConstructor;
 import com.plociennik.service.auth.AuthResponse;
 import com.plociennik.service.auth.AuthService;
@@ -18,7 +19,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) throws LoginCredentialsInvalidException {
         return authService.auth(loginRequest);
     }
 }
