@@ -28,8 +28,12 @@ public class ArticleEntity {
     @Enumerated(EnumType.STRING)
     private ArticleType type;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "article_tag", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "article_tag",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
     private List<TagEntity> tags = new ArrayList<>();
 
     @Column(name = "creation_date")
