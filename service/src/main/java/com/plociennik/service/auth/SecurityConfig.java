@@ -47,7 +47,8 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/article/**",
                                 "/autocomplete/**",
-                                "/search-articles/**"
+                                "/search-articles/**",
+                                "/backup/**"
                                 ).permitAll()
                         .anyRequest().authenticated()
                 );
