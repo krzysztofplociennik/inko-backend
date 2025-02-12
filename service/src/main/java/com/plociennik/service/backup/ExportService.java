@@ -2,7 +2,6 @@ package com.plociennik.service.backup;
 
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.repository.article.ArticleRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -23,12 +22,17 @@ import static com.plociennik.common.util.StringUtil.newLine;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
-@AllArgsConstructor
-public class BackupService {
+public class ExportService {
 
-    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
 
-    public File doBackup() {
+    private boolean withHTML = false;
+
+    public ExportService(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
+    }
+
+    public File exportArticles(boolean withHTML) {
 
         List<ArticleEntity> all = this.articleRepository.findAll();
         if (isEmpty(all)) {
@@ -44,6 +48,7 @@ public class BackupService {
 
         for (ArticleEntity article : all) {
             try {
+                this.withHTML = withHTML;
                 createSingleFile(article, backupDir);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -84,10 +89,27 @@ public class BackupService {
                 .append(newLine(1) + "Date of creation: " + getDate(entity.getCreationDate()))
                 .append(newLine(1) + "Date of modification: " + getDate(entity.getModificationDate()))
                 .append(newLine(1) + "Tags: " + Arrays.toString(entity.getTags().toArray()))
-                .append(newLine(2) + "Content: " + newLine(2) + entity.getContent())
+                .append(newLine(2) + "Content: " + newLine(2) + handleContent(entity.getContent()))
                 .append(newLine(2));
 
         return sb.toString();
+    }
+
+    private String handleContent(String content) {
+        if (!this.withHTML) {
+            return sanitizeContent(content);
+        }
+        return content;
+    }
+
+    String sanitizeContent(String content) {
+        String sanitizedContent = content
+                .replaceAll("<p>", "")
+                .replaceAll("<br>", "")
+                .replaceAll("<br/>", "")
+                .replaceAll("<img src=\"data", "<img src=\"\ndata")
+                .replaceAll("</p>", "\n");
+        return sanitizedContent;
     }
 
     private String getDate(LocalDateTime date) {

@@ -1,6 +1,6 @@
 package com.plociennik.web.api;
 
-import com.plociennik.service.backup.BackupService;
+import com.plociennik.service.backup.ExportService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -10,18 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/backup")
 @AllArgsConstructor
-public class BackupController {
+public class ExportController {
 
-    private final BackupService backupService;
+    private final ExportService exportService;
 
-    @GetMapping
-    public ResponseEntity<FileSystemResource> downloadBackup() {
-        File backupFile = backupService.doBackup();
+    @GetMapping(value = "/withHTML")
+    public ResponseEntity<FileSystemResource> exportWithHTML() {
+        File backupFile = exportService.exportArticles(true);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(new FileSystemResource(backupFile));
+    }
+
+    @GetMapping(value = "/withoutHTML")
+    public ResponseEntity<FileSystemResource> exportWithoutHTML() {
+        File backupFile = exportService.exportArticles(false);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment");
