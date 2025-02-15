@@ -7,6 +7,7 @@ build/
 #gradlew.bat
 #gradle
 lib
+.env
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
