@@ -1,6 +1,6 @@
 package com.plociennik.web.api;
 
-import com.plociennik.service.backup.ExportService;
+import com.plociennik.service.export.ExportService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.File;
 
 @RestController
-@RequestMapping("/backup")
+@RequestMapping("/export")
 @AllArgsConstructor
 public class ExportController {
 

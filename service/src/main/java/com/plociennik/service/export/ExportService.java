@@ -1,4 +1,4 @@
-package com.plociennik.service.backup;
+package com.plociennik.service.export;
 
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.repository.article.ArticleRepository;

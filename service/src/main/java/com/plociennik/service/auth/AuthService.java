@@ -1,50 +1,49 @@
 package com.plociennik.service.auth;
 
-import com.plociennik.common.errorhandling.exceptions.LoginCredentialsInvalidException;
 import com.plociennik.model.UserEntity;
 import com.plociennik.model.repository.user.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class AuthService {
 
     private final JwtTokenUtil jwtTokenUtil;
+    private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    private static final String LOGIN_SUCCESS_MESSAGE = "Logged in";
+    public ResponseEntity<AuthResponse> auth(LoginRequest loginRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
+            );
 
-    public ResponseEntity<AuthResponse> auth(LoginRequest loginRequest) throws LoginCredentialsInvalidException {
-        UserEntity user = userRepository.findByUsername(loginRequest.username())
-                .orElseThrow(() -> {
-                    logFailure(loginRequest.username(), "180501132025");
-                    return new LoginCredentialsInvalidException("184514012025");
-                });
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        boolean doesPasswordMatch = passwordEncoder.matches(loginRequest.password(), user.getPassword());
-        if (doesPasswordMatch) {
+            UserEntity user = userRepository.findByUsername(userDetails.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
             String token = jwtTokenUtil.generateToken(user);
-            logSuccess(loginRequest.username());
-            AuthResponse authResponse = new AuthResponse(token, LOGIN_SUCCESS_MESSAGE);
-            return ResponseEntity.ok(authResponse);
-        } else {
-            logFailure(loginRequest.username(), "192401132025");
-            throw new LoginCredentialsInvalidException("184314012025");
+
+            log.info("User '{}' successfully logged in.", loginRequest.username());
+            return ResponseEntity.ok(new AuthResponse(token, "Logged in"));
+        } catch (BadCredentialsException e) {
+            log.warn("Failed login attempt for username: {}", loginRequest.username());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse(null, "Invalid credentials"));
         }
     }
 
-    private void logSuccess(String username) {
-        log.info("User successfully logged in, username: {}, (EID: {})", username, "081115122024");
-    }
-
-    private void logFailure(String username, String eid) {
-        log.info("User failed to log in, username: {}, (EID: {})", username, eid);
-    }
 }
+
 
