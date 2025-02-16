@@ -36,7 +36,7 @@ public class ArticleController {
             description = "Fetches article's content with it's metadata by ID. It will throw an exception if there " +
                     "is no article in the database with that ID."
     )
-    @GetMapping
+    @GetMapping(value = "/getDetails")
     public ResponseEntity<ArticleDetails> getDetails(@RequestParam String id) throws Exception {
         ArticleDetails articleDetails = articleReadService.getArticleDetails(id);
         return ResponseEntity.ok(articleDetails);
@@ -54,13 +54,13 @@ public class ArticleController {
         return ResponseEntity.ok(id);
     }
 
-    @PutMapping
+    @PutMapping(value = "/update")
     public ResponseEntity<ArticleDetails> update(@RequestBody ArticleUpdate articleUpdate) {
         ArticleDetails response = articleUpdateService.update(articleUpdate);
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/delete")
     public ResponseEntity<String> delete(@RequestParam String id) {
         articleDeleteService.delete(id);
         return ResponseEntity.ok("The article has been deleted.");
