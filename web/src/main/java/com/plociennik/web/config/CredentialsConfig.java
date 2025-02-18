@@ -13,6 +13,7 @@ public class CredentialsConfig {
             System.setProperty("DB_USER", dotenv.get("DB_USER"));
             System.setProperty("DB_PASS", dotenv.get("DB_PASS"));
             System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
+            System.setProperty("FRONTEND_BASE_URL", dotenv.get("FRONTEND_BASE_URL"));
         } catch (Exception e) {
             // silent catch
         }
