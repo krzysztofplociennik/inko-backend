@@ -1,10 +1,7 @@
 package com.plociennik.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,11 +11,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "user", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "user", schema = "public")
+@Builder
 public class UserEntity implements UserDetails {
 
     @Id
