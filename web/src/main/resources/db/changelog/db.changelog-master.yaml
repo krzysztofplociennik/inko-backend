@@ -1,5 +1,3 @@
 databaseChangeLog:
     - includeAll:
           path: db/changelog/logs/2024
-    - includeAll:
-          path: db/changelog/logs/2025
