@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "app_user", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

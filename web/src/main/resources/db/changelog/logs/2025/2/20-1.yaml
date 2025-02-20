@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-02-20-1
+      author: kplociennik
+      changes:
+        - renameTable:
+             newTableName: app_user
+             oldTableName: user
