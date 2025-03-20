@@ -1,5 +1,5 @@
 # Use a Gradle image with JDK 21
-FROM openjdk:25-jdk-bullseye
+FROM openjdk:19-jdk-alpine3.16
 
 # Set the working directory
 WORKDIR /app
