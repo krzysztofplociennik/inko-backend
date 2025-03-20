@@ -1,21 +1,14 @@
-FROM openjdk:17-jdk-slim
-
+FROM gradle:8.5.0-jdk17-alpine as builder
 WORKDIR /app
-
 COPY gradlew .
 COPY gradle ./gradle
 COPY . ./
-
 RUN chmod +x gradlew
+RUN ./gradlew :web:build -x test
+RUN ls -l /app/inko-backend/web/build/libs/
 
-RUN ./gradlew build -x test
-
-FROM openjdk:17-jdk-slim
-
+FROM openjdk:17-jre-slim
 WORKDIR /app
-
-COPY --from=builder /web/build/libs/*.jar app.jar
-
+COPY --from=builder /app/inko-backend/web/build/libs/*.jar app.jar
 EXPOSE 8080
-
 CMD ["java", "-jar", "app.jar"]
