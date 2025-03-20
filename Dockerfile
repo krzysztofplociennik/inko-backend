@@ -7,7 +7,7 @@ RUN chmod +x gradlew
 RUN ./gradlew :web:build -x test
 RUN ls -l /app/inko-backend/web/build/libs/
 
-FROM openjdk:17-jre-slim
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/inko-backend/web/build/libs/*.jar app.jar
 EXPOSE 8080
