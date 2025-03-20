@@ -1,5 +1,5 @@
 # Use a Gradle image with JDK 21
-FROM gradle:8.5.0-jdk21-alpine as builder
+FROM openjdk:21
 
 # Set the working directory
 WORKDIR /app
