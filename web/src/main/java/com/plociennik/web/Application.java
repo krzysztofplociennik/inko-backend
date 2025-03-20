@@ -26,10 +26,11 @@ public class Application {
 
     public static void main(String[] args) {
         CredentialsConfig.load();
+        logConnection();
         SpringApplication.run(Application.class, args);
     }
 
-    private void logConnection() {
+    private static void logConnection() {
         try {
             // Load credentials
             CredentialsConfig.load();
