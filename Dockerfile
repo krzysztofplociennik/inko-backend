@@ -8,6 +8,6 @@ RUN ./gradlew :web:build -x test
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY --from=builder /app/inko-backend/web/build/libs/*.jar app.jar
+COPY --from=builder /app/web/build/libs/web-1.0-SNAPSHOT.jar app.jar
 EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
