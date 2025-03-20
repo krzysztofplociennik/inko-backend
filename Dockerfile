@@ -1,5 +1,5 @@
 # Use a Gradle image with JDK 21
-FROM openjdk:19-jdk-alpine3.16
+FROM openjdk:17-jdk-slim
 
 # Set the working directory
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN chmod +x gradlew
 RUN ./gradlew build -x test
 
 # Use a minimal JRE 21 image for runtime
-FROM openjdk:19-jdk-alpine3.16
+FROM openjdk:17-jdk-slim
 
 # Set the working directory
 WORKDIR /app
