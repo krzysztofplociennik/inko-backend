@@ -16,8 +16,16 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation project(':service')
+    implementation project(':common')
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.2.22'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    implementation group: 'io.github.cdimascio', name: 'dotenv-java', version: '3.1.0'
 }
 
 test {

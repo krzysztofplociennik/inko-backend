@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-10-24-1
+      author: kplociennik
+      changes:
+        - createTable:
+            tableName: autocomplete
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: value
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number_of_uses
+                  type: NUMBER
+                  constraints:
+                    nullable: false
