@@ -45,7 +45,8 @@ public class SecurityConfig {
                                 "/article/update",
                                 "/article/delete",
                                 "/export/withHTML",
-                                "/export/withoutHTML"
+                                "/export/withoutHTML",
+                                "/import/**"
                         ).authenticated()
                         .anyRequest().authenticated()
                 )

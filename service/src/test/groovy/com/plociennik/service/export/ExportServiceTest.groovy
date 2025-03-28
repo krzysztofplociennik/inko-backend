@@ -3,8 +3,8 @@ package com.plociennik.service.export
 import spock.lang.Specification
 
 class ExportServiceTest extends Specification {
-    def "SanitizeContent"() {
 
+    def "SanitizeContent"() {
         // Arrange
         String value = '<p class="ql-align-center">When you encounter this error:<img src="data:image/png;base64,iVBORw0CYII="></p>\n' +
                 '\n' +
