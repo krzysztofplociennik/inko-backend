@@ -6,6 +6,8 @@ build/
 gradlew
 gradlew.bat
 gradle
+lib
+.env
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -47,3 +49,4 @@ bin/
 
 ### Other ###
 .gitignore
+web/src/main/resources/application-prod.properties
