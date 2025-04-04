@@ -1,6 +1,7 @@
 package com.plociennik.service.export;
 
 import com.plociennik.model.ArticleEntity;
+import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.article.ArticleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -88,11 +89,17 @@ public class ExportService {
                 .append(newLine(1) + "Type: " + entity.getType().toString())
                 .append(newLine(1) + "Date of creation: " + getDate(entity.getCreationDate()))
                 .append(newLine(1) + "Date of modification: " + getDate(entity.getModificationDate()))
-                .append(newLine(1) + "Tags: " + Arrays.toString(entity.getTags().toArray()))
+                .append(newLine(1) + "Tags: " + Arrays.toString(getTags(entity).toArray()))
                 .append(newLine(2) + "Content: " + newLine(2) + handleContent(entity.getContent()))
                 .append(newLine(2));
 
         return sb.toString();
+    }
+
+    private List<String> getTags(ArticleEntity entity) {
+        return entity.getTags().stream()
+                .map(TagEntity::getValue)
+                .toList();
     }
 
     private String handleContent(String content) {

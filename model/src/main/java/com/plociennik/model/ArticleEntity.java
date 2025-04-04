@@ -1,10 +1,7 @@
 package com.plociennik.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -15,6 +12,8 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@EqualsAndHashCode
 public class ArticleEntity {
 
     @Id
@@ -38,6 +37,7 @@ public class ArticleEntity {
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
+    @Builder.Default
     private List<TagEntity> tags = new ArrayList<>();
 
     @Column(name = "creation_date")

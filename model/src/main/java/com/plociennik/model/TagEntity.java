@@ -1,13 +1,11 @@
 package com.plociennik.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +14,8 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@EqualsAndHashCode
 public class TagEntity {
 
     @Id
@@ -23,6 +23,7 @@ public class TagEntity {
     private UUID id;
 
     @ManyToMany(mappedBy = "tags")
+    @Builder.Default
     private List<ArticleEntity> articles = new ArrayList<>();
 
     private String value;

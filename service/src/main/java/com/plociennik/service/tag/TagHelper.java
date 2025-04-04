@@ -27,7 +27,8 @@ public class TagHelper {
         List<TagEntity> resultTags = new ArrayList<>(existingTags);
 
         List<TagEntity> newTags = tags.stream()
-                .filter(dtoTag -> existingTags.stream().anyMatch(tagEntity -> !tagEntity.getValue().equals(dtoTag)))
+                .filter(dtoTag -> existingTags.stream()
+                        .anyMatch(tagEntity -> !tagEntity.getValue().equals(dtoTag)))
                 .map(s -> new TagEntity(null, new ArrayList<>(), s))
                 .toList();
 
