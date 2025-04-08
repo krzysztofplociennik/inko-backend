@@ -1,5 +1,6 @@
 package com.plociennik.common.errorhandling;
 
+import com.plociennik.common.errorhandling.exceptions.InkoValidationException;
 import com.plociennik.common.errorhandling.responses.ErrorResponse;
 import com.plociennik.common.errorhandling.exceptions.LoginCredentialsInvalidException;
 import org.springframework.http.HttpStatus;
@@ -14,5 +15,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleLoginCredentialsInvalidException(LoginCredentialsInvalidException ex) {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+    }
+
+    @ExceptionHandler(InkoValidationException.class)
+    public ResponseEntity<String> handleValidationException(InkoValidationException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
     }
 }

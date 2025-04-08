@@ -3,11 +3,13 @@ package com.plociennik.service.importing.validation;
 import com.plociennik.common.errorhandling.exceptions.InkoRuntimeException;
 import com.plociennik.service.importing.dto.ImportFilesRequestBody;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
 
+@Component
 public class CorrectContentStructureValidator implements ImportingValidator {
 
     @Override
