@@ -1,6 +1,5 @@
 package com.plociennik.service.importing.validation;
 
-import com.plociennik.service.importing.dto.ImportFilesRequestBody;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Component
-public class CorrectTypeValidator implements ImportingValidator {
+public class CorrectTypeFileValidator implements ImportingFileValidator {
 
     private final static List<String> CORRECT_EXTENSIONS = List.of(
             ".txt", ".TXT"
@@ -18,19 +17,10 @@ public class CorrectTypeValidator implements ImportingValidator {
     );
 
     @Override
-    public boolean isValid(ImportFilesRequestBody requestBody) {
-
-        List<MultipartFile> files = requestBody.getFiles();
-
-        for (MultipartFile file : files) {
-            String originalFilename = file.getOriginalFilename();
-            String contentType = file.getContentType();
-            boolean isFileValid = isFileOfCorrectExtensionAndType(originalFilename, contentType);
-            if (!isFileValid) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isValid(MultipartFile multipartFile) {
+        String originalFilename = multipartFile.getOriginalFilename();
+        String contentType = multipartFile.getContentType();
+        return isFileOfCorrectExtensionAndType(originalFilename, contentType);
     }
 
     boolean isFileOfCorrectExtensionAndType(String filename, String contentType) {

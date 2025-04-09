@@ -2,7 +2,6 @@ package com.plociennik.service.importing.validation;
 
 import com.plociennik.service.importing.dto.ImportFilesRequestBody;
 
-public interface ImportingValidator {
+public interface ImportFilesRequestValidator extends ImportValidator {
     boolean isValid(ImportFilesRequestBody requestBody);
-    String createValidationFailureMessage();
 }

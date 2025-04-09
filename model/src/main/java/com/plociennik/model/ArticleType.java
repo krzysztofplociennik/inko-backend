@@ -1,5 +1,6 @@
 package com.plociennik.model;
 
+import com.plociennik.common.errorhandling.exceptions.InkoRuntimeException;
 import lombok.SneakyThrows;
 
 public enum ArticleType {
@@ -25,7 +26,7 @@ public enum ArticleType {
             case "OS" -> {
                 return OS;
             }
-            default -> throw new Exception("Unexpected value: " + s);
+            default -> throw new InkoRuntimeException("Unexpected value: [" + s + "]", "202504090950");
         }
     }
 

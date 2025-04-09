@@ -1,15 +1,14 @@
 package com.plociennik.service.importing.validation
 
-import com.plociennik.service.importing.dto.ImportFilesRequestBody
 import org.springframework.mock.web.MockMultipartFile
 import spock.lang.Specification
 
 class CorrectContentStructureValidatorTest extends Specification {
 
-    def validator = new CorrectContentStructureValidator()
+    def validator = new CorrectContentStructureFileValidator()
 
     def "should return true when file's content has a valid structure"() {
-        given: "a request body with a valid mock file"
+        given: "a valid mock file"
             String content =
                     """UUID: 6d0379ca-0019-420e-b785-e16b094f3098
                     Title: Styling PrimeNG's components
@@ -32,29 +31,27 @@ class CorrectContentStructureValidatorTest extends Specification {
                     """
             def validFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", content.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(validFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(validFile)
         then:
-            isRequestBodyValid
+            isFileValid
     }
 
     def "should return false when file's content is a blank string"() {
-        given: "a request body with an invalid mock file"
+        given: "an invalid mock file"
             String blankContent =
                     """
                     """
             def invalidFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", blankContent.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(invalidFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(invalidFile)
         then:
-            !isRequestBodyValid
+            !isFileValid
     }
 
     def "should return false when file's content is not valid"() {
-        given: "a request body with a file that has missing properties like title and date of modification"
+        given: "a file that has missing properties like title and date of modification"
             String content =
                     """
                         UUID: 6d0379ca-0019-420e-b785-e16b094f3098
@@ -77,11 +74,10 @@ class CorrectContentStructureValidatorTest extends Specification {
                         """
         def invalidFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", content.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(invalidFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(invalidFile)
         then:
-            !isRequestBodyValid
+            !isFileValid
     }
 
     def "should return false when the title property in the file's content is not valid"() {
@@ -109,11 +105,10 @@ class CorrectContentStructureValidatorTest extends Specification {
                     """
         def invalidFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", content.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(invalidFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(invalidFile)
         then:
-            !isRequestBodyValid
+            !isFileValid
     }
 
     def "should return false when the type property in the file's content is not valid"() {
@@ -141,11 +136,10 @@ class CorrectContentStructureValidatorTest extends Specification {
                     """
         def invalidFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", content.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(invalidFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(invalidFile)
         then:
-            !isRequestBodyValid
+            !isFileValid
     }
 
     def "should return false when the date of creation property in the file's content is not valid"() {
@@ -173,11 +167,10 @@ class CorrectContentStructureValidatorTest extends Specification {
                     """
         def invalidFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", content.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(invalidFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(invalidFile)
         then:
-            !isRequestBodyValid
+            !isFileValid
     }
 
     def "should return false when the date of modification property in the file's content is not valid"() {
@@ -205,11 +198,10 @@ class CorrectContentStructureValidatorTest extends Specification {
                     """
         def invalidFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", content.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(invalidFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(invalidFile)
         then:
-            !isRequestBodyValid
+            !isFileValid
     }
 
     def "should return false when the tags property in the file's content is not valid"() {
@@ -237,11 +229,10 @@ class CorrectContentStructureValidatorTest extends Specification {
                     """
         def invalidFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", content.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(invalidFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(invalidFile)
         then:
-            !isRequestBodyValid
+            !isFileValid
     }
 
     def "should return false when the content property in the file's content is not valid"() {
@@ -269,10 +260,9 @@ class CorrectContentStructureValidatorTest extends Specification {
                     """
         def invalidFile = new MockMultipartFile(
                     "files", "document2.txt", "text/plain", content.getBytes())
-            def requestBody = new ImportFilesRequestBody(List.of(invalidFile))
         when:
-            def isRequestBodyValid = validator.isValid(requestBody)
+            def isFileValid = validator.isValid(invalidFile)
         then:
-            !isRequestBodyValid
+            !isFileValid
     }
 }

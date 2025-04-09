@@ -29,11 +29,9 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
         BooleanExpression contentContainsPhrase = qArticleEntity.content.contains(phrase);
         BooleanExpression titleContainsPhrase = qArticleEntity.title.contains(phrase);
 
-        List<ArticleEntity> foundArticles = query.from(qArticleEntity)
+        return query.from(qArticleEntity)
                 .where(contentContainsPhrase.or(titleContainsPhrase))
                 .fetch();
-
-        return foundArticles;
     }
 
     @Override

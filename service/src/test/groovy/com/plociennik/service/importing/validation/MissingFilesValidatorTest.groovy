@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class MissingFilesValidatorTest extends Specification {
 
-    def validator = new MissingFilesValidator()
+    def validator = new MissingFilesFileRequestValidator()
 
     def "should return false when the request body has a null value"() {
         given:

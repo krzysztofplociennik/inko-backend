@@ -1,32 +1,19 @@
 package com.plociennik.service.importing.validation;
 
-import com.plociennik.common.errorhandling.exceptions.InkoRuntimeException;
-import com.plociennik.service.importing.dto.ImportFilesRequestBody;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.List;
-
 @Component
-public class CorrectContentStructureValidator implements ImportingValidator {
+public class CorrectContentStructureFileValidator implements ImportingFileValidator {
 
     @Override
-    public boolean isValid(ImportFilesRequestBody requestBody) {
-
-        List<MultipartFile> files = requestBody.getFiles();
-        for (MultipartFile file : files) {
-            boolean isValid = hasValidStructure(file);
-            if (!isValid) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isValid(MultipartFile multipartFile) {
+        return hasValidStructure(multipartFile);
     }
 
     private boolean hasValidStructure(MultipartFile file) {
-        String content = extractContentFromFile(file);
+        String content = ValidationUtils.extractContentFromFile(file);
 
         if (StringUtils.isBlank(content)) {
             return false;
@@ -43,49 +30,39 @@ public class CorrectContentStructureValidator implements ImportingValidator {
                 && hasContentPartInCorrectPlace(splitContent);
     }
 
-    private String extractContentFromFile(MultipartFile file) {
-        String content = null;
-        try {
-            content = new String(file.getBytes());
-        } catch (IOException e) {
-            throw new InkoRuntimeException(e.getMessage(), "202504031243");
-        }
-        return content;
-    }
-
     private boolean hasUUUIDPartInCorrectPlace(String[] splitContent) {
         String expectedUUIDPart = splitContent[0].trim();
         return expectedUUIDPart.startsWith("UUID: ");
     }
 
     private boolean hasTitlePartInCorrectPlace(String[] splitContent) {
-        String expectedUUIDPart = splitContent[1].trim();
-        return expectedUUIDPart.startsWith("Title: ");
+        String expectedTitlePart = splitContent[1].trim();
+        return expectedTitlePart.startsWith("Title: ");
     }
 
     private boolean hasTypePartInCorrectPlace(String[] splitContent) {
-        String expectedUUIDPart = splitContent[2].trim();
-        return expectedUUIDPart.startsWith("Type: ");
+        String expectedTypePart = splitContent[2].trim();
+        return expectedTypePart.startsWith("Type: ");
     }
 
     private boolean hasDateOfCreationPartInCorrectPlace(String[] splitContent) {
-        String expectedUUIDPart = splitContent[3].trim();
-        return expectedUUIDPart.startsWith("Date of creation: ");
+        String expectedDatePart = splitContent[3].trim();
+        return expectedDatePart.startsWith("Date of creation: ");
     }
 
     private boolean hasDateOfModificationPartInCorrectPlace(String[] splitContent) {
-        String expectedUUIDPart = splitContent[4].trim();
-        return expectedUUIDPart.startsWith("Date of modification: ");
+        String expectedDatePart = splitContent[4].trim();
+        return expectedDatePart.startsWith("Date of modification: ");
     }
 
     private boolean hasTagsPartInCorrectPlace(String[] splitContent) {
-        String expectedUUIDPart = splitContent[5].trim();
-        return expectedUUIDPart.startsWith("Tags: ");
+        String expectedTagsPart = splitContent[5].trim();
+        return expectedTagsPart.startsWith("Tags: ");
     }
 
     private boolean hasContentPartInCorrectPlace(String[] splitContent) {
-        String expectedUUIDPart = splitContent[7].trim();
-        return expectedUUIDPart.startsWith("Content:");
+        String expectedContentPart = splitContent[7].trim();
+        return expectedContentPart.startsWith("Content:");
     }
 
     @Override

@@ -5,7 +5,7 @@ import spock.lang.Unroll
 
 class CorrectTypeValidatorTest extends Specification {
 
-    def validator = new CorrectTypeValidator()
+    def validator = new CorrectTypeFileValidator()
 
     @Unroll("isFileOfCorrectType with filename '#filename' and contentType '#contentType' should return #expectedResult")
     def "should return correct boolean based on filename and content type validity"() {
