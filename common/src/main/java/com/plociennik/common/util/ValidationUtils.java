@@ -1,4 +1,4 @@
-package com.plociennik.service.importing.validation;
+package com.plociennik.common.util;
 
 import com.plociennik.common.errorhandling.exceptions.InkoRuntimeException;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +9,7 @@ public class ValidationUtils {
 
     private ValidationUtils() {}
 
-    static String extractContentFromFile(MultipartFile file) {
+    public static String extractContentFromFile(MultipartFile file) {
         String content = null;
         try {
             content = new String(file.getBytes());

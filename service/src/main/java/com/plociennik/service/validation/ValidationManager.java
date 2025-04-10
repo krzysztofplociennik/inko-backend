@@ -1,5 +1,6 @@
 package com.plociennik.service.validation;
 
+import com.plociennik.common.errorhandling.exceptions.InkoImportException;
 import com.plociennik.common.errorhandling.exceptions.InkoValidationException;
 import com.plociennik.service.importing.dto.ImportFilesRequestBody;
 import com.plociennik.service.importing.validation.ImportValidator;
@@ -43,7 +44,7 @@ public class ValidationManager {
         for (ImportingFileValidator validator : importingFileValidators) {
             boolean isFileValid = validator.isValid(file);
             if (!isFileValid) {
-                throwErrorIfNotValid(validator);
+                throwErrorIfFileNotValid(validator, file);
             }
         }
     }
@@ -53,5 +54,12 @@ public class ValidationManager {
         String validationFailureMessage = validator.createValidationFailureMessage();
         log.error(validationFailureMessage);
         throw new InkoValidationException(prefix + validationFailureMessage);
+    }
+
+    private void throwErrorIfFileNotValid(ImportingFileValidator validator, MultipartFile file) {
+        String prefix = "[InkoImportException] ";
+        String validationFailureMessage = validator.createValidationFailureMessage();
+        log.error(validationFailureMessage);
+        throw new InkoImportException(prefix + validationFailureMessage, file);
     }
 }

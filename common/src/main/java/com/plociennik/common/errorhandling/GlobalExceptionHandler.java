@@ -1,5 +1,6 @@
 package com.plociennik.common.errorhandling;
 
+import com.plociennik.common.errorhandling.exceptions.InkoImportException;
 import com.plociennik.common.errorhandling.exceptions.InkoValidationException;
 import com.plociennik.common.errorhandling.responses.ErrorResponse;
 import com.plociennik.common.errorhandling.exceptions.LoginCredentialsInvalidException;
@@ -22,5 +23,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InkoImportException.class)
+    public ResponseEntity<String> handleInkoImportException(InkoImportException ex) {
+        String message = ex.getMessage() + "\n\nFile data:\n\n" + ex.getFileData().toString();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(message);
     }
 }

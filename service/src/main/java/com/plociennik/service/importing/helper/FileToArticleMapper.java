@@ -83,8 +83,11 @@ public class FileToArticleMapper {
 
     private LocalDateTime extractDateOfModification(String[] contentSplit) {
         String dateLine = contentSplit[4].trim();
-        String subString = dateLine.substring(22);
-        return LocalDateTime.parse(subString);
+        String subString = dateLine.substring(21);
+        if (StringUtils.isBlank(subString)) {
+            return null;
+        }
+        return LocalDateTime.parse(subString.trim());
     }
 
     private List<TagEntity> extractTags(String[] contentSplit) {

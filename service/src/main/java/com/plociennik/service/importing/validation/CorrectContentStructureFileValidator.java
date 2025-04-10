@@ -1,5 +1,6 @@
 package com.plociennik.service.importing.validation;
 
+import com.plociennik.common.util.ValidationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,16 +22,24 @@ public class CorrectContentStructureFileValidator implements ImportingFileValida
 
         String[] splitContent = content.split("\n");
 
-        return hasUUUIDPartInCorrectPlace(splitContent)
-                && hasTitlePartInCorrectPlace(splitContent)
-                && hasTypePartInCorrectPlace(splitContent)
-                && hasDateOfCreationPartInCorrectPlace(splitContent)
-                && hasDateOfModificationPartInCorrectPlace(splitContent)
-                && hasTagsPartInCorrectPlace(splitContent)
-                && hasContentPartInCorrectPlace(splitContent);
+        boolean isUUIDPartValid = hasUUIDPartInCorrectPlace(splitContent);
+        boolean isTitlePartValid = hasTitlePartInCorrectPlace(splitContent);
+        boolean isTypePartValid = hasTypePartInCorrectPlace(splitContent);
+        boolean isDateOfCreationPartValid = hasDateOfCreationPartInCorrectPlace(splitContent);
+        boolean isDateOfModificationPartValid = hasDateOfModificationPartInCorrectPlace(splitContent);
+        boolean isTagsPartValid = hasTagsPartInCorrectPlace(splitContent);
+        boolean isContentPartValid = hasContentPartInCorrectPlace(splitContent);
+
+        return isUUIDPartValid
+                && isTitlePartValid
+                && isTypePartValid
+                && isDateOfCreationPartValid
+                && isDateOfModificationPartValid
+                && isTagsPartValid
+                && isContentPartValid;
     }
 
-    private boolean hasUUUIDPartInCorrectPlace(String[] splitContent) {
+    private boolean hasUUIDPartInCorrectPlace(String[] splitContent) {
         String expectedUUIDPart = splitContent[0].trim();
         return expectedUUIDPart.startsWith("UUID: ");
     }
@@ -52,7 +61,7 @@ public class CorrectContentStructureFileValidator implements ImportingFileValida
 
     private boolean hasDateOfModificationPartInCorrectPlace(String[] splitContent) {
         String expectedDatePart = splitContent[4].trim();
-        return expectedDatePart.startsWith("Date of modification: ");
+        return expectedDatePart.startsWith("Date of modification:");
     }
 
     private boolean hasTagsPartInCorrectPlace(String[] splitContent) {
@@ -78,6 +87,8 @@ public class CorrectContentStructureFileValidator implements ImportingFileValida
                 Tags: ...
                 
                 Content: ...
+                
+                (EID: 202504101400)
                 """;
     }
 }
