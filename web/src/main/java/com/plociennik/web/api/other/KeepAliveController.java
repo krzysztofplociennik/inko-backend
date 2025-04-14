@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/keep-alive")
 @AllArgsConstructor
 @Slf4j
+@SuppressWarnings("unused")
 public class KeepAliveController {
 
     @GetMapping

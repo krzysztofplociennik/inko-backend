@@ -1,7 +1,6 @@
 package com.plociennik.service.auth;
 
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +12,7 @@ import java.io.IOException;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@SuppressWarnings("unused")
 public class RequestLoggingFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(RequestLoggingFilter.class);
 
