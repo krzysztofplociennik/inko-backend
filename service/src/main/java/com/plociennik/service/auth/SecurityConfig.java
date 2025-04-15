@@ -39,8 +39,7 @@ public class SecurityConfig {
                                 "/autocomplete/**",
                                 "/article/getAll",
                                 "/article/getDetails",
-                                "/article/getTypes",
-                                "/keep-alive"
+                                "/article/getTypes"
                         ).permitAll()
                         .requestMatchers(
                                 "/article/add",

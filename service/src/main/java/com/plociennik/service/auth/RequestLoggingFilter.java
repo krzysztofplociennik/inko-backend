@@ -21,15 +21,10 @@ public class RequestLoggingFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String fullUrl = httpRequest.getRequestURL().toString();
-
         if (httpRequest.getQueryString() != null) {
             fullUrl += "?" + httpRequest.getQueryString();
         }
-
-        if (!isRequestKeepAlive(fullUrl)) {
-            logIncomingRequest(fullUrl, httpRequest);
-        }
-
+        logIncomingRequest(fullUrl, httpRequest);
         chain.doFilter(request, response);
     }
 
@@ -37,10 +32,5 @@ public class RequestLoggingFilter implements Filter {
         logger.info("Incoming request URL: {}", fullUrl);
         logger.info("Request URI: {}", httpRequest.getRequestURI());
         logger.info("Servlet Path: {}", httpRequest.getServletPath());
-    }
-
-    private boolean isRequestKeepAlive(String fullUrl) {
-        String keepAliveSubstring = "/keep-alive";
-        return fullUrl.contains(keepAliveSubstring);
     }
 }
