@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
+@SuppressWarnings("unused")
 public class KeepAlive {
 
     @Scheduled(fixedRate = 14 * 60 * 1_000)
