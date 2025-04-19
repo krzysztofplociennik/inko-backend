@@ -44,6 +44,30 @@ public class AuthService {
         }
     }
 
+    public ResponseEntity<AuthResponse> refreshToken(String authHeader) {
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+
+            try {
+                if (jwtTokenUtil.validateToken(token)) {
+                    String username = jwtTokenUtil.extractUsername(token);
+
+                    UserEntity user = userRepository.findByUsername(username)
+                            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+                    String newToken = jwtTokenUtil.generateToken(user);
+
+                    log.info("Token refreshed for user: {}", username);
+                    return ResponseEntity.ok(new AuthResponse(newToken, "Token refreshed successfully"));
+                }
+            } catch (Exception e) {
+                log.error("Failed to refresh token: {}", e.getMessage());
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse(null, "Invalid token"));
+    }
+
 }
 
 

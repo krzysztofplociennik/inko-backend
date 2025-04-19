@@ -18,7 +18,7 @@ public class JwtTokenUtil {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    private static final long JWT_TOKEN_VALIDITY = 60 * 60 * 1000; // 1 hour
+    private static final long JWT_TOKEN_VALIDITY = 20 * 60 * 1000;
 
     public String generateToken(UserEntity user) {
         return Jwts.builder()
