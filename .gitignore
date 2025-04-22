@@ -50,3 +50,4 @@ bin/
 ### Other ###
 .gitignore
 web/src/main/resources/application-prod.properties
+web/src/main/resources/application-demo.properties
