@@ -22,6 +22,7 @@ public class ArticleReadService {
         this.articleReadMapper = new ArticleReadMapper();
     }
 
+    // todo: search filter instead of just dumping everything into RAM
     public List<AllArticlesItem> getAll() {
         List<AllArticlesItem> collect = articleRepository.findAll()
                 .stream()
