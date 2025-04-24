@@ -11,6 +11,6 @@ public class KeepAliveService {
     private final ArticleRepository articleRepository;
 
     public void findFirstArticle() {
-        this.articleRepository.findAll().getFirst();
+        this.articleRepository.findAll();
     }
 }
