@@ -1,16 +1,18 @@
 package com.plociennik.service.other;
 
-import com.plociennik.model.repository.article.ArticleRepository;
+import com.plociennik.model.repository.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class KeepAliveService {
 
-    private final ArticleRepository articleRepository;
+    private final UserRepository userRepository;
 
     public void findFirstArticle() {
-        this.articleRepository.findAll();
+        this.userRepository.findById(UUID.randomUUID());
     }
 }
