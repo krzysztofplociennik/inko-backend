@@ -1,32 +1,82 @@
 # Handy IT Repository
-This is a side project that serves as a personal collection of handy tips, insightful articles, and useful hints — all loosely related to IT and tech topics.
+
+This is a side project that serves as a personal collection of handy tips, articles — all loosely related to IT and tech topics.
+
+The link to the **live demo** is below.
+
+This is the backend repository. Here is the [frontend](https://github.com/krzysztofplociennik/inko-frontend) side.
 
 ## Purpose
-The main goal of this repository is to:
 
-Keep track of interesting or useful IT-related content
+The main goals of this repository are to:
 
-Serve as a quick reference for common problems or solutions
+- keep track of useful IT-related content
+- serve as a quick reference for common problems
+- improve my programming skills through hands-on development
 
-Act as a living notebook for tech experiments, tricks, or notes
+## Functionalities
 
-## What's inside
-Short tips or code snippets
+- 🔍 search articles
+- 📄 view individual articles or browse the whole repository
+- 🌙 light/Dark mode toggle
+- 🔐 login and logout functionality
 
-Articles and summaries
+### While Logged In
 
-## Notes
-This application is a work-in-progress.
+- ➕ create a new article
+- ✏️ update existing articles
+- 🗑️ delete articles
+- 📥 import one or multiple articles from `.txt` files
+- 📤 export all articles to `.txt` files
 
-Not everything is perfectly polished — it’s more of a personal knowledge base than a public wiki.
+## Tech Stack
 
-Contributions, ideas, or feedback are welcome!
+**Backend:**
+- Java
+- Spring Boot
+- Spock
+- Hibernate
 
+**Frontend:**
+- Angular
+- [PrimeNG](https://www.primefaces.org/primeng/)
+
+**Database:**
+- PostgreSQL
+
+## Hosting
+
+- [Render](https://render.com/) (backend)
+- [Vercel](https://vercel.com/) (frontend)
+- [Supabase](https://supabase.com/) (database)
 
 ## Demo
 
-https://inkodemo.vercel.app/
+🖥️ Live Demo: [https://inkodemo.vercel.app/](https://inkodemo.vercel.app/)
 
-The application is deployed on:
-- render.com (backend)
-- vercel.com (frontend)
+Credentials for logging in:
+
+Login:  river<br>
+Pass:   wind
+
+Notes about the demo version:
+- uses a separate instance of the Supabase database
+- there's a cron job that wipes all the articles and inserts a new batch
+- usually is the same (or very similar) function-wise compared to the "production" version
+
+## Upcoming Improvements & Features
+
+- overall better article editor
+- syntax-highlighted code snippets with copy-to-clipboard functionality
+- pagination for easier navigation
+- advanced search with filters
+- a dedicated section for command-line examples and cheatsheets (e.g. Linux, Docker, MongoDB, etc.)
+- other :)
+
+## Notes
+
+⚠️ This application is a work-in-progress.
+
+It's primarily a personal knowledge base that serves also as a valuable learning experience, especially in understanding the complexities of building a fully functional frontend that communicates with a backend and a database.
+
+That said, contributions, feedback, and ideas are always welcome!
