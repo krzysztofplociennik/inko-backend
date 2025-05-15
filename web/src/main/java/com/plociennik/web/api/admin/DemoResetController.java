@@ -15,7 +15,7 @@ public class DemoResetController {
 
     private final DemoResetService service;
 
-    @PostMapping(value = "reset")
+    @PostMapping(value = "/reset")
     public ResponseEntity<String> reset(@RequestParam String adminToken) {
         service.reset(adminToken);
         return ResponseEntity.ok("Reset done.");
