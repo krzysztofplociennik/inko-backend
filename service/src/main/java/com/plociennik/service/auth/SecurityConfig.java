@@ -40,8 +40,10 @@ public class SecurityConfig {
                                 "/article/getAll",
                                 "/article/getDetails",
                                 "/article/getTypes",
-                                "/keep-alive"
-                        ).permitAll()
+                                "/keep-alive",
+                                "/demoReset/**"
+                        )
+                        .permitAll()
                         .requestMatchers(
                                 "/article/add",
                                 "/article/update",
