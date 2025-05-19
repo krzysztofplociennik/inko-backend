@@ -7,6 +7,8 @@ app = 'inko-backend'
 primary_region = 'fra'
 
 [build]
+    [build.git]
+        branch = "demo"
 
 [http_service]
 internal_port = 8080
