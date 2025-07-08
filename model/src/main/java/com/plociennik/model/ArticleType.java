@@ -1,7 +1,6 @@
 package com.plociennik.model;
 
 import com.plociennik.common.errorhandling.exceptions.InkoRuntimeException;
-import lombok.SneakyThrows;
 
 public enum ArticleType {
 
@@ -10,7 +9,6 @@ public enum ArticleType {
     DATABASE,
     OS;
 
-    @SneakyThrows
     public static ArticleType getType(String s) {
 
         switch (s) {
