@@ -1,5 +1,6 @@
 package com.plociennik.service.article;
 
+import com.plociennik.common.errorhandling.exceptions.ArticleNotFoundException;
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.article.ArticleCustomRepository;
@@ -35,13 +36,12 @@ public class ArticleUpdateService {
         this.articleUpdateMapper = new ArticleUpdateMapper();
     }
 
-    public ArticleDetails update(ArticleUpdate articleUpdate) {
+    public ArticleDetails update(ArticleUpdate articleUpdate) throws ArticleNotFoundException {
         UUID uuid = UUID.fromString(articleUpdate.getId());
         ArticleEntity entity = articleCustomRepository.findByUUID(uuid);
         List<TagEntity> mergedTags = tagHelper.mergeExistingTagsWithNewTags(articleUpdate.getTags());
         ArticleEntity mappedArticle = articleUpdateMapper.map(entity, articleUpdate, mergedTags);
         ArticleEntity updatedArticle = articleRepository.save(mappedArticle);
-        ArticleDetails response = articleReadMapper.mapToDetails(updatedArticle);
-        return response;
+        return articleReadMapper.mapToDetails(updatedArticle);
     }
 }
