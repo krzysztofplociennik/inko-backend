@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,8 +34,7 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
     }
 
     @Override
-    @SneakyThrows
-    public ArticleEntity findByUUID(UUID uuid) {
+    public ArticleEntity findByUUID(UUID uuid) throws ArticleNotFoundException {
         JPAQuery<ArticleEntity> query = new JPAQuery<>(this.entityManager);
         QArticleEntity qArticleEntity = QArticleEntity.articleEntity;
         BooleanExpression entityWithUUID = qArticleEntity.id.eq(uuid);

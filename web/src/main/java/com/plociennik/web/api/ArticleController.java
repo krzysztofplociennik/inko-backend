@@ -1,5 +1,6 @@
 package com.plociennik.web.api;
 
+import com.plociennik.common.errorhandling.exceptions.ArticleNotFoundException;
 import com.plociennik.service.article.ArticleCreateService;
 import com.plociennik.service.article.ArticleDeleteService;
 import com.plociennik.service.article.ArticleReadService;
@@ -55,7 +56,7 @@ public class ArticleController {
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<ArticleDetails> update(@RequestBody ArticleUpdate articleUpdate) {
+    public ResponseEntity<ArticleDetails> update(@RequestBody ArticleUpdate articleUpdate) throws ArticleNotFoundException {
         ArticleDetails response = articleUpdateService.update(articleUpdate);
         return ResponseEntity.ok(response);
     }
