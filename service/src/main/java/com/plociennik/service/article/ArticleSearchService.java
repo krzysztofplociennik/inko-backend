@@ -32,24 +32,11 @@ public class ArticleSearchService {
         this.autocompleteService = autocompleteService;
     }
 
-    public List<SearchArticlesItem> search(String searchPhrase) {
-        autocompleteService.incrementUsageIfExists(searchPhrase);
+    public Page<SearchArticlesItem> search(int page, int size, ArticleFilter filter) {
+        autocompleteService.incrementUsageIfExists(filter.getSearchPhrase());
+        Pageable pageable = PageRequest.of(page, size);
 
-        List<ArticleEntity> articlesByPhrase = articleRepositoryCustomRepositoryImpl.findByPhrase(searchPhrase);
-
-        List<SearchArticlesItem> searchedArticles = articlesByPhrase.stream()
-                .map(articleSearchMapper::mapToRead)
-                .toList();
-
-        return searchedArticles;
-    }
-
-    public Page<SearchArticlesItem> search(ArticleFilter filter) {
-        Pageable pageable = PageRequest.of(filter.getPage(), filter.getSize());
-
-        Specification<ArticleEntity> spec = Specification
-                .where(ArticleSpecification.filterBy(filter))
-                .and(hasSearchPhrase(filter.getSearchPhrase()));
+        Specification<ArticleEntity> spec = Specification.where(ArticleSpecification.filterBy(filter));
 
         Page<ArticleEntity> articlesFound = articleRepositoryCustomRepositoryImpl.findBySpecification(spec, pageable);
 
@@ -58,15 +45,5 @@ public class ArticleSearchService {
                 .toList();
 
         return new PageImpl<>(mappedArticles, pageable, mappedArticles.size());
-    }
-
-    private Specification<ArticleEntity> hasSearchPhrase(String searchPhrase) {
-        return (root, query, cb) -> {
-            if (searchPhrase == null || searchPhrase.isEmpty()) {
-                return cb.conjunction();
-            }
-            return cb.like(cb.lower(root.get("title")),
-                    "%" + searchPhrase.toLowerCase() + "%");
-        };
     }
 }

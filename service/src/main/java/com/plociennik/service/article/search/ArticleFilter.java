@@ -11,8 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ArticleFilter {
-    private int page;
-    private int size;
     private String searchPhrase;
     private String type;
     private List<String> tags;

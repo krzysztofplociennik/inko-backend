@@ -10,9 +10,20 @@ public class ArticleSpecification {
 
     public static Specification<ArticleEntity> filterBy(ArticleFilter filter) {
         return Specification
-                .where(hasType(filter.getType()))
+                .where(hasSearchPhrase(filter.getSearchPhrase()))
+                .and(hasType(filter.getType()))
                 .and(hasTags(filter.getTags()))
                 .and(hasCreationDateBetween(filter.getCreationDateFrom(), filter.getCreationDateTo()));
+    }
+
+    private static Specification<ArticleEntity> hasSearchPhrase(String searchPhrase) {
+        return (root, query, cb) -> {
+            if (searchPhrase == null || searchPhrase.isEmpty()) {
+                return cb.conjunction();
+            }
+            return cb.like(cb.lower(root.get("title")),
+                    "%" + searchPhrase.toLowerCase() + "%");
+        };
     }
 
     private static Specification<ArticleEntity> hasType(String type) {

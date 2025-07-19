@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/search-articles")
 @AllArgsConstructor
@@ -17,17 +15,13 @@ public class SearchArticlesController {
 
     private ArticleSearchService service;
 
-    @GetMapping
-    public ResponseEntity<List<SearchArticlesItem>> search(@RequestParam String searchPhrase) {
-            List<SearchArticlesItem> articles = service.search(searchPhrase);
-        return ResponseEntity.ok(articles);
-    }
-
-    @PostMapping("/with-filter")
+    @PostMapping
     public ResponseEntity<Page<SearchArticlesItem>> searchArticles(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
             @RequestBody
             ArticleFilter articleFilter) {
-        Page<SearchArticlesItem> page = service.search(articleFilter);
-        return ResponseEntity.ok(page);
+        Page<SearchArticlesItem> result = service.search(page, size, articleFilter);
+        return ResponseEntity.ok(result);
     }
 }
