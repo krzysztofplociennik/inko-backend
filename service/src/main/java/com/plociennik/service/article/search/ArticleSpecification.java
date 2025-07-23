@@ -1,6 +1,10 @@
 package com.plociennik.service.article.search;
 
 import com.plociennik.model.ArticleEntity;
+import com.plociennik.model.TagEntity;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Date;
@@ -17,7 +21,7 @@ public class ArticleSpecification {
     }
 
     private static Specification<ArticleEntity> hasSearchPhrase(String searchPhrase) {
-        return (root, query, cb) -> {
+        return (root, _, cb) -> {
             if (searchPhrase == null || searchPhrase.isEmpty()) {
                 return cb.conjunction();
             }
@@ -27,7 +31,7 @@ public class ArticleSpecification {
     }
 
     private static Specification<ArticleEntity> hasType(String type) {
-        return (root, query, cb) ->
+        return (root, _, cb) ->
                 type == null ? cb.conjunction() : cb.equal(root.get("type"), type);
     }
 
@@ -36,7 +40,8 @@ public class ArticleSpecification {
             if (tags == null || tags.isEmpty()) {
                 return cb.conjunction();
             }
-            return root.join("tags").in(tags);
+            Join<ArticleEntity, TagEntity> tagJoin = root.join("tags", JoinType.INNER);
+            return tagJoin.get("value").in(tags);
         };
     }
 
