@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 public class ArticleCreate implements Serializable {
-
     private String title;
     private String content;
     private String type;

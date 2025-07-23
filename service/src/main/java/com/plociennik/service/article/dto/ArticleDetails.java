@@ -12,7 +12,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class ArticleDetails implements Serializable {
-
     private String id;
     private String title;
     private String content;

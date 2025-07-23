@@ -17,23 +17,28 @@ public class TagHelper {
         this.tagRepository = tagRepository;
     }
 
-    public List<TagEntity> mergeExistingTagsWithNewTags(Set<String> tags) {
+    public List<TagEntity> mergeExistingTagsWithNewTags(Set<String> dtoTags) {
 
-        if (tags == null || tags.isEmpty()) {
+        if (dtoTags == null || dtoTags.isEmpty()) {
             return new ArrayList<>();
         }
 
-        List<TagEntity> existingTags = tagRepository.findByValueIn(tags);
+        List<TagEntity> existingTags = tagRepository.findByValueIn(dtoTags);
         List<TagEntity> resultTags = new ArrayList<>(existingTags);
 
-        List<TagEntity> newTags = tags.stream()
-                .filter(dtoTag -> existingTags.stream()
-                        .anyMatch(tagEntity -> !tagEntity.getValue().equals(dtoTag)))
+        List<TagEntity> newTags = dtoTags.stream()
+                .filter(dtoTag -> isDtoTagNew(dtoTag, existingTags))
                 .map(s -> new TagEntity(null, new ArrayList<>(), s))
                 .toList();
 
         resultTags.addAll(newTags);
 
         return resultTags;
+    }
+
+    private boolean isDtoTagNew(String dtoTag, List<TagEntity> existingTags) {
+        return existingTags.stream()
+                .map(TagEntity::getValue)
+                .noneMatch(existingTag -> existingTag.equals(dtoTag));
     }
 }

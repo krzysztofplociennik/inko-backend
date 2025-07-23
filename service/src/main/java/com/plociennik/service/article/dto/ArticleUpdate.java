@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 public class ArticleUpdate implements Serializable {
-
     private String id;
     private String title;
     private String content;

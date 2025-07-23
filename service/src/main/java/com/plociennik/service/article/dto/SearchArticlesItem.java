@@ -14,7 +14,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class SearchArticlesItem implements Serializable {
-
     private UUID id;
     private String title;
     private ArticleType type;
