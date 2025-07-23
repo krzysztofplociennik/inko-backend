@@ -35,14 +35,14 @@ public class AutocompleteService {
 
         Optional<AutocompleteEntity> optionalExactAutocomplete = customRepository.findExactAutocomplete(searchPhrase);
 
+        AutocompleteEntity entity;
         if (optionalExactAutocomplete.isPresent()) {
-            AutocompleteEntity entity = optionalExactAutocomplete.get();
+            entity = optionalExactAutocomplete.get();
             int currentNumberOfUsage = entity.getNumberOfUses();
             entity.setNumberOfUses(++currentNumberOfUsage);
-            repository.save(entity);
         } else {
-            AutocompleteEntity entity = new AutocompleteEntity(null, searchPhrase, 1);
-            repository.save(entity);
+            entity = new AutocompleteEntity(null, searchPhrase, 1);
         }
+        repository.save(entity);
     }
 }

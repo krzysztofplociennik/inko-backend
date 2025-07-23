@@ -21,7 +21,7 @@ public class ArticleSpecification {
     }
 
     private static Specification<ArticleEntity> hasSearchPhrase(String searchPhrase) {
-        return (root, _, cb) -> {
+        return (root, query, cb) -> {
             if (searchPhrase == null || searchPhrase.isEmpty()) {
                 return cb.conjunction();
             }
@@ -31,7 +31,7 @@ public class ArticleSpecification {
     }
 
     private static Specification<ArticleEntity> hasType(String type) {
-        return (root, _, cb) ->
+        return (root, query, cb) ->
                 type == null ? cb.conjunction() : cb.equal(root.get("type"), type);
     }
 
