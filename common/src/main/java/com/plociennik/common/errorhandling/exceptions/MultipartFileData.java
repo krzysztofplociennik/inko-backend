@@ -1,6 +1,5 @@
 package com.plociennik.common.errorhandling.exceptions;
 
-import com.plociennik.common.util.ValidationUtils;
 import lombok.Builder;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;

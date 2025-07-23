@@ -7,6 +7,9 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.UUID;
 public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
 
     private final EntityManager entityManager;
+    private final ArticleRepository articleRepository;
 
     @Override
     public List<ArticleEntity> findByPhrase(String phrase) {
@@ -48,6 +52,11 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
         }
 
         return articleEntity;
+    }
+
+    @Override
+    public Page<ArticleEntity> findBySpecification(Specification<ArticleEntity> specification, Pageable pageable) {
+        return articleRepository.findAll(specification, pageable);
     }
 
 
