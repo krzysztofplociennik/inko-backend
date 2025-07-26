@@ -44,6 +44,6 @@ public class ArticleSearchService {
                 .map(articleSearchMapper::mapToRead)
                 .toList();
 
-        return new PageImpl<>(mappedArticles, pageable, mappedArticles.size());
+        return new PageImpl<>(mappedArticles, pageable, articlesFound.getTotalElements());
     }
 }
