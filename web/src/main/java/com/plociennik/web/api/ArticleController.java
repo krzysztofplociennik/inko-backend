@@ -26,12 +26,6 @@ public class ArticleController {
     private final ArticleUpdateService articleUpdateService;
     private final ArticleDeleteService articleDeleteService;
 
-    @GetMapping(value = "/getAll")
-    public ResponseEntity<List<AllArticlesItem>> getAll() {
-        List<AllArticlesItem> all = articleReadService.getAll();
-        return ResponseEntity.ok(all);
-    }
-
     @Operation(
             summary = "Fetch article details by ID",
             description = "Fetches article's content with it's metadata by ID. It will throw an exception if there " +
