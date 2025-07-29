@@ -79,7 +79,7 @@ public class ArticlesParser {
 
     private ArticleEntity parse(List<String> lines) {
 
-        String uuidLine = lines.getFirst();
+        String uuidLine = lines.get(0);
         String uuidSubstring = uuidLine.substring(6);
         UUID uuid = UUID.fromString(uuidSubstring);
 
