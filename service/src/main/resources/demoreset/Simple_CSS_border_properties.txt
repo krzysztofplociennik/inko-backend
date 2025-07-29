@@ -1,0 +1,13 @@
+UUID: 4f1892e1-ddc2-4210-b854-c0d90cc161f6
+Title: Simple CSS border properties
+Type: Programming
+Date of creation: 2024-11-04T18:15:47.841903
+Date of modification: 2025-02-16T18:36:31.412107
+Tags: [css, border]
+
+Content: 
+
+<p>Here are some simple CSS properties that can show a particle border:a</p><pre data-language="plain">
+border: solid;
+</pre>
+

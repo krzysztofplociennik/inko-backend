@@ -1,0 +1,15 @@
+UUID: fefe2f17-d715-42dc-ac2b-9439de02071e
+Title: Pingowanie połączenia internetowego
+Type: Programming
+Date of creation: 2024-07-29T20:47:55.664797
+Date of modification: 2024-11-11T18:41:45.735184
+Tags: [linux, ping, internet, connection]
+
+Content: 
+
+<p><strong>Pingowanie połączenia z internetem na Linuxie.</strong></p><p></p><p><strong>[normalny ping]</strong></p><pre data-language="plain">
+ping google.com
+</pre><p></p><p><strong>[podobny ping, ale output jest zapisywany do pliku]</strong></p><pre data-language="plain">
+ping google.com &gt; pingtesting.txt
+</pre><p></p><p>! trzeba uważać, gdzie się uruchamia komendę</p>
+

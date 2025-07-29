@@ -1,0 +1,11 @@
+UUID: 45bafa37-03aa-4847-86a8-a3fbace92c68
+Title: kubernetes random commands
+Type: Tools
+Date of creation: 2025-02-04T17:04:38.554752
+Date of modification: 
+Tags: [kubernetes, commands, random]
+
+Content: 
+
+<p></p><p>&quot;C:\Aplikacje\kubectl\dev.yaml&quot;</p><p></p><p></p><p>kubectl --kubeconfig dev2.yml  get pods</p><p></p><p>kubectl --kubeconfig &quot;C:\Aplikacje\kubectl\dev.yaml&quot;  get pods</p><p></p><p>kubectl --kubeconfig &quot;C:\Aplikacje\kubectl\k-dev.yaml&quot; -ns ZZZ-dev get pods</p><p></p><p>kubectl --kubeconfig &quot;C:\Aplikacje\kubectl\k-dev.yaml&quot; get pods --namespace=ZZZ-dev</p><p></p><p>--namespace=ZZZ-dev</p><p></p><p>-ns ZZZ-dev get pods</p><p></p><p>k9s --kubeconfig &quot;C:\Aplikacje\kubectl\dev.yaml&quot;</p><p></p><p>k9s --kubeconfig &quot;C:\Aplikacje\kubectl\k-dev.yaml&quot;</p><p></p><p>k9s --kubeconfig &quot;C:\Aplikacje\kubectl\k-dev.yaml&quot; --namespace=ZZZ-dev</p><p></p><p></p><p>=============================</p><p></p><p></p><p>kubectl get pods | grep ewasd</p><p></p><p>kubectl --kubeconfig dev2.yml  get pods</p><p></p><p>kubectl --kubeconfig dev.yaml  get pods | findstr ewasd</p><p></p><p>kubectl --kubeconfig &quot;C:\Aplikacje\kubectl\dev.yaml&quot;  get pods | findstr ewasd</p><p></p><p>kubectl --kubeconfig &quot;C:\Aplikacje\kubectl\dev.yaml&quot;  get pods | findstr patents</p><p></p>
+

@@ -1,0 +1,21 @@
+UUID: 01eaf8b5-764e-494a-af2f-6f42c2a6dea5
+Title: Oracle SQL - print drop + bin
+Type: Database
+Date of creation: 2025-05-15T05:00:08.739793
+Date of modification: 
+Tags: [oracle, script, drop]
+
+Content: 
+
+<p></p><p></p><pre data-language="plain">
+select &#39;drop table &#39;, table_name, &#39;cascade constraints;&#39; from user_tables;
+select &#39;drop view &#39;, view_name, &#39;cascade constraints;&#39; from user_views;
+select &#39;drop sequence &#39;, sequence_name, &#39;;&#39; from user_sequences;
+
+-- also add this:
+--BEGIN
+--    -- Czyszczenie kosza recyclebin
+--    EXECUTE IMMEDIATE &#39;PURGE RECYCLEBIN&#39;;
+--END;
+</pre>
+

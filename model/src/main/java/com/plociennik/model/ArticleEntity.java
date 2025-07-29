@@ -27,11 +27,7 @@ public class ArticleEntity {
     @Enumerated(EnumType.STRING)
     private ArticleType type;
 
-    @ManyToMany(
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "article_tag",
             joinColumns = @JoinColumn(name = "article_id"),

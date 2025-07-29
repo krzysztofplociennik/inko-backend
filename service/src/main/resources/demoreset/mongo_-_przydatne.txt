@@ -1,0 +1,11 @@
+UUID: f3cebb6a-af68-463e-b020-c4b10c783e10
+Title: mongo - przydatne
+Type: Tools
+Date of creation: 2025-05-15T04:57:29.036850
+Date of modification: 
+Tags: [mongo, random, commands]
+
+Content: 
+
+<p>mongodb&nbsp;-&nbsp;przydatne&nbsp;komendy</p><p></p><p></p><p>========================================================</p><p>usuwanie&nbsp;pojedynczego&nbsp;rekordu&nbsp;za&nbsp;pomocą&nbsp;id:</p><p></p><p>db.getCollection(&#39;thesis&#39;).deleteOne(&nbsp;{&quot;_id&quot;:&nbsp;ObjectId(&quot;62beb169c5dba4a697e6993a&quot;)});</p><p></p><p></p><p>========================================================</p><p></p><p></p><p>Sprawdzenie&nbsp;liczby&nbsp;obiektów&nbsp;danej&nbsp;kolekcji:</p><p></p><p>db.getCollection(&#39;hd.patent&#39;).find({}).count()</p><p></p><p>========================================================</p><p></p><p>Lista&nbsp;wszystkich&nbsp;obiektów&nbsp;danej&nbsp;kolekcji&nbsp;posortowana&nbsp;odwrotnie&nbsp;(reverse&nbsp;order):</p><p></p><p>db.getCollection(&#39;hd.patent&#39;).find({}).sort({&nbsp;_id:&nbsp;-1&nbsp;})</p><p></p><p>========================================================</p>
+

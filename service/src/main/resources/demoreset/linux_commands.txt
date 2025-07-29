@@ -1,0 +1,17 @@
+UUID: 5e991b2a-0e98-4c2c-8d17-c1d252f2c803
+Title: linux commands
+Type: OS
+Date of creation: 2025-02-04T17:18:11.017706
+Date of modification: 2025-02-12T19:17:42.168058
+Tags: [linux, random, commands]
+
+Content: 
+
+<p><strong>[stworzenie folderu] </strong></p><p></p><pre data-language="plain">
+mkdir dir1
+</pre><p></p><p></p><p><strong>[install JRE] </strong></p><p></p><pre data-language="plain">
+sudo apt install -y openjdk-18-jre
+</pre><p></p><p></p><p>[dodanie dostępu w terminalu]</p><p></p><pre data-language="plain">
+sudo chmod a+x /home/x/Desktop/b/l/linux/podpis/jre/bin/java
+</pre><p></p><p>- problem może się pojawić gdy w ścieżce jest znak specjalny np. &#39;(&#39;</p>
+

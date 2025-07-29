@@ -1,0 +1,13 @@
+UUID: bc58d042-1440-4459-a95e-fdaef63660b9
+Title: Root partition almost full on Arch Linux
+Type: OS
+Date of creation: 2025-05-15T05:45:35.422105
+Date of modification: 2025-05-15T05:46:20.421967
+Tags: [linux, arch, root, partition, space]
+
+Content: 
+
+<p>Sometimes&nbsp;the&nbsp;root&nbsp;partition&nbsp;can&nbsp;run&nbsp;out&nbsp;of&nbsp;space.&nbsp;To&nbsp;be&nbsp;able&nbsp;to&nbsp;do&nbsp;a&nbsp;little&nbsp;bit&nbsp;of&nbsp;a&nbsp;cleanup&nbsp;you&nbsp;can&nbsp;run:</p><p></p><pre data-language="plain">
+sudo pacman -Scc
+</pre><p></p><p>Source:</p><p><a href="https://www.reddit.com/r/archlinux/comments/1dffm3u/root_partition_almost_full/" rel="noopener noreferrer" target="_blank">https://www.reddit.com/r/archlinux/comments/1dffm3u/root_partition_almost_full/</a></p>
+

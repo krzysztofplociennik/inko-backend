@@ -1,0 +1,11 @@
+UUID: 3a3a7aaf-6042-4a5f-943b-74ceb1f51c6b
+Title: elastic search commands
+Type: Tools
+Date of creation: 2025-02-04T17:13:57.354925
+Date of modification: 2025-05-20T13:22:34.679622
+Tags: [elastic, search, commands, random]
+
+Content: 
+
+<p>=======================================================</p><p>info&nbsp;na&nbsp;temat&nbsp;indeksu&nbsp;</p><p></p><p>GET&nbsp;/&lt;nazwa_indeksu&gt;</p><p></p><p></p><p>=======================================================</p><p>znajdź&nbsp;dokument&nbsp;na&nbsp;podstawie&nbsp;pola&nbsp;(title)</p><p></p><p>GET&nbsp;/&lt;nazwa_indeksu&gt;/_search</p><p></p><p>GET&nbsp;/&lt;nazwa_indeksu&gt;/_search</p><p></p><p>{</p><p>&quot;query&quot;:&nbsp;{</p><p>&quot;match&quot;:&nbsp;{</p><p>&quot;title&quot;:&nbsp;{</p><p>&quot;query&quot;&nbsp;:&nbsp;&quot;sroda&nbsp;sroda&nbsp;11,2&nbsp;mb&quot;</p><p>}</p><p>}</p><p>}</p><p>}</p><p></p><p></p><p>=======================================================</p><p>Lista&nbsp;wszystkich&nbsp;indeksów:</p><p></p><p>GET&nbsp;/_cat/indices</p><p></p><p></p><p>=======================================================</p><p>Lista&nbsp;wszystkich&nbsp;dokumentów&nbsp;na&nbsp;indeksie:</p><p></p><p>GET&nbsp;/&lt;nazwa_indeksu&gt;/_search</p><p>{</p><p>&quot;query&quot;:&nbsp;{</p><p>&quot;match_all&quot;:&nbsp;{}</p><p>}</p><p>}</p><p></p><p>=======================================================</p><p>usuń&nbsp;dokument</p><p></p><p>DELETE&nbsp;/&lt;index&gt;/_doc/&lt;_id&gt;</p><p></p><p>DELETE&nbsp;/&lt;nazwa_indeksu&gt;/_doc/6491b1f89e4d5302be20cb02</p><p></p><p>=======================================================</p><p></p><p></p><p>GET&nbsp;/&lt;nazwa_indeksu&gt;/_search</p><p>{</p><p>&quot;query&quot;:&nbsp;{</p><p>&quot;match_all&quot;:&nbsp;{}</p><p>}</p><p>}</p>
+

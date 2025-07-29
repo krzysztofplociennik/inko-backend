@@ -16,7 +16,7 @@ public class DemoResetService {
 
     private final ArticleRepository articleRepository;
     private final TagRepository tagRepository;
-    private final DemoResetHelper demoResetHelper;
+    private final ArticlesParser articlesParser;
 
     @Value("${admin.token}")
     private String adminToken;
@@ -24,20 +24,20 @@ public class DemoResetService {
     public DemoResetService(
             ArticleRepository articleRepository,
             TagRepository tagRepository,
-            DemoResetHelper demoResetHelper
+            ArticlesParser articlesParser
     ) {
         this.articleRepository = articleRepository;
         this.tagRepository = tagRepository;
-        this.demoResetHelper = demoResetHelper;
+        this.articlesParser = articlesParser;
     }
 
-    public void reset(String adminToken) {
-        throwIfAdminTokenIsInvalid(adminToken);
+    public void reset(String adminTokenFromRequest) {
+        throwIfAdminTokenIsInvalid(adminTokenFromRequest);
 
         log.info("Commencing demo reset... {}", "(eventId: 202505151514)");
         deleteAllArticlesAndTags();
 
-        List<ArticleEntity> dummyArticles = demoResetHelper.createDummyArticles();
+        List<ArticleEntity> dummyArticles = articlesParser.process();
         articleRepository.saveAll(dummyArticles);
 
         log.info("Demo reset has been successfully finished! {}", "(eventId: 202505151515)");

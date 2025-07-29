@@ -1,0 +1,19 @@
+UUID: d480b0a5-8793-4582-807a-24c03c1da687
+Title: Styling PrimeNG's components
+Type: Programming
+Date of creation: 2024-11-04T18:42:34.414108
+Date of modification: 2024-12-08T12:39:24.108839
+Tags: [primeng, css, styling, components]
+
+Content: 
+
+<p>Styling components using PrimeNG can be very weird sometimes. These are examples that worked for me though:</p><pre data-language="plain">
+&lt;p-chip [style]=&quot;{&#39;height&#39;: &#39;30px&#39;,&#39;width&#39;: &#39;auto&#39;}&quot;&gt;{{ tag }}&lt;/p-chip&gt;
+
+[style]=&quot;{&#39;height&#39;: &#39;35px&#39;, &#39;width&#39;: &#39;auto&#39;, &#39;margin&#39;: &#39;5px 5px 5px 5px&#39;}&quot;
+
+::ng-deep .p-card .p-card-title {
+font-size: 20px;
+}
+</pre>
+
