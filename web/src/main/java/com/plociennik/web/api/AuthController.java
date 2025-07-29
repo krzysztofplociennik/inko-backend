@@ -16,7 +16,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) throws LoginCredentialsInvalidException {
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
         return authService.auth(loginRequest);
     }
 
