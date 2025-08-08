@@ -4,6 +4,7 @@ COPY gradlew .
 COPY gradle ./gradle
 COPY . ./
 RUN chmod +x gradlew
+RUN ./gradlew :web:build -x test
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
