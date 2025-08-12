@@ -25,8 +25,7 @@ public class ArticleReadService {
         Optional<ArticleEntity> searchedArticle = articleRepository.findById(uuid);
         if (searchedArticle.isPresent()) {
             ArticleEntity articleEntity = searchedArticle.get();
-            ArticleDetails articleDetails = articleReadMapper.mapToDetails(articleEntity);
-            return articleDetails;
+            return articleReadMapper.mapToDetails(articleEntity);
         } else {
             throw new Exception("There is no article with this ID: '" + id + "' in the database! (eid: 310720240701");
         }
@@ -34,9 +33,8 @@ public class ArticleReadService {
 
     public List<String> getAllTypes() {
         ArticleType[] values = ArticleType.values();
-        List<String> articleTypes = Arrays.stream(values)
+        return Arrays.stream(values)
                 .map(Enum::toString)
                 .toList();
-        return articleTypes;
     }
 }

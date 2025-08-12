@@ -18,14 +18,10 @@ public class AutocompleteService {
     private final AutocompleteCustomRepository customRepository;
 
     public List<String> findAllBySearchPhrase(String phrase) {
-
         List<AutocompleteEntity> allBySearchPhrase = customRepository.findAllBySearchPhrase(phrase);
-
-        List<String> autocompletes = allBySearchPhrase.stream()
+        return allBySearchPhrase.stream()
                 .map(AutocompleteEntity::getValue)
                 .toList();
-
-        return autocompletes;
     }
 
     public void incrementUsageIfExists(String searchPhrase) {

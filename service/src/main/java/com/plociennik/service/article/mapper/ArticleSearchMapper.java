@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 public class ArticleSearchMapper {
 
     public SearchArticlesItem mapToRead(ArticleEntity articleEntity) {
-
-        SearchArticlesItem searchArticlesItem = new SearchArticlesItem(
+        return new SearchArticlesItem(
                 articleEntity.getId(),
                 articleEntity.getTitle(),
                 articleEntity.getType(),
@@ -20,17 +19,12 @@ public class ArticleSearchMapper {
                 articleEntity.getCreationDate(),
                 articleEntity.getModificationDate()
         );
-
-        return searchArticlesItem;
     }
 
     private Set<String> mapTags(ArticleEntity articleEntity) {
-
         List<TagEntity> tags = articleEntity.getTags();
-        Set<String> collectedValues = tags.stream()
+        return tags.stream()
                 .map(TagEntity::getValue)
                 .collect(Collectors.toSet());
-
-        return collectedValues;
     }
 }

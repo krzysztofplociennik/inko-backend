@@ -24,8 +24,7 @@ public class ArticleReadMapper {
     }
 
     public AllArticlesItem mapToAllItem(ArticleEntity articleEntity) {
-
-        AllArticlesItem allArticlesItem = new AllArticlesItem(
+        return new AllArticlesItem(
                 articleEntity.getId(),
                 articleEntity.getTitle(),
                 articleEntity.getType(),
@@ -33,17 +32,12 @@ public class ArticleReadMapper {
                 articleEntity.getCreationDate(),
                 articleEntity.getModificationDate()
         );
-
-        return allArticlesItem;
     }
 
     private Set<String> mapTags(ArticleEntity articleEntity) {
-
         List<TagEntity> tags = articleEntity.getTags();
-        Set<String> collectedTagNames = tags.stream()
+        return tags.stream()
                 .map(TagEntity::getValue)
                 .collect(Collectors.toSet());
-
-        return collectedTagNames;
     }
 }
