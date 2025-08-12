@@ -3,13 +3,11 @@ package com.plociennik.service.article;
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.ArticleType;
 import com.plociennik.model.repository.article.ArticleRepository;
-import com.plociennik.service.article.dto.AllArticlesItem;
 import com.plociennik.service.article.dto.ArticleDetails;
 import com.plociennik.service.article.mapper.ArticleReadMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class ArticleReadService {
@@ -20,15 +18,6 @@ public class ArticleReadService {
     public ArticleReadService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
         this.articleReadMapper = new ArticleReadMapper();
-    }
-
-    // todo: search filter instead of just dumping everything into RAM
-    public List<AllArticlesItem> getAll() {
-        List<AllArticlesItem> collect = articleRepository.findAll()
-                .stream()
-                .map(articleReadMapper::mapToAllItem)
-                .collect(Collectors.toList());
-        return collect;
     }
 
     public ArticleDetails getArticleDetails(String id) throws Exception {
@@ -50,5 +39,4 @@ public class ArticleReadService {
                 .toList();
         return articleTypes;
     }
-
 }
