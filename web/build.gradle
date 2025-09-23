@@ -17,8 +17,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation project(':service')
     implementation project(':common')
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.38'
-    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
     implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.2.22'
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
