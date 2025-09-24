@@ -30,7 +30,8 @@ public class ArticleEntity {
     @ManyToMany(
             cascade = {
                     CascadeType.PERSIST,
-                    CascadeType.MERGE
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
             })
     @JoinTable(
             name = "article_tag",
