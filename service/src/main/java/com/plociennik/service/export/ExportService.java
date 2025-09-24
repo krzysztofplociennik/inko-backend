@@ -110,13 +110,12 @@ public class ExportService {
     }
 
     String sanitizeContent(String content) {
-        String sanitizedContent = content
+        return content
                 .replaceAll("<p>", "")
                 .replaceAll("<br>", "")
                 .replaceAll("<br/>", "")
                 .replaceAll("<img src=\"data", "<img src=\"\ndata")
                 .replaceAll("</p>", "\n");
-        return sanitizedContent;
     }
 
     private String getDate(LocalDateTime date) {

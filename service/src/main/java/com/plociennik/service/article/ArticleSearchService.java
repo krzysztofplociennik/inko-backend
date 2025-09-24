@@ -36,7 +36,7 @@ public class ArticleSearchService {
         autocompleteService.incrementUsageIfExists(filter.getSearchPhrase());
         Pageable pageable = PageRequest.of(page, size);
 
-        Specification<ArticleEntity> spec = Specification.where(ArticleSpecification.filterBy(filter));
+        Specification<ArticleEntity> spec = ArticleSpecification.createWith(filter);
 
         Page<ArticleEntity> articlesFound = articleRepositoryCustomRepositoryImpl.findBySpecification(spec, pageable);
 

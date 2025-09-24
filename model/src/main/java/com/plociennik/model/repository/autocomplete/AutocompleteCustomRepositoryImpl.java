@@ -30,13 +30,11 @@ public class AutocompleteCustomRepositoryImpl implements AutocompleteCustomRepos
                 .where(valueContainsPhrase)
                 .fetch();
 
-        List<AutocompleteEntity> reverseSortedAutocompletes = allMatchedAutocompletes.stream()
+        return allMatchedAutocompletes.stream()
                 .sorted(Comparator.comparing(AutocompleteEntity::getNumberOfUses).reversed())
                 .distinct()
                 .limit(5)
                 .toList();
-
-        return reverseSortedAutocompletes;
     }
 
     @Override
