@@ -4,7 +4,6 @@ import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.TagEntity;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Date;
@@ -12,9 +11,9 @@ import java.util.List;
 
 public class ArticleSpecification {
 
-    public static Specification<ArticleEntity> filterBy(ArticleFilter filter) {
-        return Specification
-                .where(hasSearchPhrase(filter.getSearchPhrase()))
+    public static Specification<ArticleEntity> createWith(ArticleFilter filter) {
+
+        return hasSearchPhrase(filter.getSearchPhrase())
                 .and(hasType(filter.getType()))
                 .and(hasTags(filter.getTags()))
                 .and(hasCreationDateBetween(filter.getCreationDateFrom(), filter.getCreationDateTo()));
