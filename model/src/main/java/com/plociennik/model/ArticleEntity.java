@@ -2,6 +2,8 @@ package com.plociennik.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -30,8 +32,7 @@ public class ArticleEntity {
     @ManyToMany(
             cascade = {
                     CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
+                    CascadeType.MERGE
             })
     @JoinTable(
             name = "article_tag",
@@ -39,6 +40,7 @@ public class ArticleEntity {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     @Builder.Default
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<TagEntity> tags = new ArrayList<>();
 
     @Column(name = "creation_date")
