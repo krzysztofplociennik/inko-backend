@@ -56,7 +56,7 @@ public class ArticleController {
     }
 
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<String> delete(@RequestParam String id) {
+    public ResponseEntity<String> delete(@RequestParam String id) throws ArticleNotFoundException {
         articleDeleteService.delete(id);
         return ResponseEntity.ok("The article has been deleted.");
     }
