@@ -1,1 +1,2 @@
 1. after importing successfully the files are still "loaded", the component should be reset
+2. ArticleNotFoundException should not have a hard coded EID, every EID should be individual
