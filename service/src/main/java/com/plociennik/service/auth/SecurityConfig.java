@@ -41,7 +41,8 @@ public class SecurityConfig {
                                 "/article/getDetails",
                                 "/article/getTypes",
                                 "/keep-alive",
-                                "/demoReset/**"
+                                "/demoReset/**",
+                                "/error"
                         )
                         .permitAll()
                         .requestMatchers(
