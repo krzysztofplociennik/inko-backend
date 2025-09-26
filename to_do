@@ -1,0 +1,9 @@
+================ TO DO LIST ===============================================================================
+
+1. after importing successfully the files are still "loaded", the component should be reset
+2. ArticleNotFoundException should not have a hard coded EID, every EID should be individual
+3. Sorting should be added
+4. Fix deprecated code (analyze code in IntelliJ)
+5. Cards should be a bit smaller in height
+6. Login should "remember" the previous view/place (I read something -> I log in -> I am sent to that specific article)
+7.
