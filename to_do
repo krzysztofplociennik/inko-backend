@@ -6,4 +6,4 @@
 4. Fix deprecated code (analyze code in IntelliJ)
 5. Cards should be a bit smaller in height
 6. Login should "remember" the previous view/place (I read something -> I log in -> I am sent to that specific article)
-7.
+7. after login token expiration the buttons should match the state (they do not - the logout button is still visible)
