@@ -5,7 +5,6 @@ import com.plociennik.service.article.ArticleCreateService;
 import com.plociennik.service.article.ArticleDeleteService;
 import com.plociennik.service.article.ArticleReadService;
 import com.plociennik.service.article.ArticleUpdateService;
-import com.plociennik.service.article.dto.AllArticlesItem;
 import com.plociennik.service.article.dto.ArticleCreate;
 import com.plociennik.service.article.dto.ArticleDetails;
 import com.plociennik.service.article.dto.ArticleUpdate;
