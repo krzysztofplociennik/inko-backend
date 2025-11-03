@@ -1,6 +1,5 @@
 package com.plociennik.web.api;
 
-import com.plociennik.common.errorhandling.exceptions.LoginCredentialsInvalidException;
 import lombok.AllArgsConstructor;
 import com.plociennik.service.auth.AuthResponse;
 import com.plociennik.service.auth.AuthService;

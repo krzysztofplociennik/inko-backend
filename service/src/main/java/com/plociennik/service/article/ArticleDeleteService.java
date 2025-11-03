@@ -19,21 +19,21 @@ public class ArticleDeleteService {
     private final ArticleRepository articleRepository;
     private final TagRepository tagRepository;
 
-    public void delete(String id) throws ArticleNotFoundException {
-        UUID uuid = UUID.fromString(id);
+    public void delete(String articleId) throws ArticleNotFoundException {
+        UUID articleUuid = UUID.fromString(articleId);
 
-        Optional<ArticleEntity> optionalArticle = articleRepository.findById(uuid);
+        Optional<ArticleEntity> optionalArticle = articleRepository.findById(articleUuid);
 
         if (optionalArticle.isEmpty()) {
-            throw new ArticleNotFoundException(uuid.toString());
+            throw new ArticleNotFoundException(articleUuid.toString(), "241020251633");
         }
 
         ArticleEntity articleToBeDeleted = optionalArticle.get();
         List<TagEntity> tags = articleToBeDeleted.getTags();
 
-        tags.forEach(tag -> deleteTagAssociation(tag, id));
+        tags.forEach(tag -> deleteTagAssociation(tag, articleId));
         articleToBeDeleted.getTags().clear();
-        articleRepository.deleteById(uuid);
+        articleRepository.deleteById(articleUuid);
     }
 
     private void deleteTagAssociation(TagEntity tagEntity, String articleId) {

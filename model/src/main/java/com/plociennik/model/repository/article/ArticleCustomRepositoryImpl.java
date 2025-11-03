@@ -38,17 +38,17 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
     }
 
     @Override
-    public ArticleEntity findByUUID(UUID uuid) throws ArticleNotFoundException {
+    public ArticleEntity findByUUID(UUID articleUuid) throws ArticleNotFoundException {
         JPAQuery<ArticleEntity> query = new JPAQuery<>(this.entityManager);
         QArticleEntity qArticleEntity = QArticleEntity.articleEntity;
-        BooleanExpression entityWithUUID = qArticleEntity.id.eq(uuid);
+        BooleanExpression entityWithUUID = qArticleEntity.id.eq(articleUuid);
 
         ArticleEntity articleEntity = query.from(qArticleEntity)
                 .where(entityWithUUID)
                 .fetchOne();
 
         if (articleEntity == null) {
-            throw new ArticleNotFoundException(uuid.toString());
+            throw new ArticleNotFoundException(articleUuid.toString(), "241020251632");
         }
 
         return articleEntity;
