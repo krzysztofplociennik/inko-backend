@@ -4,4 +4,8 @@ public class InkoRuntimeException extends RuntimeException {
     public InkoRuntimeException(String message, String eid) {
         super(message + eid);
     }
+
+    public InkoRuntimeException(String mainMessage, String causeMessage, String eid) {
+        super(mainMessage + causeMessage + eid);
+    }
 }
