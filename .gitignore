@@ -8,6 +8,7 @@ gradlew.bat
 gradle
 lib
 .env
+*.patch
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
