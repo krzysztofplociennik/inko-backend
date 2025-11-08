@@ -1,5 +1,6 @@
 package com.plociennik.service.article;
 
+import com.plociennik.common.errorhandling.exceptions.InkoRuntimeException;
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.repository.article.ArticleCustomRepositoryImpl;
 import com.plociennik.service.article.search.ArticleFilter;
@@ -7,10 +8,7 @@ import com.plociennik.service.article.search.ArticleSpecification;
 import com.plociennik.service.autocomplete.AutocompleteService;
 import com.plociennik.service.article.dto.SearchArticlesItem;
 import com.plociennik.service.article.mapper.ArticleSearchMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +32,9 @@ public class ArticleSearchService {
 
     public Page<SearchArticlesItem> search(int page, int size, ArticleFilter filter) {
         autocompleteService.incrementUsageIfExists(filter.getSearchPhrase());
-        Pageable pageable = PageRequest.of(page, size);
-
         Specification<ArticleEntity> spec = ArticleSpecification.createWith(filter);
+        Sort sort = Sort.by(getSortDirection(filter), translateFieldFromLabel(filter));
+        Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<ArticleEntity> articlesFound = articleRepositoryCustomRepositoryImpl.findBySpecification(spec, pageable);
 
@@ -45,5 +43,21 @@ public class ArticleSearchService {
                 .toList();
 
         return new PageImpl<>(mappedArticles, pageable, articlesFound.getTotalElements());
+    }
+
+    private Sort.Direction getSortDirection(ArticleFilter articleFilter2) {
+        String lowercaseSortType = articleFilter2.getSort().getSortType().toLowerCase();
+        return lowercaseSortType.startsWith("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+    }
+
+    private String translateFieldFromLabel(ArticleFilter filter) {
+        String sort = filter.getSort().getSortField();
+        return switch (sort) {
+            case "title", "type" -> sort;
+            case "date of creation" -> "creationDate";
+            case "date of modification" -> "modificationDate";
+            default ->
+                    throw new InkoRuntimeException("There was an error while translating the sorting field: [" + sort + "]", "081120251217");
+        };
     }
 }
