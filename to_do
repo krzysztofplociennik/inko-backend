@@ -1,9 +1,9 @@
 ================ TO DO LIST ===============================================================================
 
-1. "Not yet modified" should be something like "Not yet updated"
+1. adding logging so warns and errors are more visible
 2. adding some number of autocompletes into the database
 3. no tags being added
 4. Fix deprecated code (analyze code in IntelliJ)
-5.
+5. adding some test pipeline
 6.
 7.
