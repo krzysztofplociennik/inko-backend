@@ -16,4 +16,5 @@ public class ArticleFilter {
     private List<String> tags;
     private Date creationDateFrom;
     private Date creationDateTo;
+    private ArticleSort sort;
 }
