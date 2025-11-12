@@ -2,8 +2,8 @@
 
 1. adding logging so warns and errors are more visible
 2. adding some number of autocompletes into the database
-3. no tags being added
+3. no tags and autocompletes being added while importing
 4. Fix deprecated code (analyze code in IntelliJ)
 5. adding some test pipeline
-6. check if export works with tags
-7. fix filtering, it does not work
+6.
+7.
