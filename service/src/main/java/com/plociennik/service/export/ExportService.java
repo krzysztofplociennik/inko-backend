@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
@@ -33,10 +32,10 @@ public class ExportService {
         this.articleRepository = articleRepository;
     }
 
-    public File exportArticles(boolean withHTML) {
+    public File packageAllArticlesIntoZip(boolean withHTML) {
 
-        List<ArticleEntity> all = this.articleRepository.findAll();
-        if (isEmpty(all)) {
+        List<ArticleEntity> allArticles = this.articleRepository.findAll();
+        if (isEmpty(allArticles)) {
             return null;
         }
 
@@ -47,10 +46,10 @@ public class ExportService {
             throw new RuntimeException(e);
         }
 
-        for (ArticleEntity article : all) {
+        for (ArticleEntity article : allArticles) {
             try {
                 this.withHTML = withHTML;
-                createSingleFile(article, backupDir);
+                createSingleArticleTxtFile(article, backupDir);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -68,7 +67,7 @@ public class ExportService {
         return zipFile;
     }
 
-    private void createSingleFile(ArticleEntity article, Path backupDir) throws IOException {
+    private void createSingleArticleTxtFile(ArticleEntity article, Path backupDir) throws IOException {
         String safeTitle = StringUtils.replace(article.getTitle(), " ", "_").replaceAll("[^a-zA-Z0-9_.-]", "");
         if (safeTitle.isEmpty()) {
             safeTitle = "article_" + UUID.randomUUID();
@@ -89,17 +88,21 @@ public class ExportService {
                 .append(newLine(1) + "Type: " + entity.getType().toString())
                 .append(newLine(1) + "Date of creation: " + getDate(entity.getCreationDate()))
                 .append(newLine(1) + "Date of modification: " + getDate(entity.getModificationDate()))
-                .append(newLine(1) + "Tags: " + Arrays.toString(getTags(entity).toArray()))
+                .append(newLine(1) + "Tags: " + getTags(entity))
                 .append(newLine(2) + "Content: " + newLine(2) + handleContent(entity.getContent()))
                 .append(newLine(2));
 
         return sb.toString();
     }
 
-    private List<String> getTags(ArticleEntity entity) {
-        return entity.getTags().stream()
-                .map(TagEntity::getValue)
-                .toList();
+    private String getTags(ArticleEntity entity) {
+        List<TagEntity> tags = entity.getTags();
+        StringBuilder tagsString = new StringBuilder("[");
+        for (TagEntity tag : tags) {
+            String tagToAdd = tag.getValue().trim();
+            tagsString.append(tagToAdd).append(", ");
+        }
+        return tagsString.substring(0, tagsString.length() - 2) + "]";
     }
 
     private String handleContent(String content) {
