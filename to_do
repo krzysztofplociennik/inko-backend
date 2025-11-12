@@ -5,5 +5,5 @@
 3. no tags being added
 4. Fix deprecated code (analyze code in IntelliJ)
 5. adding some test pipeline
-6.
-7.
+6. check if export works with tags
+7. fix filtering, it does not work
