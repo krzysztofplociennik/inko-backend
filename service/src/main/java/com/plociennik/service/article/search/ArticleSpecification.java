@@ -31,7 +31,7 @@ public class ArticleSpecification {
 
     private static Specification<ArticleEntity> hasType(String type) {
         return (root, query, cb) ->
-                type == null ? cb.conjunction() : cb.equal(root.get("type"), type);
+                type == null ? cb.conjunction() : cb.equal(root.get("type"), type.toUpperCase());
     }
 
     private static Specification<ArticleEntity> hasTags(List<String> tags) {
