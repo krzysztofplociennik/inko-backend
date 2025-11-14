@@ -20,7 +20,7 @@ public class ExportController {
 
     @GetMapping(value = "/withHTML")
     public ResponseEntity<FileSystemResource> exportWithHTML() {
-        File backupFile = exportService.exportArticles(true);
+        File backupFile = exportService.packageAllArticlesIntoZip(true);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment");
@@ -32,7 +32,7 @@ public class ExportController {
 
     @GetMapping(value = "/withoutHTML")
     public ResponseEntity<FileSystemResource> exportWithoutHTML() {
-        File backupFile = exportService.exportArticles(false);
+        File backupFile = exportService.packageAllArticlesIntoZip(false);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment");

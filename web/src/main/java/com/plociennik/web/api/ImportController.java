@@ -15,7 +15,7 @@ public class ImportController {
     private final ImportService importService;
 
     @PostMapping(value = "/single", consumes = "multipart/form-data")
-    public ResponseEntity<String> importFiles(@ModelAttribute MultipartFile file) {
+    public ResponseEntity<String> importFile(@ModelAttribute MultipartFile file) {
         importService.importFiles(file);
         return ResponseEntity.ok("The file uploaded successfully!");
     }

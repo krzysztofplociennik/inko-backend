@@ -45,8 +45,8 @@ public class ArticleSearchService {
         return new PageImpl<>(mappedArticles, pageable, articlesFound.getTotalElements());
     }
 
-    private Sort.Direction getSortDirection(ArticleFilter articleFilter2) {
-        String lowercaseSortType = articleFilter2.getSort().getSortType().toLowerCase();
+    private Sort.Direction getSortDirection(ArticleFilter articleFilter) {
+        String lowercaseSortType = articleFilter.getSort().getSortType().toLowerCase();
         return lowercaseSortType.startsWith("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
     }
 
