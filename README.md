@@ -16,18 +16,18 @@ The main goals of this repository are to:
 
 ## Functionalities
 
-- 🔍 search articles
-- 📄 view individual articles or browse the whole repository
-- 🌙 light/Dark mode toggle
-- 🔐 login and logout functionality
+- search articles
+- view individual articles or browse the whole repository
+- light/Dark mode toggle
+- login and logout functionality
 
 ### While Logged In
 
-- ➕ create a new article
-- ✏️ update existing articles
-- 🗑️ delete articles
-- 📥 import one or multiple articles from `.txt` files
-- 📤 export all articles to `.txt` files
+- create a new article
+- update existing articles
+- delete articles
+- import one or multiple articles from `.txt` files
+- export all articles to `.txt` files
 
 ## Tech Stack
 
@@ -52,7 +52,7 @@ The main goals of this repository are to:
 
 ## Demo
 
-🖥️ Live Demo: [https://inkodemo.vercel.app/](https://inkodemo.vercel.app/)
+Live Demo: [https://inkodemo.vercel.app/](https://inkodemo.vercel.app/)
 
 Credentials for logging in:
 
@@ -61,15 +61,11 @@ Pass:   wind
 
 Notes about the demo version:
 - uses a separate instance of the Supabase database
-- there's a cron job that wipes all the articles and inserts a new batch
-- usually is the same (or very similar) function-wise compared to the "production" version
+- is pretty much the same (or very similar) function-wise compared to the "production" version
 
 ## Upcoming Improvements & Features
 
 - overall better article editor
-- syntax-highlighted code snippets with copy-to-clipboard functionality
-- pagination for easier navigation
-- advanced search with filters
 - a dedicated section for command-line examples and cheatsheets (e.g. Linux, Docker, MongoDB, etc.)
 - other :)
 
