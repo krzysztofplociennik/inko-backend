@@ -23,17 +23,6 @@ public class ArticleReadMapper {
         );
     }
 
-    public AllArticlesItem mapToAllItem(ArticleEntity articleEntity) {
-        return new AllArticlesItem(
-                articleEntity.getId(),
-                articleEntity.getTitle(),
-                articleEntity.getType(),
-                mapTags(articleEntity),
-                articleEntity.getCreationDate(),
-                articleEntity.getModificationDate()
-        );
-    }
-
     private Set<String> mapTags(ArticleEntity articleEntity) {
         List<TagEntity> tags = articleEntity.getTags();
         return tags.stream()
