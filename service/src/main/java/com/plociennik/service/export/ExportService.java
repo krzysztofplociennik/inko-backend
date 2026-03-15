@@ -68,7 +68,8 @@ public class ExportService {
     }
 
     private void createSingleArticleTxtFile(ArticleEntity article, Path backupDir) throws IOException {
-        String safeTitle = StringUtils.replace(article.getTitle(), " ", "_").replaceAll("[^a-zA-Z0-9_.-]", "");
+        String safeTitle = StringUtils.replace(article.getTitle(), " ", "_")
+                .replaceAll("[^a-zA-Z0-9_.-]", "");
         if (safeTitle.isEmpty()) {
             safeTitle = "article_" + UUID.randomUUID();
         }
@@ -88,7 +89,7 @@ public class ExportService {
                 .append(newLine(1) + "Type: " + entity.getType().toString())
                 .append(newLine(1) + "Date of creation: " + getDate(entity.getCreationDate()))
                 .append(newLine(1) + "Date of modification: " + getDate(entity.getModificationDate()))
-                .append(newLine(1) + "Tags: " + getTags(entity))
+                .append(newLine(1) + "Tags: [" + getTags(entity) + "]")
                 .append(newLine(2) + "Content: " + newLine(2) + handleContent(entity.getContent()))
                 .append(newLine(2));
 
@@ -97,12 +98,12 @@ public class ExportService {
 
     private String getTags(ArticleEntity entity) {
         List<TagEntity> tags = entity.getTags();
-        StringBuilder tagsString = new StringBuilder("[");
+        StringBuilder appendedTags = new StringBuilder();
         for (TagEntity tag : tags) {
             String tagToAdd = tag.getValue().trim();
-            tagsString.append(tagToAdd).append(", ");
+            appendedTags.append(tagToAdd).append(", ");
         }
-        return tagsString.substring(0, tagsString.length() - 2) + "]";
+        return appendedTags.toString();
     }
 
     private String handleContent(String content) {
