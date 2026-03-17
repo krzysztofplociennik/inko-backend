@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -150,8 +151,8 @@ public class ExportService {
     }
 
     private void deleteDirectory(File directory) {
-        if (directory.isDirectory()) {
-            for (File file : directory.listFiles()) {
+        if (directory.isDirectory() && directory.listFiles() != null) {
+            for (File file : Objects.requireNonNull(directory.listFiles())) {
                 deleteDirectory(file);
             }
         }
