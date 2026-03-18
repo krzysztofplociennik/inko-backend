@@ -78,7 +78,7 @@ class ExportServiceTest extends Specification {
             content.contains("<p>Raw content</p>")
     }
 
-    def "should include tags in exported file content"() {
+    def "should include article tags in exported file content"() {
         given:
             def tag = new TagEntity(id: UUID.randomUUID(), value: "Docker", articles: [])
             articleRepository.findAll() >> [buildArticle("Article", "<p>Content</p>", [tag])]
@@ -98,44 +98,6 @@ class ExportServiceTest extends Specification {
             getZipEntryNames(result).size() == 1
     }
 
-    def "SanitizeContent"() {
-        given:
-            String value = '<p class="ql-align-center">When you encounter this error:<img src="data:image/png;base64,iVBORw0CYII="></p>\n' +
-                    '\n' +
-                    '<p class="ql-align-right">you just have to delete a .lock file and run the application again.</p>\n' +
-                    '<p></p>\n' +
-                    '<p>One of the file&#39;s position can be at*:</p>\n' +
-                    '<pre data-language="plain">\n' +
-                    './home/{your-username}/.var/app/com.jetbrains.IntelliJ-IDEA-Community/config/JetBrains/IdeaIC2024.1/.lock\n' +
-                    '</pre>\n' +
-                    '<p>*Obviously - depending on your OS and where you initially installed the application it might not be the right directory.</p>\n' +
-                    '<p></p>\n' +
-                    '<br/>\n' +
-                    '<p>PS. edited for testing</p>'
-
-            ExportService exportService = new ExportService(null)
-
-        when:
-            def actual = exportService.sanitizeContent(value)
-
-        then:
-            String expected = '<p class="ql-align-center">When you encounter this error:<img src="\ndata:image/png;base64,iVBORw0CYII=">\n\n' +
-                    '\n' +
-                    '<p class="ql-align-right">you just have to delete a .lock file and run the application again.\n\n' +
-                    '\n\n' +
-                    'One of the file&#39;s position can be at*:\n\n' +
-                    '<pre data-language="plain">\n' +
-                    './home/{your-username}/.var/app/com.jetbrains.IntelliJ-IDEA-Community/config/JetBrains/IdeaIC2024.1/.lock\n' +
-                    '</pre>\n' +
-                    '*Obviously - depending on your OS and where you initially installed the application it might not be the right directory.\n\n' +
-                    '\n\n' +
-                    '\n' +
-                    'PS. edited for testing\n'
-            actual == expected
-    }
-
-    // --- helpers ---
-
     def "should handle article with blank title without throwing"() {
         given:
             articleRepository.findAll() >> [buildArticle("", "<p>Content</p>", [])]
@@ -145,6 +107,43 @@ class ExportServiceTest extends Specification {
             result != null
             notThrown(Exception)
     }
+
+    def "should include multiple article tags in exported file content"() {
+        given:
+            def tag1 = new TagEntity(id: UUID.randomUUID(), value: "Docker", articles: [])
+            def tag2 = new TagEntity(id: UUID.randomUUID(), value: "Linux", articles: [])
+            articleRepository.findAll() >> [buildArticle("Article", "<p>Content</p>", [tag1, tag2])]
+        when:
+            def result = exportService.packageAllArticlesIntoZip(true)
+        then:
+            def content = readFirstZipEntry(result)
+            content.contains("Tags: [Docker, Linux]")
+            !content.contains("Docker, Linux,") // no trailing comma
+            !content.contains("Linux, Docker,") // no trailing comma
+    }
+
+    def "should handle article with no article tags without throwing"() {
+        given:
+            articleRepository.findAll() >> [buildArticle("Article", "<p>Content</p>", [])]
+        when:
+            def result = exportService.packageAllArticlesIntoZip(true)
+        then:
+            notThrown(Exception)
+    }
+
+    def "should trim whitespace from article tags"() {
+        given:
+            def tag = new TagEntity(id: UUID.randomUUID(), value: "  Docker  ", articles: [])
+            articleRepository.findAll() >> [buildArticle("Article", "<p>Content</p>", [tag])]
+        when:
+            def result = exportService.packageAllArticlesIntoZip(true)
+        then:
+            def content = readFirstZipEntry(result)
+            content.contains("Tags: [Docker]")
+            !content.contains("  Docker  ")
+    }
+
+    // --- helpers ---
 
     private ArticleEntity buildArticle(String title, String content, List<TagEntity> tags) {
         return ArticleEntity.builder()

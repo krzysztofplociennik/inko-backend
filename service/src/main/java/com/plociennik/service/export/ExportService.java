@@ -1,7 +1,6 @@
 package com.plociennik.service.export;
 
 import com.plociennik.model.ArticleEntity;
-import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.article.ArticleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -16,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -26,8 +26,6 @@ import static org.springframework.util.CollectionUtils.isEmpty;
 public class ExportService {
 
     private final ArticleRepository articleRepository;
-
-    private boolean withHTML = false;
 
     public ExportService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
@@ -48,9 +46,10 @@ public class ExportService {
         }
 
         for (ArticleEntity article : allArticles) {
+            String articleTitle = article.getTitle();
+            String articleAsFileContent = createFileContent(article, withHTML);
             try {
-                this.withHTML = withHTML;
-                createSingleArticleTxtFile(article, backupDir);
+                writeArticleContentIntoFile(articleTitle, articleAsFileContent, backupDir);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -68,8 +67,8 @@ public class ExportService {
         return zipFile;
     }
 
-    private void createSingleArticleTxtFile(ArticleEntity article, Path backupDir) throws IOException {
-        String safeTitle = StringUtils.replace(article.getTitle(), " ", "_")
+    private void writeArticleContentIntoFile(String articleTitle, String articleAsFileContent, Path backupDir) throws IOException {
+        String safeTitle = StringUtils.replace(articleTitle, " ", "_")
                 .replaceAll("[^a-zA-Z0-9_.-]", "");
         if (safeTitle.isEmpty()) {
             safeTitle = "article_" + UUID.randomUUID();
@@ -78,43 +77,36 @@ public class ExportService {
         File file = new File(backupDir.toFile(), safeTitle + ".txt");
 
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write(createFileContent(article));
+            writer.write(articleAsFileContent);
         }
     }
 
-    private String createFileContent(ArticleEntity entity) {
+    private String createFileContent(ArticleEntity entity, boolean withHTML) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("UUID: " + entity.getId())
+        sb
+                .append("UUID: " + entity.getId())
                 .append(newLine(1) + "Title: " + entity.getTitle())
                 .append(newLine(1) + "Type: " + entity.getType().toString())
                 .append(newLine(1) + "Date of creation: " + getDate(entity.getCreationDate()))
                 .append(newLine(1) + "Date of modification: " + getDate(entity.getModificationDate()))
                 .append(newLine(1) + "Tags: [" + getTags(entity) + "]")
-                .append(newLine(2) + "Content: " + newLine(2) + handleContent(entity.getContent()))
+                .append(newLine(2) + "Content: " + newLine(2) + getContent(entity.getContent(), withHTML))
                 .append(newLine(2));
 
         return sb.toString();
     }
 
     private String getTags(ArticleEntity entity) {
-        List<TagEntity> tags = entity.getTags();
-        StringBuilder appendedTags = new StringBuilder();
-        for (TagEntity tag : tags) {
-            String tagToAdd = tag.getValue().trim();
-            appendedTags.append(tagToAdd).append(", ");
-        }
-        return appendedTags.toString();
+        return entity.getTags().stream()
+                .map(tag -> tag.getValue().trim())
+                .collect(Collectors.joining(", "));
     }
 
-    private String handleContent(String content) {
-        if (!this.withHTML) {
-            return sanitizeContent(content);
+    private String getContent(String content, boolean withHTML) {
+        if (withHTML) {
+            return content;
         }
-        return content;
-    }
-
-    String sanitizeContent(String content) {
         return content
                 .replaceAll("<p>", "")
                 .replaceAll("<br>", "")
