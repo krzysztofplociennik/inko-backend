@@ -126,7 +126,7 @@ class ExportServiceTest extends Specification {
         given:
             articleRepository.findAll() >> [buildArticle("Article", "<p>Content</p>", [])]
         when:
-            def result = exportService.packageAllArticlesIntoZip(true)
+            exportService.packageAllArticlesIntoZip(true)
         then:
             notThrown(Exception)
     }
