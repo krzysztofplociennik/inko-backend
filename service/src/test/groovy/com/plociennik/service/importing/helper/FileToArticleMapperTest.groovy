@@ -47,7 +47,6 @@ class FileToArticleMapperTest extends Specification {
             def expectedTags = List.of(new TagEntity(null, List.of(), "CSS"))
 
             def expectedEntity = ArticleEntity.builder()
-                    .id()
                     .creationDate(LocalDateTime.of(2024, 11, 4, 18, 15, 47, 841_903_000))
                     .modificationDate(LocalDateTime.of(2025, 2, 16, 18, 36, 31, 412_107_000))
                     .type(ArticleType.PROGRAMMING)
@@ -87,7 +86,6 @@ class FileToArticleMapperTest extends Specification {
             def expectedTags = List.of(new TagEntity(null, List.of(), "CSS"))
 
             def expectedEntity = ArticleEntity.builder()
-                    .id()
                     .creationDate(LocalDateTime.of(2024, 11, 4, 18, 15, 47, 841_903_000))
                     .modificationDate(LocalDateTime.of(2025, 2, 16, 18, 36, 31, 412_107_000))
                     .type(ArticleType.PROGRAMMING)

@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets
 import java.time.LocalDateTime
 import java.util.zip.ZipFile
 
+@SuppressWarnings('GrMethodMayBeStatic')
 class ExportServiceTest extends Specification {
 
     def articleRepository = Mock(ArticleRepository)

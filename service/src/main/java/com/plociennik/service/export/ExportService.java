@@ -38,7 +38,7 @@ public class ExportService {
             return null;
         }
 
-        Path backupDir = null;
+        Path backupDir;
         try {
             backupDir = Files.createTempDirectory("articles_backup_");
         } catch (IOException e) {
@@ -55,7 +55,7 @@ public class ExportService {
             }
         }
 
-        File zipFile = null;
+        File zipFile;
         try {
             zipFile = zipFiles(backupDir);
         } catch (IOException e) {
