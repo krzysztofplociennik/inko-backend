@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static com.plociennik.common.util.StringUtil.newLine;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
@@ -82,19 +81,27 @@ public class ExportService {
     }
 
     private String createFileContent(ArticleEntity entity, boolean withHTML) {
-        StringBuilder sb = new StringBuilder();
-
-        sb
-                .append("UUID: " + entity.getId())
-                .append(newLine(1) + "Title: " + entity.getTitle())
-                .append(newLine(1) + "Type: " + entity.getType().toString())
-                .append(newLine(1) + "Date of creation: " + getDate(entity.getCreationDate()))
-                .append(newLine(1) + "Date of modification: " + getDate(entity.getModificationDate()))
-                .append(newLine(1) + "Tags: [" + getTags(entity) + "]")
-                .append(newLine(2) + "Content: " + newLine(2) + getContent(entity.getContent(), withHTML))
-                .append(newLine(2));
-
-        return sb.toString();
+        return """
+        UUID: %s
+        Title: %s
+        Type: %s
+        Date of creation: %s
+        Date of modification: %s
+        Tags: [%s]
+        
+        Content: 
+        
+        %s
+        
+        """.formatted(
+                entity.getId(),
+                entity.getTitle(),
+                entity.getType().toString(),
+                getDate(entity.getCreationDate()),
+                getDate(entity.getModificationDate()),
+                getTags(entity),
+                getContent(entity.getContent(), withHTML)
+        );
     }
 
     private String getTags(ArticleEntity entity) {
