@@ -1,7 +1,8 @@
-package com.plociennik.service.auth;
+package com.plociennik.service.security.auth;
 
 import com.plociennik.model.UserEntity;
 import com.plociennik.model.repository.user.UserRepository;
+import com.plociennik.service.security.jwt.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
 
-    public ResponseEntity<AuthResponse> auth(LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> authorize(LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())

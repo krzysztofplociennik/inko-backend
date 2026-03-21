@@ -1,4 +1,4 @@
-package com.plociennik.service.auth;
+package com.plociennik.service.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
