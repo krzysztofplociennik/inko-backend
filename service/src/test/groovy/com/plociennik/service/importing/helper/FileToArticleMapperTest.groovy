@@ -4,7 +4,6 @@ import com.plociennik.model.ArticleEntity
 import com.plociennik.model.ArticleType
 import com.plociennik.model.TagEntity
 import com.plociennik.model.repository.article.ArticleCustomRepositoryImpl
-import com.plociennik.model.repository.tag.TagRepository
 import com.plociennik.service.tag.TagHelper
 import org.springframework.mock.web.MockMultipartFile
 import spock.lang.Specification
@@ -13,7 +12,6 @@ import java.time.LocalDateTime
 
 class FileToArticleMapperTest extends Specification {
 
-    def tagRepository = Mock(TagRepository)
     def tagHelper = Mock(TagHelper)
     def articleRepository = Mock(ArticleCustomRepositoryImpl)
     def mapper = new FileToArticleMapper(tagHelper, articleRepository)
@@ -35,8 +33,6 @@ class FileToArticleMapperTest extends Specification {
                     """
         MockMultipartFile validFile = new MockMultipartFile(
                         "files", "document2.txt", "text/plain", content.getBytes())
-        and: "mocking the repository find method"
-            tagRepository.findByValue("CSS") >> Optional.of(new TagEntity(null, List.of(), "CSS"))
         and: "mocking the helper"
             tagHelper.mergeExistingTagsWithNewTags(Set.of("CSS")) >> List.of(new TagEntity(null, List.of(), "CSS"))
         and: "mocking the article repository find method"
@@ -74,8 +70,6 @@ class FileToArticleMapperTest extends Specification {
                     """
         MockMultipartFile validFile = new MockMultipartFile(
                         "files", "document2.txt", "text/plain", content.getBytes())
-        and: "mocking a repository find method"
-            tagRepository.findByValue("CSS") >> Optional.of(new TagEntity(null, List.of(), "CSS"))
         and: "mocking a helper"
             tagHelper.mergeExistingTagsWithNewTags(Set.of("CSS")) >> List.of(new TagEntity(null, List.of(), "CSS"))
         and: "mocking the article repository find method"
@@ -95,6 +89,4 @@ class FileToArticleMapperTest extends Specification {
                     .build()
             actualEntity == expectedEntity
     }
-
-
 }
