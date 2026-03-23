@@ -2,7 +2,6 @@ package com.plociennik.service.article.mapper;
 
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.TagEntity;
-import com.plociennik.service.article.dto.AllArticlesItem;
 import com.plociennik.service.article.dto.ArticleDetails;
 
 import java.util.List;

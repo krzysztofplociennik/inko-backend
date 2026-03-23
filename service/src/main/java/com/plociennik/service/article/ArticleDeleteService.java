@@ -42,7 +42,7 @@ public class ArticleDeleteService {
                 .filter(article -> article.getId().toString().equals(articleId))
                 .findFirst();
 
-        optionalAssociation.ifPresent(article -> articles.remove(article));
-        TagEntity savedTag = tagRepository.save(tagEntity);
+        optionalAssociation.ifPresent(articles::remove);
+        tagRepository.save(tagEntity);
     }
 }

@@ -49,7 +49,7 @@ test {
     useJUnitPlatform()
 }
 
-def querydslDir = "$buildDir/generated/querydsl"
+def querydslDir = "build/generated/querydsl"
 
 configurations {
     querydsl.extendsFrom compileClasspath
@@ -59,8 +59,8 @@ tasks.withType(JavaCompile).configureEach {
     options.annotationProcessorPath = configurations.annotationProcessor + configurations.querydsl
 }
 
-tasks.withType(JavaCompile) {
-    options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+tasks.withType(JavaCompile).configureEach {
+    options.generatedSourceOutputDirectory = file(querydslDir)
 }
 
 clean {
