@@ -1,5 +1,8 @@
-package com.plociennik.service.auth;
+package com.plociennik.service.security;
 
+import com.plociennik.service.security.auth.CustomUserDetailsService;
+import com.plociennik.service.security.jwt.JwtAuthenticationFilter;
+import com.plociennik.service.security.jwt.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -73,8 +76,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }

@@ -1,4 +1,4 @@
-package com.plociennik.service.auth;
+package com.plociennik.service.security.jwt;
 
 import com.plociennik.model.UserEntity;
 import io.jsonwebtoken.JwtParser;

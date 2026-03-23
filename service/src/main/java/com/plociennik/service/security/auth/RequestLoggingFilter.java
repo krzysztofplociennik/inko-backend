@@ -1,4 +1,4 @@
-package com.plociennik.service.auth;
+package com.plociennik.service.security.auth;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

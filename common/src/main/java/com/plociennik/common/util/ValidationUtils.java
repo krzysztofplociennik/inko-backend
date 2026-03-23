@@ -10,7 +10,7 @@ public class ValidationUtils {
     private ValidationUtils() {}
 
     public static String extractContentFromFile(MultipartFile file) {
-        String content = null;
+        String content;
         try {
             content = new String(file.getBytes());
         } catch (IOException e) {

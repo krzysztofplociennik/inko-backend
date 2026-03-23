@@ -1,4 +1,4 @@
-package com.plociennik.service.auth;
+package com.plociennik.service.security.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

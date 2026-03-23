@@ -47,7 +47,6 @@ test {
 sourceSets {
     test {
         java.srcDirs = ['src/test/java']
-        groovy.srcDirs = ['src/test/groovy']
     }
 }
 

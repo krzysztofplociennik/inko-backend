@@ -1,4 +1,4 @@
-package com.plociennik.service.auth;
+package com.plociennik.service.security.auth;
 
 import com.plociennik.model.UserEntity;
 import com.plociennik.model.repository.user.UserRepository;
