@@ -11,26 +11,26 @@ class ArticleCreateMapperTest extends Specification {
 
     def "should map correctly"() {
         given:
-            def tags = Set.of("CSS", "HTML")
+            def stringTags = Set.of("CSS", "HTML")
             def article = ArticleCreate.builder()
                     .title("title")
                     .type("DATABASE")
                     .content("content")
-                    .tags(tags)
+                    .tags(stringTags)
                     .build()
-            def tags2 = List.of(
+            def entityTags = List.of(
                         TagEntity.builder().value("CSS").build(),
                         TagEntity.builder().value("HTML").build()
             )
         when:
-            def mappedArticle = mapper.mapToEntity(article, tags2)
+            def mappedArticle = mapper.mapToEntity(article, entityTags)
         then:
             mappedArticle != null
             mappedArticle.id == null
             mappedArticle.title == "title"
             mappedArticle.tags.size() == 2
-            mappedArticle.tags.contains("CSS")
-            mappedArticle.tags.contains("HTML")
+            mappedArticle.tags.stream().anyMatch {t -> t.value == "CSS"}
+            mappedArticle.tags.stream().anyMatch {t -> t.value == "HTML"}
             mappedArticle.content == "content"
             mappedArticle.type == ArticleType.DATABASE
             mappedArticle.creationDate != null
