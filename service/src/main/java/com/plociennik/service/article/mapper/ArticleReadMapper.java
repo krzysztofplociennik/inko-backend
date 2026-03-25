@@ -11,15 +11,15 @@ import java.util.stream.Collectors;
 public class ArticleReadMapper {
 
     public ArticleDetails mapToDetails(ArticleEntity articleEntity) {
-        return new ArticleDetails(
-                articleEntity.getId().toString(),
-                articleEntity.getTitle(),
-                articleEntity.getContent(),
-                articleEntity.getType().toString(),
-                mapTags(articleEntity),
-                articleEntity.getCreationDate(),
-                articleEntity.getModificationDate()
-        );
+        return ArticleDetails.builder()
+                .id(articleEntity.getId().toString())
+                .title(articleEntity.getTitle())
+                .content(articleEntity.getContent())
+                .type(articleEntity.getType().toString())
+                .tags(mapTags(articleEntity))
+                .creationDate(articleEntity.getCreationDate())
+                .modificationDate(articleEntity.getModificationDate())
+                .build();
     }
 
     private Set<String> mapTags(ArticleEntity articleEntity) {
