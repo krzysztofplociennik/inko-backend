@@ -1,7 +1,7 @@
 ================ TO DO LIST ===============================================================================
 
 1. more tests, maybe even E2E tests
-2.
+2. deleting tags might not be working correctly (old tags not being removed)
 3.
 4. Fix deprecated code (analyze code in IntelliJ)
 5. adding a test pipeline
