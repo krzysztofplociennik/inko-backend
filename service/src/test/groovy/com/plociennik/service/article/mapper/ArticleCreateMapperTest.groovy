@@ -1,7 +1,6 @@
 package com.plociennik.service.article.mapper
 
 import com.plociennik.model.ArticleType
-import com.plociennik.model.TagEntity
 import com.plociennik.service.article.dto.ArticleCreate
 import spock.lang.Specification
 
@@ -18,12 +17,8 @@ class ArticleCreateMapperTest extends Specification {
                     .content("content")
                     .tags(stringTags)
                     .build()
-            def entityTags = List.of(
-                        TagEntity.builder().value("CSS").build(),
-                        TagEntity.builder().value("HTML").build()
-            )
         when:
-            def mappedArticle = mapper.mapToEntity(article, entityTags)
+            def mappedArticle = mapper.mapToEntity(article)
         then:
             mappedArticle != null
             mappedArticle.id == null
