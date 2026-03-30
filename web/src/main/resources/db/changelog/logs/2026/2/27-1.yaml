@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 27-1
+      author: kplociennik
+      changes:
+        - dropTable:
+            tableName: post

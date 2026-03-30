@@ -27,7 +27,7 @@ public class ArticleReadService {
             ArticleEntity articleEntity = searchedArticle.get();
             return articleReadMapper.mapToDetails(articleEntity);
         } else {
-            throw new Exception("There is no article with this ID: '" + id + "' in the database! (eid: 310720240701");
+            throw new Exception("There is no article with this ID: '" + id + "' in the database! (eid: 310720240701)");
         }
     }
 

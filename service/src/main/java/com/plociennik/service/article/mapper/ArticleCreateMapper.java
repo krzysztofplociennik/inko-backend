@@ -10,24 +10,30 @@ import java.util.List;
 
 public class ArticleCreateMapper {
 
-    public ArticleEntity mapToEntity(ArticleCreate articleCreate, List<TagEntity> tagsValues) {
-        ArticleEntity articleEntity = new ArticleEntity();
-        articleEntity.setTitle(articleCreate.getTitle());
-        articleEntity.setContent(articleCreate.getContent());
-
+    public ArticleEntity mapToEntity(ArticleCreate articleCreate) {
         ArticleType createType = ArticleType.getType(articleCreate.getType());
-        articleEntity.setType(createType);
-        articleEntity.setTags(tagsValues);
-
         LocalDateTime currentTime = LocalDateTime.now();
-        articleEntity.setCreationDate(currentTime);
-        articleEntity.setModificationDate(null);
+        List<TagEntity> tags = mapTags(articleCreate);
 
-        for (TagEntity tagsValue : tagsValues) {
-            List<ArticleEntity> articles = tagsValue.getArticles();
+        ArticleEntity articleEntity = ArticleEntity.builder()
+                .title(articleCreate.getTitle())
+                .content(articleCreate.getContent())
+                .type(createType)
+                .tags(tags)
+                .creationDate(currentTime)
+                .build();
+
+        for (TagEntity tag : tags) {
+            List<ArticleEntity> articles = tag.getArticles();
             articles.add(articleEntity);
         }
 
         return articleEntity;
+    }
+
+    private List<TagEntity> mapTags(ArticleCreate articleCreate) {
+        return articleCreate.getTags().stream()
+                .map(t -> TagEntity.builder().value(t).build())
+                .toList();
     }
 }

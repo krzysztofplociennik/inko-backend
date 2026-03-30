@@ -10,18 +10,17 @@ public enum ArticleType {
     OS;
 
     public static ArticleType getType(String s) {
-
-        switch (s) {
-            case "Programming" -> {
+        switch (s.toLowerCase()) {
+            case "programming" -> {
                 return PROGRAMMING;
             }
-            case "Tools" -> {
+            case "tools" -> {
                 return TOOLS;
             }
-            case "Database" -> {
+            case "database" -> {
                 return DATABASE;
             }
-            case "OS" -> {
+            case "os" -> {
                 return OS;
             }
             default -> throw new InkoRuntimeException("Unexpected value: [" + s + "]", "202504090950");

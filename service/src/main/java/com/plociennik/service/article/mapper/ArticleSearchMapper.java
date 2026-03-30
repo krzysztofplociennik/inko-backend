@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 public class ArticleSearchMapper {
 
     public SearchArticlesItem mapToRead(ArticleEntity articleEntity) {
-        return new SearchArticlesItem(
-                articleEntity.getId(),
-                articleEntity.getTitle(),
-                articleEntity.getType(),
-                mapTags(articleEntity),
-                articleEntity.getCreationDate(),
-                articleEntity.getModificationDate()
-        );
+        return SearchArticlesItem.builder()
+                .id(articleEntity.getId())
+                .title(articleEntity.getTitle())
+                .type(articleEntity.getType())
+                .tags(mapTags(articleEntity))
+                .creationDate(articleEntity.getCreationDate())
+                .modificationDate(articleEntity.getModificationDate())
+                .build();
     }
 
     private Set<String> mapTags(ArticleEntity articleEntity) {

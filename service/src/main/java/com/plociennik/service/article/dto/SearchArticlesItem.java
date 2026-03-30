@@ -2,6 +2,7 @@ package com.plociennik.service.article.dto;
 
 import com.plociennik.model.ArticleType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class SearchArticlesItem implements Serializable {
     private UUID id;
     private String title;
