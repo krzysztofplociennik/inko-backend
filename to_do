@@ -1,9 +1,15 @@
 ================ TO DO LIST ===============================================================================
 
 1. more tests, maybe even E2E tests
-2.
-3.
+2. deleting tags might not be working correctly (old tags not being removed)
+3. maybe dto should be converted into records
 4. Fix deprecated code (analyze code in IntelliJ)
 5. adding a test pipeline
-6.
-7.
+6. need to check the actual editing/creating articles - for some reason there are errors while trying to do these
+operations
+7. middle top buttons are being moved when logged in
+8. maybe move the code that processes the article content somewhere else
+9.
+10. login refresh message - seems unnecessary
+11. additional new lines are not being registered/honored when saving the updated article
+12.
