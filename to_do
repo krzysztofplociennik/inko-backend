@@ -9,7 +9,7 @@
 operations
 7. middle top buttons are being moved when logged in
 8. maybe move the code that processes the article content somewhere else
-9. while editing - the old type is not visible, there is only: "Select the new type" placeholder
+9.
 10. login refresh message - seems unnecessary
 11. additional new lines are not being registered/honored when saving the updated article
 12.
