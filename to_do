@@ -1,15 +1,15 @@
 ================ TO DO LIST ===============================================================================
 
 1. more tests, maybe even E2E tests
-2.
+2. after editing the copy buttons disappear (only after cancelling the edit)
 3. maybe dto should be converted into records
 4. Fix deprecated code (analyze code in IntelliJ)
 5. adding a test pipeline
 6. need to check the actual editing/creating articles - for some reason there are errors while trying to do these
 operations
-7.
-8. maybe move the code that processes the article content somewhere else (sounds like a stretch right now)
-9.
-10.
+7. add another button for going back to
+8. confirmation dialog for editing needs to change a bit (or delete is fully and add "discard changes" button
+9. editing container (quill) is not centered
+10. "go back" button needs to be fixed - it does not go back to a specific page number of articles list
 11.
 12.
