@@ -9,7 +9,7 @@
 operations
 7.
 8. confirmation dialog for editing needs to change a bit (or delete is fully and add "discard changes" button)
-9. some methods might be unused (get all articles)
+9.
 10. "go back" button needs to be fixed - it does not go back to a specific page number of articles list
 11.
 12.
