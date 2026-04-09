@@ -7,7 +7,7 @@
 5. adding a test pipeline
 6. need to check the actual editing/creating articles - for some reason there are errors while trying to do these
 operations
-7.
+7. need more 500 handling (nonexistent)
 8. confirmation dialog for editing needs to change a bit (or delete is fully and add "discard changes" button)
 9.
 10. "go back" button needs to be fixed - it does not go back to a specific page number of articles list
