@@ -13,4 +13,5 @@ operations
 10. "go back" button needs to be fixed - it does not go back to a specific page number of articles list
 11. "go back" button should also be present when not logged in
 12. toggle dark/light should also have more margin/separation
-13.
+13. bottom edit buttons are not aligned properly
+14.
