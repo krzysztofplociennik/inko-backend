@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Builder
@@ -14,7 +14,7 @@ public class ArticleFilter {
     private String searchPhrase;
     private String type;
     private List<String> tags;
-    private Date creationDateFrom;
-    private Date creationDateTo;
+    private LocalDate creationDateFrom;
+    private LocalDate creationDateTo;
     private ArticleSort sort;
 }
