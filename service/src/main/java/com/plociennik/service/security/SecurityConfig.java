@@ -40,7 +40,6 @@ public class SecurityConfig {
                                 "/info/**",
                                 "/search-articles/**",
                                 "/autocomplete/**",
-                                "/article/getAll",
                                 "/article/getDetails",
                                 "/article/getTypes",
                                 "/keep-alive"
