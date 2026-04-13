@@ -6,7 +6,7 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ArticleSpecification {
@@ -44,7 +44,7 @@ public class ArticleSpecification {
         };
     }
 
-    private static Specification<ArticleEntity> hasCreationDateBetween(Date from, Date to) {
+    private static Specification<ArticleEntity> hasCreationDateBetween(LocalDate from, LocalDate to) {
         return (root, query, cb) -> {
             if (from == null && to == null) return cb.conjunction();
             if (from == null) return cb.lessThanOrEqualTo(root.get("creationDate"), to);
