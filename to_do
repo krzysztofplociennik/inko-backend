@@ -1,7 +1,7 @@
 ================ TO DO LIST ===============================================================================
 
 1. more tests, maybe even E2E tests
-2. after editing the copy buttons disappear (only after cancelling the edit)
+2. use test containers
 3. maybe dto should be converted into records
 4. Fix deprecated code (analyze code in IntelliJ)
 5. adding a test pipeline
@@ -11,7 +11,7 @@ operations
 8. confirmation dialog for editing needs to change a bit (or delete is fully and add "discard changes" button)
 9. editor not aligned when creating an article
 10. maybe adding some specific validation (now when trying to add an empty article it shows a generic error message)
-11.
-12.
+11. improve logging
+12. create a matching api and gui mechanism to see if versions are correct
 13.
 14.
