@@ -13,5 +13,5 @@ operations
 10. maybe adding some specific validation (now when trying to add an empty article it shows a generic error message)
 11. improve logging
 12. create a matching api and gui mechanism to see if versions are correct
-13. bottom links (gh, LI) not centered
+13. 
 14.
