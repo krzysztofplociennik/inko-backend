@@ -20,4 +20,4 @@ jobs:
           distribution: 'temurin'
 
       - name: Run backend tests
-        run: ./gradlew :service:test
+        run: ./gradlew :service:test :web:test
