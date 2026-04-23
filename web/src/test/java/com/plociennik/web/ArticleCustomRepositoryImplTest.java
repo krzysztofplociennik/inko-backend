@@ -6,6 +6,7 @@ import com.plociennik.model.ArticleType;
 import com.plociennik.model.repository.article.ArticleCustomRepositoryImpl;
 import com.plociennik.model.repository.article.ArticleRepository;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -60,6 +61,28 @@ public class ArticleCustomRepositoryImplTest extends IntegrationTest {
 
         // then
         assertThat(results).hasSize(1);
+    }
+
+    @Test
+    void shouldFindArticleByUUID() {
+        // given
+        ArticleEntity article = ArticleEntity.builder()
+                .title("Some title")
+                .content("This is about Docker containers")
+                .type(ArticleType.TOOLS)
+                .creationDate(LocalDateTime.now())
+                .build();
+        ArticleEntity savedArticle = articleRepository.save(article);
+        UUID savedId = savedArticle.getId();
+        // when
+        ArticleEntity searchedArticle;
+        try {
+            searchedArticle = articleCustomRepository.findByUUID(savedId);
+        } catch (ArticleNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        // then
+        Assertions.assertNotNull(searchedArticle);
     }
 
     @Test
