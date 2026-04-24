@@ -3,13 +3,21 @@ package com.plociennik.web;
 import com.plociennik.common.errorhandling.exceptions.ArticleNotFoundException;
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.ArticleType;
+import com.plociennik.model.TagEntity;
 import com.plociennik.model.repository.article.ArticleCustomRepositoryImpl;
 import com.plociennik.model.repository.article.ArticleRepository;
+import com.plociennik.service.article.search.ArticleFilter;
+import com.plociennik.service.article.search.ArticleSpecification;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -74,6 +82,7 @@ public class ArticleCustomRepositoryImplTest extends IntegrationTest {
                 .build();
         ArticleEntity savedArticle = articleRepository.save(article);
         UUID savedId = savedArticle.getId();
+
         // when
         ArticleEntity searchedArticle;
         try {
@@ -81,8 +90,41 @@ public class ArticleCustomRepositoryImplTest extends IntegrationTest {
         } catch (ArticleNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         // then
         Assertions.assertNotNull(searchedArticle);
+    }
+
+    @Test
+    void shouldFindArticleBySpecification() {
+        // given
+        ArticleEntity article = ArticleEntity.builder()
+                .title("How to install Linux Mint")
+                .content("Here is how to install Linux Mint on your PC.")
+                .tags(List.of(
+                        TagEntity.builder().value("Linux").build(),
+                        TagEntity.builder().value("Mint").build()
+                ))
+                .type(ArticleType.OS)
+                .creationDate(LocalDateTime.of(2026, 2, 4, 14, 22))
+                .build();
+        articleRepository.save(article);
+
+        ArticleFilter filter = ArticleFilter.builder()
+                .searchPhrase("Linux Mint")
+                .tags(List.of("Linux", "Mint"))
+                .creationDateFrom(LocalDate.of(2026, 2, 1))
+                .creationDateTo(LocalDate.of(2026, 2, 5))
+                .build();
+        Specification<ArticleEntity> spec = ArticleSpecification.createWith(filter);
+        Pageable pageable = PageRequest.of(0, 5);
+
+        // when
+        Page<ArticleEntity> pageOfArticles = articleCustomRepository.findBySpecification(spec, pageable);
+
+        // then
+        Assertions.assertNotNull(pageOfArticles);
+        Assertions.assertEquals(1, pageOfArticles.getTotalElements());
     }
 
     @Test
