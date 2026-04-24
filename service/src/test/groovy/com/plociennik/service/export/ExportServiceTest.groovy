@@ -148,7 +148,6 @@ class ExportServiceTest extends Specification {
 
     private ArticleEntity buildArticle(String title, String content, List<TagEntity> tags) {
         return ArticleEntity.builder()
-                .id(UUID.randomUUID())
                 .title(title)
                 .content(content)
                 .type(ArticleType.PROGRAMMING)

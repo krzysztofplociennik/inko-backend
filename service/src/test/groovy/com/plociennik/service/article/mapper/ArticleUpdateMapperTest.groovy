@@ -23,7 +23,6 @@ class ArticleUpdateMapperTest extends Specification {
             def creationDate = LocalDateTime.of(2026, 6, 9, 11, 33)
             def modificationDate = creationDate.plusDays(3)
             def currentArticleEntity = ArticleEntity.builder()
-                    .id(randomUuid)
                     .title("example title")
                     .type(ArticleType.TOOLS)
                     .content("example content")
@@ -31,6 +30,7 @@ class ArticleUpdateMapperTest extends Specification {
                     .creationDate(creationDate)
                     .modificationDate(modificationDate)
                     .build()
+            currentArticleEntity.id = randomUuid
         when:
             def updatedTags = Set.of("CSS", "HTML", "Angular")
             def updatedArticleEntity = ArticleUpdate.builder()
