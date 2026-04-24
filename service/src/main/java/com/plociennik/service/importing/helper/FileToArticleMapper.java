@@ -31,7 +31,6 @@ public class FileToArticleMapper {
 
         String[] fileContentSplit = fileContents.split("\n");
         return ArticleEntity.builder()
-                .id(null)
                 .title(extractTitle(fileContentSplit))
                 .type(extractType(fileContentSplit))
                 .creationDate(extractDateOfCreations(fileContentSplit))
