@@ -1,7 +1,7 @@
 ================ TO DO LIST ===============================================================================
 
 1. more tests, maybe even E2E tests
-2.
+2. creating/updating an article does not go through any validation
 3. maybe dto should be converted into records
 4. Fix deprecated code (analyze code in IntelliJ)
 5.
