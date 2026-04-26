@@ -4,6 +4,7 @@ import com.plociennik.service.article.ArticleSearchService;
 import com.plociennik.service.article.dto.SearchArticlesItem;
 import com.plociennik.service.article.search.ArticleFilter;
 import com.plociennik.service.article.search.ArticleSort;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,9 @@ public class SearchArticlesController {
 
     private ArticleSearchService service;
 
+    @Operation(
+            summary = "Search for articles given a specific filter"
+    )
     @GetMapping
     public ResponseEntity<Page<SearchArticlesItem>> searchArticles(
             @RequestParam(defaultValue = "0") int page,

@@ -65,7 +65,7 @@ public class ArticleController {
     }
 
     @Operation(
-            summary = "Deletes an existing article"
+            summary = "Delete an existing article"
     )
     @DeleteMapping(value = "/delete")
     public ResponseEntity<String> delete(@RequestParam String id) throws ArticleNotFoundException {
