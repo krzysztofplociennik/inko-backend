@@ -2,9 +2,9 @@ package com.plociennik.common.errorhandling.exceptions;
 
 public class ArticleNotFoundException extends Exception {
 
-    private final static String BASE_MESSAGE = "Article with ID [{}] has not been found! ";
+    private static final String BASE_MESSAGE = "Article with ID [%s] has not been found! (eventID: %s)";
 
     public ArticleNotFoundException(String articleID, String eid) {
-        super(BASE_MESSAGE.replace("{}", articleID) + eid);
+        super(BASE_MESSAGE.formatted(articleID, eid));
     }
 }
