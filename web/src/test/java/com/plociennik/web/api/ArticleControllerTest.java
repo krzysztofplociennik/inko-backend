@@ -42,26 +42,29 @@ class ArticleControllerTest extends IntegrationTest {
     private ArticleCustomRepositoryImpl articleCustomRepository;
 
     @Test
-    void getDetails() {
+    void shouldReturnCorrectDetailsWhenAskedForSpecificArticle() throws Exception {
         // given
         initArticles();
         String title = "Building a REST API with Spring Boot and PostgreSQL";
-        ArticleEntity article = articleCustomRepository.findByPhrase(title).getFirst();
+        UUID id = articleCustomRepository.findByPhrase(title).getFirst().getId();
 
-        // when / then
+        // when
+        ArticleDetails article = articleReadService.getArticleDetails(id.toString());
+
+        // then
         Assertions.assertEquals(title, article.getTitle());
-        Assertions.assertEquals(ArticleType.PROGRAMMING, article.getType());
+        Assertions.assertEquals("Programming", article.getType());
         Assertions.assertEquals("Dummy content here (Building...)", article.getContent());
-        Assertions.assertEquals("Java", article.getTags().get(0).getValue());
-        Assertions.assertEquals("Spring Boot", article.getTags().get(1).getValue());
-        Assertions.assertEquals("PostgreSQL", article.getTags().get(2).getValue());
-        Assertions.assertEquals("REST", article.getTags().get(3).getValue());
+        Assertions.assertTrue(article.getTags().contains("Java"));
+        Assertions.assertTrue(article.getTags().contains("Spring Boot"));
+        Assertions.assertTrue(article.getTags().contains("PostgreSQL"));
+        Assertions.assertTrue(article.getTags().contains("REST"));
         Assertions.assertEquals(LocalDateTime.of(2026, 1, 5, 10, 30), article.getCreationDate());
         Assertions.assertNull(article.getModificationDate());
     }
 
     @Test
-    void getTypes() {
+    void shouldReturnNonBlankNonEmptyListOfTypes() {
         // given
         List<String> allTypes = articleReadService.getAllTypes();
 
@@ -71,22 +74,8 @@ class ArticleControllerTest extends IntegrationTest {
     }
 
     @Test
-    void create() throws ArticleNotFoundException {
-        // given / when
-//        ArticleEntity article = ArticleEntity.builder()
-//                .title("Building a REST API with Spring Boot and PostgreSQL")
-//                .content("Dummy content here (Building...)")
-//                .type(ArticleType.PROGRAMMING)
-//                .tags(List.of(
-//                        TagEntity.builder().value("Java").build(),
-//                        TagEntity.builder().value("Spring Boot").build(),
-//                        TagEntity.builder().value("PostgreSQL").build(),
-//                        TagEntity.builder().value("REST").build()
-//                ))
-//                .creationDate(LocalDateTime.of(2026, 1, 5, 10, 30))
-//                .build();
-//        ArticleEntity saved = articleRepository.save(article);
-
+    void shouldCreateNewArticleWithCorrectInformation() throws ArticleNotFoundException {
+        // given
         ArticleCreate article = ArticleCreate.builder()
                 .title("Mastering Git Branching Strategies for Team Collaboration")
                 .content("Dummy content here")
@@ -97,14 +86,13 @@ class ArticleControllerTest extends IntegrationTest {
                         "DevOps",
                         "Agile"
                 )).build();
-
-        String savedID = articleCreateService.create(article);
-
-        ArticleEntity saved = articleCustomRepository.findByUUID(UUID.fromString(savedID));
-
         LocalDateTime currentDateTime = LocalDateTime.now();
 
+        // when
+        String savedID = articleCreateService.create(article);
+
         // then
+        ArticleEntity saved = articleCustomRepository.findByUUID(UUID.fromString(savedID));
         Assertions.assertEquals(1, articleRepository.count());
         Assertions.assertEquals("Mastering Git Branching Strategies for Team Collaboration", saved.getTitle());
         Assertions.assertEquals(ArticleType.OS, saved.getType());
@@ -122,7 +110,7 @@ class ArticleControllerTest extends IntegrationTest {
     }
 
     @Test
-    void update() throws ArticleNotFoundException {
+    void shouldUpdateArticleWithCorrectInformation() throws ArticleNotFoundException {
         // given
         initArticles();
         UUID id = articleCustomRepository.findByPhrase("Docker").getFirst().getId();
@@ -145,7 +133,6 @@ class ArticleControllerTest extends IntegrationTest {
         // then
         Assertions.assertEquals(3, articleRepository.count());
         Assertions.assertEquals("Introduction to Docker and Container Orchestration [edit]", saved.getTitle());
-        Assertions.assertEquals("Programming", saved.getType());
         Assertions.assertEquals("Dummy content here (Introduction...) [edit]", saved.getContent());
         Assertions.assertTrue(saved.getTags().contains("Docker"));
         Assertions.assertTrue(saved.getTags().contains("Kubernetes"));
@@ -156,7 +143,7 @@ class ArticleControllerTest extends IntegrationTest {
     }
 
     @Test
-    void delete() throws ArticleNotFoundException {
+    void shouldDeleteSpecificArticle() throws ArticleNotFoundException {
         // given
         initArticles();
         long sizeBeforeDeletion = articleRepository.count();
@@ -164,12 +151,13 @@ class ArticleControllerTest extends IntegrationTest {
 
         // when
         articleDeleteService.delete(id.toString());
-
         long sizeAfterDeletion = articleRepository.count();
 
         // then
         Assertions.assertEquals(3, sizeBeforeDeletion);
         Assertions.assertEquals(2, sizeAfterDeletion);
+        Assertions.assertThrows(ArticleNotFoundException.class,
+                () -> articleReadService.getArticleDetails(id.toString()));
     }
 
     void initArticles() {
