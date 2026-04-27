@@ -12,7 +12,6 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @EqualsAndHashCode
 public class ArticleEntity {
 
@@ -40,4 +39,14 @@ public class ArticleEntity {
 
     @Column(name = "modification_date")
     private LocalDateTime modificationDate;
+
+    @Builder
+    public ArticleEntity(String title, String content, ArticleType type, List<TagEntity> tags, LocalDateTime creationDate, LocalDateTime modificationDate) {
+        this.title = title;
+        this.content = content;
+        this.type = type;
+        this.tags = tags;
+        this.creationDate = creationDate;
+        this.modificationDate = modificationDate;
+    }
 }

@@ -36,24 +36,37 @@ public class ArticleController {
         return ResponseEntity.ok(articleDetails);
     }
 
+    @Operation(
+            summary = "Fetch all article types",
+            description = "Fetches all types of the article."
+    )
     @GetMapping(value = "/getTypes")
     public ResponseEntity<List<String>> getTypes() {
         List<String> allTypes = articleReadService.getAllTypes();
         return ResponseEntity.ok(allTypes);
     }
 
+    @Operation(
+            summary = "Create a new article"
+    )
     @PostMapping(value = "/add")
     public ResponseEntity<String> create(@RequestBody ArticleCreate articleCreate) {
         String id = articleCreateService.create(articleCreate);
         return ResponseEntity.ok(id);
     }
 
+    @Operation(
+            summary = "Update an existing article"
+    )
     @PutMapping(value = "/update")
     public ResponseEntity<ArticleDetails> update(@RequestBody ArticleUpdate articleUpdate) throws ArticleNotFoundException {
         ArticleDetails response = articleUpdateService.update(articleUpdate);
         return ResponseEntity.ok(response);
     }
 
+    @Operation(
+            summary = "Delete an existing article"
+    )
     @DeleteMapping(value = "/delete")
     public ResponseEntity<String> delete(@RequestParam String id) throws ArticleNotFoundException {
         articleDeleteService.delete(id);

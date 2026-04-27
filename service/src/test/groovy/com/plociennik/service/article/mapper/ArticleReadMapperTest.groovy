@@ -20,7 +20,6 @@ class ArticleReadMapperTest extends Specification {
             def randomUuid = "34fc88dd-e4f5-48dd-b16b-d0c6442aa71c"
             def dateTime = LocalDateTime.of(2026, 2, 22, 10, 53)
             def articleEntity = ArticleEntity.builder()
-                    .id(UUID.fromString(randomUuid))
                     .title("dummy title")
                     .content("dummy content")
                     .type(ArticleType.PROGRAMMING)
@@ -28,6 +27,7 @@ class ArticleReadMapperTest extends Specification {
                     .creationDate(dateTime)
                     .modificationDate()
                     .build()
+            articleEntity.id = UUID.fromString(randomUuid)
         when:
             def mappedArticle = mapper.mapToDetails(articleEntity)
         then:
