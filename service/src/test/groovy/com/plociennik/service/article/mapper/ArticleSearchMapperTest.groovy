@@ -20,13 +20,13 @@ class ArticleSearchMapperTest extends Specification {
             def randomUuid = UUID.fromString("d7f7ff0b-8dec-41c3-9a27-2a68ffc15d75")
             def dateTime = LocalDateTime.of(2026, 6, 9, 11, 33)
             def articleEntity = ArticleEntity.builder()
-                    .id(randomUuid)
                     .title("example title")
                     .type(ArticleType.TOOLS)
                     .tags(entityTags)
                     .creationDate(dateTime)
                     .modificationDate(dateTime.plusDays(3))
                     .build()
+            articleEntity.id = randomUuid
         when:
             def mappedArticle = mapper.mapToRead(articleEntity)
         then:

@@ -19,11 +19,9 @@ class TagHelperTest extends Specification {
         when:
             def actualTags = tagHelper.mergeExistingTagsWithNewTags(dtoTags)
         then:
-            def expectedTags = List.of(
-                    new TagEntity(null, [], "CSS"),
-                    new TagEntity(null, [], "HTML"),
-                    new TagEntity(null, [], "Frontend"),
-            )
-            actualTags == expectedTags
+            actualTags.size() == 3
+            actualTags.contains(new TagEntity(null, [], "CSS"))
+            actualTags.contains(new TagEntity(null, [], "HTML"))
+            actualTags.contains(new TagEntity(null, [], "Frontend"))
     }
 }

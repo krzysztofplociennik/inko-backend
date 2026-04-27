@@ -1,5 +1,6 @@
 package com.plociennik.service.article;
 
+import com.plociennik.common.errorhandling.exceptions.ArticleNotFoundException;
 import com.plociennik.model.ArticleEntity;
 import com.plociennik.model.ArticleType;
 import com.plociennik.model.repository.article.ArticleRepository;
@@ -27,7 +28,7 @@ public class ArticleReadService {
             ArticleEntity articleEntity = searchedArticle.get();
             return articleReadMapper.mapToDetails(articleEntity);
         } else {
-            throw new Exception("There is no article with this ID: '" + id + "' in the database! (eid: 310720240701)");
+            throw new ArticleNotFoundException(id, "310720240701");
         }
     }
 

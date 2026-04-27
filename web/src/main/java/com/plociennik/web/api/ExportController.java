@@ -1,6 +1,7 @@
 package com.plociennik.web.api;
 
 import com.plociennik.service.export.ExportService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,11 @@ public class ExportController {
 
     private final ExportService exportService;
 
+    @Operation(
+            summary = "Export all existing articles with HTML tags",
+            description = "Fetches all articles with non processed HTML tags in their contents and then packages them" +
+                    " into a single ZIP file."
+    )
     @GetMapping(value = "/withHTML")
     public ResponseEntity<FileSystemResource> exportWithHTML() {
         File backupFile = exportService.packageAllArticlesIntoZip(true);
@@ -30,6 +36,11 @@ public class ExportController {
                 .body(new FileSystemResource(backupFile));
     }
 
+    @Operation(
+            summary = "Export all existing articles with no HTML tags",
+            description = "Fetches all articles with deleted HTML tags in their contents and then packages them" +
+                    " into a single ZIP file."
+    )
     @GetMapping(value = "/withoutHTML")
     public ResponseEntity<FileSystemResource> exportWithoutHTML() {
         File backupFile = exportService.packageAllArticlesIntoZip(false);
