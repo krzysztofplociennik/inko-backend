@@ -26,7 +26,7 @@ public class ImportService {
 
     private void throwIfRequestIsNull(MultipartFile file) {
         if (file == null) {
-            throw new InkoRuntimeException("MultipartFile is null!", "202502041021");
+            throw new InkoRuntimeException("202502041021", "MultipartFile is null!");
         }
     }
 }

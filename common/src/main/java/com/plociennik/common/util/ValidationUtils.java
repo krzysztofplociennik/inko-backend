@@ -14,7 +14,7 @@ public class ValidationUtils {
         try {
             content = new String(file.getBytes());
         } catch (IOException e) {
-            throw new InkoRuntimeException(e.getMessage(), "202504031243");
+            throw new InkoRuntimeException("202504031243", e.getMessage());
         }
         return content;
     }

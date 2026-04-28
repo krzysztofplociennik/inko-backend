@@ -8,7 +8,7 @@ public class SleepUtils {
 
     public static void sleep(long milliseconds) {
         if (milliseconds < 0) {
-            throw new InkoRuntimeException("Sleep duration cannot be negative.", "202504171538");
+            throw new InkoRuntimeException("202504171538", "Sleep duration cannot be negative.");
         }
         try {
             Thread.sleep(milliseconds);

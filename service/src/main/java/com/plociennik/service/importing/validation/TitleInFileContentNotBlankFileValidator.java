@@ -22,6 +22,6 @@ public class TitleInFileContentNotBlankFileValidator implements ImportingFileVal
 
     @Override
     public String createValidationFailureMessage() {
-        return "Title is blank! (EID: 202509041223)";
+        return "[EID: 202509041223] Title is blank!";
     }
 }

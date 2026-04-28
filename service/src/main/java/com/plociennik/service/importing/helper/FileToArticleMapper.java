@@ -45,7 +45,7 @@ public class FileToArticleMapper {
         try {
             fileContents = new String(file.getBytes());
         } catch (IOException e) {
-            throw new InkoRuntimeException("An error occurred when trying to extract the file's fileContents", "202504031634");
+            throw new InkoRuntimeException("202504031634", "An error occurred when trying to extract the file's fileContents");
         }
         return fileContents;
     }

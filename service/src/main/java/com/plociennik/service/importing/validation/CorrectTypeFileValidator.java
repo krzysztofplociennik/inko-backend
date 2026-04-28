@@ -55,6 +55,6 @@ public class CorrectTypeFileValidator implements ImportingFileValidator {
 
     @Override
     public String createValidationFailureMessage() {
-        return "One of the files has an invalid type! (EID: 202504010904)";
+        return "[EID: 202504010904] One of the files has an invalid type!";
     }
 }

@@ -48,7 +48,7 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
                 .fetchOne();
 
         if (articleEntity == null) {
-            throw new ArticleNotFoundException(articleUuid.toString(), "241020251632");
+            throw new ArticleNotFoundException("241020251632", articleUuid.toString());
         }
 
         return articleEntity;
