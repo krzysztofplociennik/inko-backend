@@ -40,6 +40,21 @@ dependencies {
 
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 }
+
 test {
     useJUnitPlatform()
+}
+
+tasks.register("preCommitCheck") {
+    group = "verification"
+    description = "Compiles Java/Groovy and runs tests for selected modules"
+
+    dependsOn(
+            ":common:compileJava",
+            ":model:compileJava",
+            ":service:compileJava",
+            ":service:test",
+            ":web:compileJava",
+            ":web:test",
+    )
 }
