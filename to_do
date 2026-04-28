@@ -1,6 +1,6 @@
 ================ TO DO LIST ===============================================================================
 
-1.
+1. when creating an empty article - there is a 403 response even if logged in
 2. creating/updating an article does not go through any validation
 3. maybe dto should be converted into records
 4. Fix deprecated code (analyze code in IntelliJ)
