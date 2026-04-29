@@ -2,6 +2,6 @@ package com.plociennik.common.errorhandling.exceptions;
 
 public class InkoRuntimeException extends RuntimeException {
     public InkoRuntimeException(String eid, String message) {
-        super("[EID: " + eid + "] " + message);
+        super("[EID: %s] %s".formatted(eid, message));
     }
 }

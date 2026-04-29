@@ -23,7 +23,7 @@ public enum ArticleType {
             case "os" -> {
                 return OS;
             }
-            default -> throw new InkoRuntimeException("202504090950", "Unexpected value: [" + s + "]");
+            default -> throw new InkoRuntimeException("202504090950", "Unexpected value: [%s]".formatted(s));
         }
     }
 
