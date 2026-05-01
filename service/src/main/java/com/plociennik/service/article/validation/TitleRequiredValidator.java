@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 public class TitleRequiredValidator implements ArticleCreateValidator {
 
     @Override
+    public String getPath() {
+        return "ArticleCreate:title";
+    }
+
+    @Override
     public boolean isValid(ArticleCreate articleCreate) {
         String title = articleCreate.getTitle();
         return StringUtils.isNotBlank(title);

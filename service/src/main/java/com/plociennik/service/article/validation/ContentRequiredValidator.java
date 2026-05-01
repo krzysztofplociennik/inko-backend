@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 public class ContentRequiredValidator implements ArticleCreateValidator {
 
     @Override
+    public String getPath() {
+        return "ArticleCreate:content";
+    }
+
+    @Override
     public boolean isValid(ArticleCreate articleCreate) {
         String content = articleCreate.getContent();
         return StringUtils.isNotBlank(content);

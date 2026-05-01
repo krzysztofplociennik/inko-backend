@@ -5,7 +5,9 @@ import com.plociennik.common.errorhandling.exceptions.InkoRuntimeException;
 import com.plociennik.common.errorhandling.exceptions.InkoValidationException;
 import com.plociennik.common.errorhandling.responses.ErrorResponse;
 import com.plociennik.common.errorhandling.exceptions.LoginCredentialsInvalidException;
+import com.plociennik.common.errorhandling.responses.ValidationErrorResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -20,10 +22,17 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InkoValidationException.class)
-    public ResponseEntity<String> handleValidationException(InkoValidationException ex) {
+    public ResponseEntity<ValidationErrorResponse> handleValidationException(InkoValidationException ex) {
+        ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                "New article is not valid!",
+                "ArticleCreate",
+                ex.getErrors()
+        );
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(ex.getMessage());
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(validationErrorResponse);
     }
 
     @ExceptionHandler(InkoImportException.class)

@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 public class TypeRequiredValidator implements ArticleCreateValidator {
 
     @Override
+    public String getPath() {
+        return "ArticleCreate:type";
+    }
+
+    @Override
     public boolean isValid(ArticleCreate articleCreate) {
         String type = articleCreate.getType();
         if (type == null) {

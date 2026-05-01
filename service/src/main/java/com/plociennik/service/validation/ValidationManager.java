@@ -10,7 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @AllArgsConstructor
@@ -24,31 +26,31 @@ public class ValidationManager {
         for (ImportingFileValidator validator : importingFileValidators) {
             boolean isFileValid = validator.isValid(file);
             if (!isFileValid) {
-                throwErrorIfFileNotValid(validator, file);
+                throwError(validator, file);
             }
         }
     }
 
     public void validateArticleCreate(ArticleCreate articleCreate) {
+        Map<String, String> errors = new LinkedHashMap<>();
+
         for (ArticleCreateValidator validator : articleCreateValidators) {
-            boolean isValid = validator.isValid(articleCreate);
-            if (!isValid) {
-                throwErrorIfFileNotValid(validator, articleCreate);
+            if (!validator.isValid(articleCreate)) {
+                String validationFailureMessage = validator.createValidationFailureMessage();
+                log.error("[InkoValidationException] {}: {}", validator.getPath(), validationFailureMessage);
+                errors.put(validator.getPath(), validationFailureMessage);
             }
+        }
+
+        if (!errors.isEmpty()) {
+            throw new InkoValidationException(errors);
         }
     }
 
-    private void throwErrorIfFileNotValid(ImportingFileValidator validator, MultipartFile file) {
+    private void throwError(ImportingFileValidator validator, MultipartFile file) {
         String prefix = "[InkoImportException] ";
         String validationFailureMessage = validator.createValidationFailureMessage();
         log.error(validationFailureMessage);
         throw new InkoImportException(prefix + validationFailureMessage, file);
-    }
-
-    private void throwErrorIfFileNotValid(ArticleCreateValidator validator, ArticleCreate file) {
-        String prefix = "[InkoValidationException] ";
-        String validationFailureMessage = validator.createValidationFailureMessage();
-        log.error(validationFailureMessage);
-        throw new InkoValidationException(prefix + validationFailureMessage);
     }
 }
