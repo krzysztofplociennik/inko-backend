@@ -5,7 +5,7 @@ import com.plociennik.model.ArticleType;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class ArticleUpdateTypeRequiredValidator implements ConstraintValidator<ValidArticleType, String> {
+public class ArticleUpdateTypeRequiredValidator implements ConstraintValidator<ValidType, String> {
 
     @Override
     public boolean isValid(String type, ConstraintValidatorContext context) {

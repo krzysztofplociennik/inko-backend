@@ -6,11 +6,11 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = ArticleUpdateTypeRequiredValidator.class)
+@Constraint(validatedBy = ArticleUpdateContentNotEmpty.class)
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidArticleType {
-    String message() default "Type is not recognized";
+public @interface ValidContent {
+    String message() default "Content is empty";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
