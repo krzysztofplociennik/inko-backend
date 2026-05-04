@@ -28,7 +28,7 @@ public class ArticleReadService {
             ArticleEntity articleEntity = searchedArticle.get();
             return articleReadMapper.mapToDetails(articleEntity);
         } else {
-            throw new ArticleNotFoundException(id, "310720240701");
+            throw new ArticleNotFoundException("310720240701", id);
         }
     }
 

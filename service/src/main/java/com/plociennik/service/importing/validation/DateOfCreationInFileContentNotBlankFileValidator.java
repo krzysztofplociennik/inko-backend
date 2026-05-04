@@ -22,6 +22,6 @@ public class DateOfCreationInFileContentNotBlankFileValidator implements Importi
 
     @Override
     public String createValidationFailureMessage() {
-        return "Date of creation is blank! (EID: 202509041222)";
+        return "[EID: 202509041222] Date of creation is blank!";
     }
 }

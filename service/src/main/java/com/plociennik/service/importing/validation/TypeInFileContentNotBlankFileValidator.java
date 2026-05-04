@@ -22,6 +22,6 @@ public class TypeInFileContentNotBlankFileValidator implements ImportingFileVali
 
     @Override
     public String createValidationFailureMessage() {
-        return "Type is blank! (EID: 202509041224)";
+        return "[EID: 202509041224] Type is blank!";
     }
 }

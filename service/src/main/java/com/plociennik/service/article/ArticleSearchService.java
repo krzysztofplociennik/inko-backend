@@ -57,7 +57,7 @@ public class ArticleSearchService {
             case "date of creation" -> "creationDate";
             case "date of modification" -> "modificationDate";
             default ->
-                    throw new InkoRuntimeException("There was an error while translating the sorting field: [" + sort + "]", "081120251217");
+                    throw new InkoRuntimeException("081120251217", "There was an error while translating the sorting field: [" + sort + "]");
         };
     }
 }
