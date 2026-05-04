@@ -1,7 +1,7 @@
 ================ TO DO LIST ===============================================================================
 
-1. more tests, maybe even E2E tests
-2. creating/updating an article does not go through any validation
+1.
+2.
 3. maybe dto should be converted into records
 4. Fix deprecated code (analyze code in IntelliJ)
 5.
@@ -9,8 +9,8 @@
 operations
 7.
 8.
-9. editor not aligned when creating an article
-10. maybe adding some specific validation (now when trying to add an empty article it shows a generic error message)
+9.
+10.
 11. improve logging
 12. create a matching api and gui mechanism to see if versions are correct
 13.

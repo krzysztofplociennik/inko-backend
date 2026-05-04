@@ -25,7 +25,7 @@ public class ArticleDeleteService {
         Optional<ArticleEntity> optionalArticle = articleRepository.findById(articleUuid);
 
         if (optionalArticle.isEmpty()) {
-            throw new ArticleNotFoundException(articleUuid.toString(), "241020251633");
+            throw new ArticleNotFoundException("241020251633", articleUuid.toString());
         }
 
         ArticleEntity articleToBeDeleted = optionalArticle.get();

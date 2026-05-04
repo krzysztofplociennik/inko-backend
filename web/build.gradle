@@ -21,6 +21,7 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     implementation 'io.github.cdimascio:dotenv-java:3.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation("org.springframework.boot:spring-boot-starter-validation:4.1.0-M3")
 
     compileOnly 'org.projectlombok:lombok:1.18.42'
 
@@ -40,6 +41,21 @@ dependencies {
 
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 }
+
 test {
     useJUnitPlatform()
+}
+
+tasks.register("preCommitCheck") {
+    group = "verification"
+    description = "Compiles Java/Groovy and runs tests for selected modules"
+
+    dependsOn(
+            ":common:compileJava",
+            ":model:compileJava",
+            ":service:compileJava",
+            ":service:test",
+            ":web:compileJava",
+            ":web:test",
+    )
 }

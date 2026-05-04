@@ -9,6 +9,7 @@ import com.plociennik.service.article.dto.ArticleCreate;
 import com.plociennik.service.article.dto.ArticleDetails;
 import com.plociennik.service.article.dto.ArticleUpdate;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +60,7 @@ public class ArticleController {
             summary = "Update an existing article"
     )
     @PutMapping(value = "/update")
-    public ResponseEntity<ArticleDetails> update(@RequestBody ArticleUpdate articleUpdate) throws ArticleNotFoundException {
+    public ResponseEntity<ArticleDetails> update(@RequestBody @Valid ArticleUpdate articleUpdate) throws ArticleNotFoundException {
         ArticleDetails response = articleUpdateService.update(articleUpdate);
         return ResponseEntity.ok(response);
     }

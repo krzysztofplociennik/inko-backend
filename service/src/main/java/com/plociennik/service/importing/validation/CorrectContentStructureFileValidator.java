@@ -77,6 +77,7 @@ public class CorrectContentStructureFileValidator implements ImportingFileValida
     @Override
     public String createValidationFailureMessage() {
         return """
+                [EID: 202504101400]
                 One of the files in the request does not have the correct structure of:
                 
                 UUID: ...
@@ -88,7 +89,6 @@ public class CorrectContentStructureFileValidator implements ImportingFileValida
                 
                 Content: ...
                 
-                (EID: 202504101400)
                 """;
     }
 }

@@ -27,6 +27,6 @@ public class ContentInFileContentNotBlankFileValidator implements ImportingFileV
 
     @Override
     public String createValidationFailureMessage() {
-        return "Content is blank! (EID: 202509041221)";
+        return "[EID: 202509041221] Content is blank!";
     }
 }
