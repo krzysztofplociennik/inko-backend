@@ -114,7 +114,6 @@ public class ArticlesParser {
         }
 
         return ArticleEntity.builder()
-                .id(uuid)
                 .title(title)
                 .type(type)
                 .creationDate(creationDate)
