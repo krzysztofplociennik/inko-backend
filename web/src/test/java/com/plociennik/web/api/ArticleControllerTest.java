@@ -51,16 +51,15 @@ class ArticleControllerTest extends IntegrationTest {
         // when
         ArticleDetails article = articleReadService.getArticleDetails(id.toString());
 
-        // then
-        Assertions.assertEquals(title, article.getTitle());
-        Assertions.assertEquals("Programming", article.getType());
-        Assertions.assertEquals("Dummy content here (Building...)", article.getContent());
-        Assertions.assertTrue(article.getTags().contains("Java"));
-        Assertions.assertTrue(article.getTags().contains("Spring Boot"));
-        Assertions.assertTrue(article.getTags().contains("PostgreSQL"));
-        Assertions.assertTrue(article.getTags().contains("REST"));
-        Assertions.assertEquals(LocalDateTime.of(2026, 1, 5, 10, 30), article.getCreationDate());
-        Assertions.assertNull(article.getModificationDate());
+        // thenAssertions.assertEquals(title, article.title());
+        Assertions.assertEquals("Programming", article.type());
+        Assertions.assertEquals("Dummy content here (Building...)", article.content());
+        Assertions.assertTrue(article.tags().contains("Java"));
+        Assertions.assertTrue(article.tags().contains("Spring Boot"));
+        Assertions.assertTrue(article.tags().contains("PostgreSQL"));
+        Assertions.assertTrue(article.tags().contains("REST"));
+        Assertions.assertEquals(LocalDateTime.of(2026, 1, 5, 10, 30), article.creationDate());
+        Assertions.assertNull(article.modificationDate());
     }
 
     @Test
@@ -132,14 +131,14 @@ class ArticleControllerTest extends IntegrationTest {
 
         // then
         Assertions.assertEquals(3, articleRepository.count());
-        Assertions.assertEquals("Introduction to Docker and Container Orchestration [edit]", saved.getTitle());
-        Assertions.assertEquals("Dummy content here (Introduction...) [edit]", saved.getContent());
-        Assertions.assertTrue(saved.getTags().contains("Docker"));
-        Assertions.assertTrue(saved.getTags().contains("Kubernetes"));
-        Assertions.assertTrue(saved.getTags().contains("DevOps"));
-        Assertions.assertTrue(saved.getTags().contains("Orchestration"));
-        Assertions.assertEquals(LocalDateTime.of(2025, 11, 22, 14, 0), saved.getCreationDate());
-        Assertions.assertNotNull(saved.getModificationDate());
+        Assertions.assertEquals("Introduction to Docker and Container Orchestration [edit]", saved.title());
+        Assertions.assertEquals("Dummy content here (Introduction...) [edit]", saved.content());
+        Assertions.assertTrue(saved.tags().contains("Docker"));
+        Assertions.assertTrue(saved.tags().contains("Kubernetes"));
+        Assertions.assertTrue(saved.tags().contains("DevOps"));
+        Assertions.assertTrue(saved.tags().contains("Orchestration"));
+        Assertions.assertEquals(LocalDateTime.of(2025, 11, 22, 14, 0), saved.creationDate());
+        Assertions.assertNotNull(saved.modificationDate());
     }
 
     @Test

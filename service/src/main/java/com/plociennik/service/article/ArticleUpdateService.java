@@ -37,9 +37,9 @@ public class ArticleUpdateService {
     }
 
     public ArticleDetails update(ArticleUpdate articleUpdate) throws ArticleNotFoundException {
-        UUID uuid = UUID.fromString(articleUpdate.getId());
+        UUID uuid = UUID.fromString(articleUpdate.id());
         ArticleEntity entity = articleCustomRepository.findByUUID(uuid);
-        List<TagEntity> mergedTags = tagHelper.mergeExistingTagsWithNewTags(articleUpdate.getTags());
+        List<TagEntity> mergedTags = tagHelper.mergeExistingTagsWithNewTags(articleUpdate.tags());
         ArticleEntity mappedArticle = articleUpdateMapper.map(entity, articleUpdate, mergedTags);
         ArticleEntity updatedArticle = articleRepository.save(mappedArticle);
         return articleReadMapper.mapToDetails(updatedArticle);

@@ -14,7 +14,7 @@ public class ContentRequiredValidator implements ArticleCreateValidator {
 
     @Override
     public boolean isValid(ArticleCreate articleCreate) {
-        String content = articleCreate.getContent();
+        String content = articleCreate.content();
         return StringUtils.isNotBlank(content);
     }
 

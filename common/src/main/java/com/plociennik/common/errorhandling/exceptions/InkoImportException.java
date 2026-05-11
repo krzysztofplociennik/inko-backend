@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class InkoImportException extends RuntimeException {
 
     @Getter
-    private MultipartFileData fileData;
+    private final MultipartFileData fileData;
 
     public InkoImportException(String message, MultipartFile file) {
         super(message);

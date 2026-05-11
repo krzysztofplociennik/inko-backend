@@ -11,8 +11,8 @@ public class ArticleUpdateMapper {
 
     public ArticleEntity map(ArticleEntity currentArticle, ArticleUpdate updatedArticle, List<TagEntity> mergedTags) {
         LocalDateTime modificationDate = LocalDateTime.now();
-        currentArticle.setTitle(updatedArticle.getTitle());
-        currentArticle.setContent(updatedArticle.getContent());
+        currentArticle.setTitle(updatedArticle.title());
+        currentArticle.setContent(updatedArticle.content());
         currentArticle.setModificationDate(modificationDate);
         currentArticle.setTags(mergedTags);
         return currentArticle;
