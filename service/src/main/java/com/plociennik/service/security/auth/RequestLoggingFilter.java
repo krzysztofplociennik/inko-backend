@@ -65,12 +65,6 @@ public class RequestLoggingFilter implements Filter {
         logger.info("----------------------------");
     }
 
-    private void logIncomingRequest(String fullUrl, HttpServletRequest httpRequest) {
-        logger.info("Incoming request URL: {}", fullUrl);
-        logger.info("Request URI: {}", httpRequest.getRequestURI());
-        logger.info("Servlet Path: {}", httpRequest.getServletPath());
-    }
-
     private boolean isRequestKeepAlive(String fullUrl) {
         String keepAliveSubstring = "/keep-alive";
         return fullUrl.contains(keepAliveSubstring);

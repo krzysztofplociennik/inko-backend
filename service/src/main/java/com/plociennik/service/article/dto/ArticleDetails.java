@@ -1,25 +1,18 @@
 package com.plociennik.service.article.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@AllArgsConstructor
-@Getter
-@Setter
 @Builder
-public class ArticleDetails implements Serializable {
-    private String id;
-    private String title;
-    private String content;
-    private String type;
-    private Set<String> tags;
-    private LocalDateTime creationDate;
-    private LocalDateTime modificationDate;
-
-}
+public record ArticleDetails(
+        String id,
+        String title,
+        String content,
+        String type,
+        Set<String> tags,
+        LocalDateTime creationDate,
+        LocalDateTime modificationDate
+) implements Serializable {}

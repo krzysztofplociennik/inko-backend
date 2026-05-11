@@ -11,13 +11,13 @@ import java.util.List;
 public class ArticleCreateMapper {
 
     public ArticleEntity mapToEntity(ArticleCreate articleCreate) {
-        ArticleType createType = ArticleType.getType(articleCreate.getType());
+        ArticleType createType = ArticleType.getType(articleCreate.type());
         LocalDateTime currentTime = LocalDateTime.now();
         List<TagEntity> tags = mapTags(articleCreate);
 
         ArticleEntity articleEntity = ArticleEntity.builder()
-                .title(articleCreate.getTitle())
-                .content(articleCreate.getContent())
+                .title(articleCreate.title())
+                .content(articleCreate.content())
                 .type(createType)
                 .tags(tags)
                 .creationDate(currentTime)
@@ -32,7 +32,7 @@ public class ArticleCreateMapper {
     }
 
     private List<TagEntity> mapTags(ArticleCreate articleCreate) {
-        return articleCreate.getTags().stream()
+        return articleCreate.tags().stream()
                 .map(t -> TagEntity.builder().value(t).build())
                 .toList();
     }

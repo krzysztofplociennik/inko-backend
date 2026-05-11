@@ -25,7 +25,6 @@ class ArticleReadMapperTest extends Specification {
                     .type(ArticleType.PROGRAMMING)
                     .tags(entityTags)
                     .creationDate(dateTime)
-                    .modificationDate()
                     .build()
             articleEntity.id = UUID.fromString(randomUuid)
         when:

@@ -14,7 +14,7 @@ public class TitleRequiredValidator implements ArticleCreateValidator {
 
     @Override
     public boolean isValid(ArticleCreate articleCreate) {
-        String title = articleCreate.getTitle();
+        String title = articleCreate.title();
         return StringUtils.isNotBlank(title);
     }
 

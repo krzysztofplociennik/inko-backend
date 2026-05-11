@@ -15,7 +15,7 @@ public class TypeRequiredValidator implements ArticleCreateValidator {
 
     @Override
     public boolean isValid(ArticleCreate articleCreate) {
-        String type = articleCreate.getType();
+        String type = articleCreate.type();
         if (type == null) {
             return false;
         }
